@@ -8,7 +8,9 @@ param(
   [string]$Data = (Join-Path $PSScriptRoot '..\Data'),
   # -SelfContained: .NET inside the package (user installs nothing). Needs the runtime pack of the SDK's version in the NuGet cache
   # (Microsoft.NETCore.App.Runtime.win-x64 + WindowsDesktop) — one-time download, only with the owner's OK.
-  [switch]$SelfContained
+  [switch]$SelfContained,
+  # optional: the signed release APK of the phone app; copied as FisherCompanion-<ver>.apk and added to SHA256SUMS.txt
+  [string]$Apk
 )
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw "version must be X.Y.Z" }
@@ -54,7 +56,9 @@ if ($bad) { throw "private-looking files in package: $(($bad | ForEach-Object Na
 if (Test-Path $zip) { Remove-Item $zip -Force }
 Compress-Archive -Path "$pub\*" -DestinationPath $zip -CompressionLevel Optimal
 $h = (Get-FileHash $zip -Algorithm SHA256).Hash
-"$h  $zipName" | Set-Content (Join-Path $Out 'SHA256SUMS.txt') -Encoding ASCII
+$sums = @("$h  $zipName")
+if ($Apk) { $apkName = "FisherCompanion-$Version.apk"; Copy-Item $Apk (Join-Path $Out $apkName) -Force; $sums += "$((Get-FileHash (Join-Path $Out $apkName) -Algorithm SHA256).Hash)  $apkName" }
+$sums | Set-Content (Join-Path $Out 'SHA256SUMS.txt') -Encoding ASCII
 "FisherLogger $Version`n`n- (что нового)`n" | Set-Content (Join-Path $Out 'RELEASE_NOTES.md') -Encoding UTF8
 "OK $zip $([math]::Round((Get-Item $zip).Length/1MB,1)) MB sha256 $h"
 

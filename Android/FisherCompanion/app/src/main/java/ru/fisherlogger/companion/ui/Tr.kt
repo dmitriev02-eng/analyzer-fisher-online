@@ -59,7 +59,8 @@ object L {
             o.keys().forEach { k -> m[k] = o.getString(k) }
             map = m
             val keys = m.keys.filter { it.trim().length >= 3 && cyr.containsMatchIn(it) }.sortedByDescending { it.length }
-            frag = if (keys.isEmpty()) null else Regex(keys.joinToString("|") { Regex.escape(it) })
+            frag = if (keys.isEmpty()) null else Regex(keys.joinToString("|") { k ->
+                (if (cyr.matches(k.take(1))) "(?<![А-Яа-яЁё])" else "") + Regex.escape(k) + (if (cyr.matches(k.takeLast(1))) "(?![А-Яа-яЁё])" else "") })
         } catch (_: Exception) { }
     }
 

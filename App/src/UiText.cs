@@ -65,7 +65,9 @@ namespace FisherLogger
             _map = new Dictionary<string, string>(m.Where(kv => !string.IsNullOrEmpty(kv.Key) && kv.Value != null), StringComparer.Ordinal);
             _cache.Clear();
             // фрагменты для составных строк: длинные раньше коротких; совсем короткие (1–2 буквы) не подставляем
-            var keys = _map.Keys.Where(k => k.Trim().Length >= 3 && Cyr.IsMatch(k)).OrderByDescending(k => k.Length).Select(Regex.Escape).ToList();
+            var keys = _map.Keys.Where(k => k.Trim().Length >= 3 && Cyr.IsMatch(k)).OrderByDescending(k => k.Length)
+                .Select(k => (Cyr.IsMatch(k[..1]) ? "(?<![А-Яа-яЁё])" : "") + Regex.Escape(k) + (Cyr.IsMatch(k[^1..]) ? "(?![А-Яа-яЁё])" : "")).ToList();
+            // куски — только целыми словами (не внутри русского слова: «Сом» не трогает «Сомик»)
             _frag = keys.Count == 0 ? null : new Regex(string.Join("|", keys), RegexOptions.Compiled | RegexOptions.CultureInvariant);
         }
 
