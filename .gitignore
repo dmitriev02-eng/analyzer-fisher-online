@@ -1,0 +1,26 @@
+# build output
+App/bin/
+App/obj/
+**/bin/
+**/obj/
+out/
+# Android
+Android/FisherCompanion/build/
+Android/FisherCompanion/app/build/
+Android/FisherCompanion/.gradle/
+Android/FisherCompanion/.kotlin/
+Android/FisherCompanion/local.properties
+Android/FisherCompanion/keystore.properties
+Android/FisherCompanion/build_log.txt
+*.jks
+*.keystore
+# personal data never goes here
+*.db
+*.db-wal
+*.db-shm
+*.pcap
+*.pcapng
+app_settings.json
+install.json
+server.json
+companion_settings.json

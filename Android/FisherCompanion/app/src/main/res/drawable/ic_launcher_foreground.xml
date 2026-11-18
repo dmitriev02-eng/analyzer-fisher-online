@@ -1,0 +1,7 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <!-- simple fish glyph -->
+    <path android:fillColor="#29B6E6"
+        android:pathData="M30,54 C40,38 62,36 74,50 L86,40 L84,54 L86,68 L74,58 C62,72 40,70 30,54 Z" />
+    <path android:fillColor="#0D141F" android:pathData="M44,51 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+</vector>

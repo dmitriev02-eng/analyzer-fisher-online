@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FisherLogger runs on a PC in the local network over plain HTTP (no certificate on a LAN IP).
+     Integrity and authentication are provided by per-request HMAC signatures (see docs/README.md). -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

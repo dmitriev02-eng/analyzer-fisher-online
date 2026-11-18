@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "method": "Сетевой ID (offset 32 в FULL catch) сопоставляется с fishLang ID из SUMMARY-кадра (kind=3, len=108/110, u32 по смещению blob+12) по весу и временному сдвигу ~20-30 с. Один fishLang ID может соответствовать нескольким сетевым ID — это варианты/размерные классы.",
+  "confirmed_pairs": [
+    {
+      "net_id": 697,
+      "fishlang_id": 52,
+      "name": "Лещ",
+      "weight_g": 1021,
+      "bait_id": 1018,
+      "session": "session_001",
+      "full_t": 1791839752.887,
+      "summary_t": 1791839782.584
+    },
+    {
+      "net_id": 688,
+      "fishlang_id": 52,
+      "name": "Лещ (мелкий = Подлещик)",
+      "weight_g": 364,
+      "bait_id": 1018,
+      "session": "session_002",
+      "full_t": 1791841578.425,
+      "summary_t": 1791841599.57
+    },
+    {
+      "net_id": 688,
+      "fishlang_id": 52,
+      "name": "Лещ (мелкий = Подлещик)",
+      "weight_g": 625,
+      "bait_id": 1018,
+      "session": "fisher_catch_real",
+      "note": "третье независимое подтверждение 688→52"
+    }
+  ],
+  "summary_only": [
+    {
+      "fishlang_id": 97,
+      "name": "Синец",
+      "weight_g": 364,
+      "bait_id": 1018,
+      "session": "session_002",
+      "note": "FULL catch для этой поимки в дампе отсутствует"
+    },
+    {
+      "fishlang_id": 26,
+      "name": "Густера",
+      "weight_g": 1132,
+      "bait_id": 1018,
+      "session": "session_002"
+    },
+    {
+      "fishlang_id": 26,
+      "name": "Густера",
+      "weight_g": 1115,
+      "bait_id": 1018,
+      "session": "session_002"
+    }
+  ],
+  "network_ids": {
+    "697": {
+      "name": "Лещ",
+      "fishlang_id": 52,
+      "size_hint": "крупный (1021 г)",
+      "confidence": "high",
+      "source": "session_001: FULL catch net=697 1021 г; через 30 с SUMMARY fishLang=52 (Лещ) 1021 г, bait=1018"
+    },
+    "688": {
+      "name": "Лещ (Подлещик по размеру)",
+      "fishlang_id": 52,
+      "size_hint": "мелкий (364 г)",
+      "confidence": "high",
+      "source": "session_002: FULL catch net=688 364 г; через 21 с SUMMARY fishLang=52 (Лещ) 364 г, bait=1018. Отображается как «Подлещик» (52_NameSmall)."
+    },
+    "305": {
+      "name": "Карась",
+      "fishlang_id": 37,
+      "confidence": "low (manual/chat, не проверено в этих дампах)"
+    },
+    "622": {
+      "name": "Окунь",
+      "fishlang_id": 66,
+      "confidence": "low (manual/chat)"
+    },
+    "566": {
+      "name": "Густера",
+      "fishlang_id": 26,
+      "confidence": "low (manual/chat; вариант густеры)"
+    },
+    "589": {
+      "name": "Ильный карп",
+      "fishlang_id": 589,
+      "confidence": "low (manual/chat)"
+    },
+    "366": {
+      "name": "Окунь речной",
+      "fishlang_id": 66,
+      "confidence": "low (manual/chat)"
+    },
+    "432": {
+      "name": "Подлещик",
+      "fishlang_id": 52,
+      "confidence": "low (manual/chat)"
+    },
+    "587": {
+      "name": "Тилапия",
+      "fishlang_id": 587,
+      "confidence": "low (manual/chat)"
+    },
+    "110": {
+      "name": "Окунь речной",
+      "fishlang_id": 66,
+      "size_hint": "обычный",
+      "confidence": "high",
+      "source": "session_001: автодетект Окунь речной 283гр"
+    },
+    "185": {
+      "name": "Лещ (средний)",
+      "fishlang_id": 52,
+      "confidence": "low (из задания; в дампах не подтверждён)"
+    },
+    "561": {
+      "name": "Густера",
+      "fishlang_id": 26,
+      "confidence": "low (из задания; в дампах не подтверждён)"
+    }
+  },
+  "variant_note": "Сетевой ID — это ID варианта/префаба рыбы, а не вида. 697 и 688 оба соответствуют fishLang 52 (Лещ): 697 — крупный вариант (1021 г), 688 — мелкий (364/625 г), который в UI подписывается «Подлещик» (52_NameSmall). Поэтому автоматический маппинг нужно строить по SUMMARY-кадрам (fishLang ID), а не по весу или по названию из чата.",
+  "static_data": {
+    "fish_full_database": "fish_full_database.json",
+    "items_full_database": "items_full_database.json",
+    "note": "network_id — эмпирический идентификатор варианта/префаба; статический IL2CPP-дамп не содержит network_id. Маппинг network_ids обновляется только по реальным FULL_CATCH/SUMMARY."
+  },
+  "updated": "2026-10-20T02:56:55",
+  "reverse_mapping": {
+    "52": [
+      697,
+      688,
+      185,
+      432
+    ],
+    "26": [
+      566,
+      561
+    ],
+    "66": [
+      110,
+      366,
+      622
+    ]
+  },
+  "heuristic_note": "reverse_mapping: 52 -> 697/688/185/432, 26 -> 566/561, 66 -> 110/366/622. 185/561 помечены low: взяты из задания, в дампах не подтверждены; эвристика для 52 выбирает 697 при >=800, иначе 688; для 26 — 566."
+}

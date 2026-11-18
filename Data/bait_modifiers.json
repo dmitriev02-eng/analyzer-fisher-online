@@ -1,0 +1,5709 @@
+{
+  "schema_version": 1,
+  "generated": "2026-10-20T02:07:08",
+  "source": "Weapons.txt: addpar/addoptions/klevprop",
+  "format_note": "klevprop разобран как kind/fish_id/modifier. kind 1/2 — клиентский тип модификатора (точная семантика требует декомпиляции тела PoplDrop/FishManager); fish_id — fishLang ID; modifier — целое/дробное смещение к шансу.",
+  "items": [
+    {
+      "item_id": 1286,
+      "name": "Тройник-15-2",
+      "name_de": "Drilling",
+      "category": "hook",
+      "wtype": 6,
+      "type_name": "крючок",
+      "klevprop_raw": "1/1/-2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": -2.0,
+          "raw": "1/1/-2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1367,
+      "name": "Бомбарда-8-6",
+      "name_de": "Bombard-8-6",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/19/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 3.0,
+          "raw": "1/19/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1368,
+      "name": "Бомбарда-10-8",
+      "name_de": "Bombard-10-8",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/19/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 2.0,
+          "raw": "1/19/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1369,
+      "name": "Бомбарда-20-12",
+      "name_de": "BBombard-20-12",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/19/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1370,
+      "name": "Живцовый S",
+      "name_de": "Köderfisch Pose",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/2/1,2/128/1,2/110/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/2/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 1.0,
+          "raw": "2/110/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1393,
+      "name": "VIB Raiwa 12g",
+      "name_de": "VIB Raiwa 12g",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        48,
+        50,
+        95,
+        105,
+        106,
+        110,
+        113,
+        128,
+        136,
+        304,
+        382,
+        486,
+        515
+      ],
+      "fish": [
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Сиг",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Усач",
+        "Щука",
+        "Форель золотая",
+        "Таймень дунайский",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лаврак"
+      ]
+    },
+    {
+      "item_id": 1394,
+      "name": "VIB Raiwa 18g",
+      "name_de": "VIB Raiwa 18g",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        48,
+        50,
+        95,
+        105,
+        106,
+        110,
+        113,
+        128,
+        136,
+        304,
+        382,
+        486,
+        515
+      ],
+      "fish": [
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Сиг",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Усач",
+        "Щука",
+        "Форель золотая",
+        "Таймень дунайский",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лаврак"
+      ]
+    },
+    {
+      "item_id": 1395,
+      "name": "VIB Raiwa 25g",
+      "name_de": "VIB Raiwa 25g",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        48,
+        50,
+        95,
+        105,
+        106,
+        110,
+        113,
+        128,
+        136,
+        304,
+        382,
+        486,
+        515
+      ],
+      "fish": [
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Сиг",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Усач",
+        "Щука",
+        "Форель золотая",
+        "Таймень дунайский",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лаврак"
+      ]
+    },
+    {
+      "item_id": 1397,
+      "name": "JIG TwistNord 40mm",
+      "name_de": "JIG TwistNord 40mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/74/1,2/21/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 74,
+          "fish_name": "Палия",
+          "modifier": 1.0,
+          "raw": "2/74/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 21,
+          "fish_name": "Голец арктический",
+          "modifier": 1.0,
+          "raw": "2/21/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        8,
+        9,
+        21,
+        33,
+        56,
+        61,
+        66,
+        74,
+        99,
+        103,
+        105,
+        106,
+        110,
+        128,
+        369,
+        382,
+        486,
+        512,
+        513,
+        515,
+        517,
+        520,
+        521,
+        522
+      ],
+      "fish": [
+        "Берш",
+        "Басс чёрный",
+        "Голец арктический",
+        "Жерех",
+        "Моллюск",
+        "Налим",
+        "Окунь речной",
+        "Палия",
+        "Сом европейский",
+        "Стерлядь",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Чоп",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лобан",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1398,
+      "name": "JIG TwistNord 75mm",
+      "name_de": "JIG TwistNord 75mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/74/1,2/21/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 74,
+          "fish_name": "Палия",
+          "modifier": 1.0,
+          "raw": "2/74/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 21,
+          "fish_name": "Голец арктический",
+          "modifier": 1.0,
+          "raw": "2/21/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        8,
+        9,
+        21,
+        33,
+        56,
+        61,
+        66,
+        74,
+        99,
+        103,
+        105,
+        106,
+        110,
+        128,
+        369,
+        382,
+        486,
+        512,
+        513,
+        515,
+        517,
+        520,
+        521,
+        522
+      ],
+      "fish": [
+        "Берш",
+        "Басс чёрный",
+        "Голец арктический",
+        "Жерех",
+        "Моллюск",
+        "Налим",
+        "Окунь речной",
+        "Палия",
+        "Сом европейский",
+        "Стерлядь",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Чоп",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лобан",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1399,
+      "name": "JIG TwistNord 95mm",
+      "name_de": "JIG TwistNord 95mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/74/1,2/21/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 74,
+          "fish_name": "Палия",
+          "modifier": 1.0,
+          "raw": "2/74/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 21,
+          "fish_name": "Голец арктический",
+          "modifier": 1.0,
+          "raw": "2/21/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        8,
+        9,
+        21,
+        33,
+        56,
+        61,
+        66,
+        74,
+        99,
+        103,
+        105,
+        106,
+        110,
+        128,
+        369,
+        382,
+        486,
+        512,
+        513,
+        515,
+        517,
+        520,
+        521,
+        522
+      ],
+      "fish": [
+        "Берш",
+        "Басс чёрный",
+        "Голец арктический",
+        "Жерех",
+        "Моллюск",
+        "Налим",
+        "Окунь речной",
+        "Палия",
+        "Сом европейский",
+        "Стерлядь",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Чоп",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лобан",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1432,
+      "name": "JIG TwistNY Ice 14cm",
+      "name_de": "Nord TWS-III ICE",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/17/1,1/22/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 17,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/17/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 22,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/22/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1454,
+      "name": "Прикорм \"Карп-медовый\"",
+      "name_de": "Karpfen-Futter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/39/2,2/412/2,2/413/2,2/91/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 2.0,
+          "raw": "2/39/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 2.0,
+          "raw": "2/412/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 2.0,
+          "raw": "2/413/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 2.0,
+          "raw": "2/91/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1455,
+      "name": "Прикорм \"Линь-Карась\"",
+      "name_de": "Schleien-Futter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/54/2,2/37/2,2/38/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 54,
+          "fish_name": "Линь",
+          "modifier": 2.0,
+          "raw": "2/54/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 37,
+          "fish_name": "Карась",
+          "modifier": 2.0,
+          "raw": "2/37/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 38,
+          "fish_name": "Карась золотой",
+          "modifier": 2.0,
+          "raw": "2/38/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1456,
+      "name": "Прикорм \"Лещ-Густера\"",
+      "name_de": "Brachsen-Futter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/52/2,2/78/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 52,
+          "fish_name": "Лещ",
+          "modifier": 2.0,
+          "raw": "2/52/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 78,
+          "fish_name": "Подлещик",
+          "modifier": 2.0,
+          "raw": "2/78/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1458,
+      "name": "-- Прикорм \"Карповый\"",
+      "name_de": "Karpfenfutter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/39/2,2/412/2,2/413/2,2/91/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 2.0,
+          "raw": "2/39/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 2.0,
+          "raw": "2/412/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 2.0,
+          "raw": "2/413/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 2.0,
+          "raw": "2/91/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1461,
+      "name": "Своя смесь",
+      "name_de": "Mein Futter-Mix",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/39/1,2/41/1,2/412/1,2/413/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 1.0,
+          "raw": "2/39/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 41,
+          "fish_name": "Гигантский карп",
+          "modifier": 1.0,
+          "raw": "2/41/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 1.0,
+          "raw": "2/412/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 1.0,
+          "raw": "2/413/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1466,
+      "name": "Уклеечный-I",
+      "name_de": "Bleaker-I",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/2,1/25/1,1/30/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 2.0,
+          "raw": "1/15/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 25,
+          "fish_name": "Горбуша",
+          "modifier": 1.0,
+          "raw": "1/25/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 30,
+          "fish_name": "Ёрш",
+          "modifier": 1.0,
+          "raw": "1/30/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1490,
+      "name": "Прикорм \"Универсал\"",
+      "name_de": "Universal-Futter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/1/2,1/4/1,1/16/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 2.0,
+          "raw": "1/1/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 16,
+          "fish_name": "Вьюн",
+          "modifier": 1.0,
+          "raw": "1/16/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1511,
+      "name": "Метод-70",
+      "name_de": "Method-70",
+      "category": "feeder",
+      "wtype": 7,
+      "type_name": "кормушка",
+      "klevprop_raw": "1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1512,
+      "name": "Метод-90",
+      "name_de": "Method-90",
+      "category": "feeder",
+      "wtype": 7,
+      "type_name": "кормушка",
+      "klevprop_raw": "1/4/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/4/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1513,
+      "name": "Метод-100",
+      "name_de": "Method-100",
+      "category": "feeder",
+      "wtype": 7,
+      "type_name": "кормушка",
+      "klevprop_raw": "1/4/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/4/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1521,
+      "name": "Донный-Премиум",
+      "name_de": "Bottom-Premium",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 3.0,
+          "raw": "1/20/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1532,
+      "name": "Поппер \"Лягушка-III-М5\"",
+      "name_de": "Frosch Popper-III-M5",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/128/6,2/110/5",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 6.0,
+          "raw": "2/128/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 5.0,
+          "raw": "2/110/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        8,
+        9,
+        33,
+        50,
+        99,
+        128
+      ],
+      "fish": [
+        "Берш",
+        "Басс чёрный",
+        "Жерех",
+        "Форель радужная",
+        "Сом европейский",
+        "Щука"
+      ]
+    },
+    {
+      "item_id": 1536,
+      "name": "TopW Асп-I",
+      "name_de": "TopWater Asp-I",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/-3",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": -3.0,
+          "raw": "2/128/-3",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        19,
+        33,
+        48,
+        50,
+        106,
+        110,
+        128,
+        129,
+        304,
+        486,
+        491
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Голавль",
+        "Жерех",
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Язь",
+        "Таймень дунайский",
+        "Лосось балтийский",
+        "Хариус европейский"
+      ]
+    },
+    {
+      "item_id": 1537,
+      "name": "TopW Асп-II",
+      "name_de": "TopWater Asp-II",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/-3",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": -3.0,
+          "raw": "2/128/-3",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        19,
+        33,
+        48,
+        50,
+        106,
+        110,
+        128,
+        129,
+        304,
+        486,
+        491
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Голавль",
+        "Жерех",
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Язь",
+        "Таймень дунайский",
+        "Лосось балтийский",
+        "Хариус европейский"
+      ]
+    },
+    {
+      "item_id": 1538,
+      "name": "TopW Асп-III",
+      "name_de": "TopWater Asp-III",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/-3",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": -3.0,
+          "raw": "2/128/-3",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        19,
+        33,
+        48,
+        50,
+        106,
+        110,
+        128,
+        129,
+        304,
+        486,
+        491
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Голавль",
+        "Жерех",
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Таймень",
+        "Щука северная",
+        "Щука",
+        "Язь",
+        "Таймень дунайский",
+        "Лосось балтийский",
+        "Хариус европейский"
+      ]
+    },
+    {
+      "item_id": 1556,
+      "name": "Твистер Сиг-II",
+      "name_de": "Twister Sig-II 50mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/95/1,1/34/3",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 95,
+          "fish_name": "Сиг",
+          "modifier": 1.0,
+          "raw": "2/95/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 1,
+          "fish_id": 34,
+          "fish_name": "",
+          "modifier": 3.0,
+          "raw": "1/34/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1604,
+      "name": "VIB Raiwa 30g",
+      "name_de": "VIB Raiwa 30g",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        48,
+        50,
+        95,
+        105,
+        106,
+        110,
+        113,
+        128,
+        136,
+        304,
+        382,
+        486,
+        515
+      ],
+      "fish": [
+        "Кумжа озёрная",
+        "Форель радужная",
+        "Сиг",
+        "Судак",
+        "Таймень",
+        "Щука северная",
+        "Усач",
+        "Щука",
+        "Форель золотая",
+        "Таймень дунайский",
+        "Хек европейский",
+        "Лосось балтийский",
+        "Лаврак"
+      ]
+    },
+    {
+      "item_id": 1633,
+      "name": "SF \"Счастливый улов\"",
+      "name_de": "Normales Futter",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "1/20/1,1/1/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1652,
+      "name": "CRL TroutMaster M1",
+      "name_de": "CRL TroutMaster M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1,1/7/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 2.0,
+          "raw": "1/7/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        33,
+        46,
+        47,
+        65,
+        94,
+        370,
+        389,
+        486,
+        491,
+        517,
+        520,
+        521
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Жерех",
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Сельдь азовская",
+        "Шемая каспийская",
+        "Кальмар",
+        "Лосось балтийский",
+        "Хариус европейский",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский"
+      ]
+    },
+    {
+      "item_id": 1653,
+      "name": "CRL TroutMaster M2",
+      "name_de": "CRL TroutMaster M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1,1/7/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 2.0,
+          "raw": "1/7/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        33,
+        46,
+        47,
+        65,
+        94,
+        370,
+        389,
+        486,
+        491,
+        517,
+        520,
+        521
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Жерех",
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Сельдь азовская",
+        "Шемая каспийская",
+        "Кальмар",
+        "Лосось балтийский",
+        "Хариус европейский",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский"
+      ]
+    },
+    {
+      "item_id": 1654,
+      "name": "CRL TroutMaster M3",
+      "name_de": "CRL TroutMaster M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1,1/7/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 2.0,
+          "raw": "1/7/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        9,
+        33,
+        46,
+        47,
+        65,
+        94,
+        370,
+        389,
+        486,
+        491,
+        517,
+        520,
+        521
+      ],
+      "fish": [
+        "Басс чёрный",
+        "Жерех",
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Сельдь азовская",
+        "Шемая каспийская",
+        "Кальмар",
+        "Лосось балтийский",
+        "Хариус европейский",
+        "Тунец альбакор",
+        "Солнечный окунь",
+        "Лосось каспийский"
+      ]
+    },
+    {
+      "item_id": 1655,
+      "name": "CRL Marss M1",
+      "name_de": "CRL Marss M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/491/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 491,
+          "fish_name": "Хариус европейский",
+          "modifier": 2.0,
+          "raw": "0/491/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        46,
+        47,
+        65,
+        66,
+        88,
+        94,
+        128,
+        389,
+        491,
+        521,
+        531
+      ],
+      "fish": [
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Окунь речной",
+        "Форель ручьевая",
+        "Сельдь азовская",
+        "Щука",
+        "Кальмар",
+        "Хариус европейский",
+        "Лосось каспийский",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1656,
+      "name": "CRL Marss M2",
+      "name_de": "CRL Marss M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/491/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 491,
+          "fish_name": "Хариус европейский",
+          "modifier": 2.0,
+          "raw": "0/491/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        46,
+        47,
+        65,
+        66,
+        88,
+        94,
+        128,
+        389,
+        491,
+        521,
+        531
+      ],
+      "fish": [
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Окунь речной",
+        "Форель ручьевая",
+        "Сельдь азовская",
+        "Щука",
+        "Кальмар",
+        "Хариус европейский",
+        "Лосось каспийский",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1657,
+      "name": "CRL Marss M3",
+      "name_de": "CRL Marss M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/491/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 491,
+          "fish_name": "Хариус европейский",
+          "modifier": 2.0,
+          "raw": "0/491/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        46,
+        47,
+        65,
+        66,
+        88,
+        94,
+        128,
+        389,
+        491,
+        521,
+        531
+      ],
+      "fish": [
+        "Корюшка",
+        "Красноперка",
+        "Форель прудовая",
+        "Окунь речной",
+        "Форель ручьевая",
+        "Сельдь азовская",
+        "Щука",
+        "Кальмар",
+        "Хариус европейский",
+        "Лосось каспийский",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1659,
+      "name": "TroutMaster",
+      "name_de": "TroutMaster",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/1,1/7/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 1.0,
+          "raw": "1/6/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 2.0,
+          "raw": "1/7/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1660,
+      "name": "CRL Marss",
+      "name_de": "CRL Marss",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/491/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 491,
+          "fish_name": "Хариус европейский",
+          "modifier": 2.0,
+          "raw": "0/491/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1675,
+      "name": "VIB MD Cyclope M1",
+      "name_de": "VIB MD Cyclope M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/105/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "0/105/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        25,
+        33,
+        74,
+        105,
+        106,
+        135,
+        382,
+        385,
+        476,
+        491,
+        513,
+        515,
+        517,
+        522,
+        523,
+        531
+      ],
+      "fish": [
+        "Горбуша",
+        "Жерех",
+        "Палия",
+        "Судак",
+        "Таймень",
+        "Чёрный окунь",
+        "Хек европейский",
+        "Лосось чинук",
+        "Усач итальянский",
+        "Хариус европейский",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Судак морской",
+        "Лаврак полосатый",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1676,
+      "name": "VIB MD Cyclope M2",
+      "name_de": "VIB MD Cyclope M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/105/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "0/105/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        25,
+        33,
+        74,
+        105,
+        106,
+        135,
+        382,
+        385,
+        476,
+        491,
+        513,
+        515,
+        517,
+        522,
+        523,
+        531
+      ],
+      "fish": [
+        "Горбуша",
+        "Жерех",
+        "Палия",
+        "Судак",
+        "Таймень",
+        "Чёрный окунь",
+        "Хек европейский",
+        "Лосось чинук",
+        "Усач итальянский",
+        "Хариус европейский",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Судак морской",
+        "Лаврак полосатый",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1677,
+      "name": "VIB MD Cyclope M3",
+      "name_de": "VIB MD Cyclope M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "0/105/2",
+      "modifiers": [
+        {
+          "kind": 0,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "0/105/2",
+          "meaning": "редкое специфическое"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        25,
+        33,
+        74,
+        105,
+        106,
+        135,
+        382,
+        385,
+        476,
+        491,
+        513,
+        515,
+        517,
+        522,
+        523,
+        531
+      ],
+      "fish": [
+        "Горбуша",
+        "Жерех",
+        "Палия",
+        "Судак",
+        "Таймень",
+        "Чёрный окунь",
+        "Хек европейский",
+        "Лосось чинук",
+        "Усач итальянский",
+        "Хариус европейский",
+        "Кефаль сингиль",
+        "Лаврак",
+        "Тунец альбакор",
+        "Судак морской",
+        "Лаврак полосатый",
+        "Кефаль губач"
+      ]
+    },
+    {
+      "item_id": 1769,
+      "name": "Прикорм \"Криль\"",
+      "name_de": "Krill",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "2/389/3,2/386/3,1/20/1,1/19/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 389,
+          "fish_name": "Кальмар",
+          "modifier": 3.0,
+          "raw": "2/389/3",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 386,
+          "fish_name": "Креветка",
+          "modifier": 3.0,
+          "raw": "2/386/3",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1776,
+      "name": "VibroTail Shad M1 120mm",
+      "name_de": "VibroTail Shad M1 120mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3,2/105/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        110,
+        402,
+        486,
+        522
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Щука северная",
+        "Катран",
+        "Лосось балтийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1777,
+      "name": "VibroTail Shad M2 120mm",
+      "name_de": "VibroTail Shad M2 120mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3,2/105/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        110,
+        402,
+        486,
+        522
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Щука северная",
+        "Катран",
+        "Лосось балтийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1778,
+      "name": "VibroTail Shad M3 120mm",
+      "name_de": "VibroTail Shad M3 120mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3,2/105/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        110,
+        402,
+        486,
+        522
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Щука северная",
+        "Катран",
+        "Лосось балтийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1779,
+      "name": "VibroTail Shad M4 120mm",
+      "name_de": "VibroTail Shad M4 120mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3,2/105/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        110,
+        402,
+        486,
+        522
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Щука северная",
+        "Катран",
+        "Лосось балтийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1780,
+      "name": "VibroTail Shad M5 120mm",
+      "name_de": "VibroTail Shad M5 120mm",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3,2/105/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        110,
+        402,
+        486,
+        522
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Щука северная",
+        "Катран",
+        "Лосось балтийский",
+        "Судак морской"
+      ]
+    },
+    {
+      "item_id": 1782,
+      "name": "Метод-40",
+      "name_de": "Flat-40",
+      "category": "feeder",
+      "wtype": 7,
+      "type_name": "кормушка",
+      "klevprop_raw": "1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1783,
+      "name": "Метод-50",
+      "name_de": "Flat-50",
+      "category": "feeder",
+      "wtype": 7,
+      "type_name": "кормушка",
+      "klevprop_raw": "1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1807,
+      "name": "Akma VB1 gold",
+      "name_de": "Akma VB1 Gold",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        382,
+        385,
+        515
+      ],
+      "fish": [
+        "Хек европейский",
+        "Лосось чинук",
+        "Лаврак"
+      ]
+    },
+    {
+      "item_id": 1808,
+      "name": "Akma VB2 silver",
+      "name_de": "Akma VB2 Silber",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        135,
+        382
+      ],
+      "fish": [
+        "Чёрный окунь",
+        "Хек европейский"
+      ]
+    },
+    {
+      "item_id": 1809,
+      "name": "Akma VB3 fluo",
+      "name_de": "Akma VB3 Fluo",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/19/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 3.0,
+          "raw": "1/19/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        74,
+        105,
+        527
+      ],
+      "fish": [
+        "Палия",
+        "Судак",
+        "Луфарь"
+      ]
+    },
+    {
+      "item_id": 1861,
+      "name": "Технопланктон корм",
+      "name_de": "Technoplankton Futter",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "1/20/1,1/1/1,1/4/1,2/39/1,2/412/1,2/413/1,2/91/1,2/373/1,2/108/1,2/121/1,2/7/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 1.0,
+          "raw": "2/39/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 1.0,
+          "raw": "2/412/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 1.0,
+          "raw": "2/413/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 1.0,
+          "raw": "2/91/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 373,
+          "fish_name": "Толстолобик пёстрый",
+          "modifier": 1.0,
+          "raw": "2/373/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 108,
+          "fish_name": "Толстолобик белый",
+          "modifier": 1.0,
+          "raw": "2/108/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 121,
+          "fish_name": "Амур чёрный",
+          "modifier": 1.0,
+          "raw": "2/121/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 1.0,
+          "raw": "2/7/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1869,
+      "name": "VIB Salmon GT-1",
+      "name_de": "VIB Salmon GT-1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        535
+      ],
+      "fish": [
+        "Треска атлантическая"
+      ]
+    },
+    {
+      "item_id": 1870,
+      "name": "VIB Salmon GT-2",
+      "name_de": "VIB Salmon GT-2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        25,
+        110,
+        428
+      ],
+      "fish": [
+        "Горбуша",
+        "Щука северная",
+        "Пикша"
+      ]
+    },
+    {
+      "item_id": 1871,
+      "name": "VIB Salmon GT-3",
+      "name_de": "VIB Salmon GT-3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [
+        25,
+        402,
+        428
+      ],
+      "fish": [
+        "Горбуша",
+        "Катран",
+        "Пикша"
+      ]
+    },
+    {
+      "item_id": 1896,
+      "name": "Приманка Мышь-М1",
+      "name_de": "Lure Mouse-М1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1897,
+      "name": "Приманка Мышь-М2",
+      "name_de": "Lure Mouse-М2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1898,
+      "name": "Приманка Мышь-М3",
+      "name_de": "Lure Mouse-М3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1899,
+      "name": "Бурундук-NY-M0",
+      "name_de": "Lure Chipmunk-NY",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1920,
+      "name": "Balsa Fine-1",
+      "name_de": "Balsa Fine-1",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1921,
+      "name": "Balsa Fine-2",
+      "name_de": "Balsa Fine-2",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1922,
+      "name": "Balsa Fine-3",
+      "name_de": "Balsa Fine-3",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1925,
+      "name": "Balsa Saimon 1",
+      "name_de": "Balsa Saimon 1",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1926,
+      "name": "Balsa Saimon 2",
+      "name_de": "Balsa Saimon 2",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1927,
+      "name": "Balsa Saimon 3",
+      "name_de": "Balsa Saimon 3",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1990,
+      "name": "Прикорм \"Осётр\"",
+      "name_de": "Störfutter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/1,1/23/2,1/17/1,1/19/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 23,
+          "fish_name": "Буффало большеротый",
+          "modifier": 2.0,
+          "raw": "1/23/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 17,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/17/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 1991,
+      "name": "Прикорм \"Уклея\"",
+      "name_de": "Laubenfutter",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/1/1,1/15/3,1/25/1,2/123/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 25,
+          "fish_name": "Горбуша",
+          "modifier": 1.0,
+          "raw": "1/25/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 123,
+          "fish_name": "Чехонь",
+          "modifier": 2.0,
+          "raw": "2/123/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2009,
+      "name": "SF \"Карповый\"",
+      "name_de": "SF \"Karpfen\"",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "2/39/2,2/412/2,2/413/2,2/91/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 2.0,
+          "raw": "2/39/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 2.0,
+          "raw": "2/412/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 2.0,
+          "raw": "2/413/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 2.0,
+          "raw": "2/91/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2010,
+      "name": "SF \"Амур-толстолобик\"",
+      "name_de": "SF \"Gras / Silberkarpfen\"",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "2/7/2,2/121/1,2/373/2,2/108/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 2.0,
+          "raw": "2/7/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 121,
+          "fish_name": "Амур чёрный",
+          "modifier": 1.0,
+          "raw": "2/121/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 373,
+          "fish_name": "Толстолобик пёстрый",
+          "modifier": 2.0,
+          "raw": "2/373/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 108,
+          "fish_name": "Толстолобик белый",
+          "modifier": 2.0,
+          "raw": "2/108/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2011,
+      "name": "SF \"Морской-Кефаль\"",
+      "name_de": "SF \"Meeräsche\"",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "1/20/1,1/30/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 30,
+          "fish_name": "Ёрш",
+          "modifier": 2.0,
+          "raw": "1/30/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2012,
+      "name": "Морской хищник",
+      "name_de": "Ergänzungsfutter \"Sea Predator\"",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/2/2,1/17/1,1/19/1,2/387/2,2/402/2,2/517/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/2/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 17,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/17/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 387,
+          "fish_name": "Акула полярная",
+          "modifier": 2.0,
+          "raw": "2/387/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 402,
+          "fish_name": "Катран",
+          "modifier": 2.0,
+          "raw": "2/402/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 517,
+          "fish_name": "Тунец альбакор",
+          "modifier": 2.0,
+          "raw": "2/517/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2078,
+      "name": "VIB Salmon GT-4",
+      "name_de": "VIB Salmon GT-4",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2079,
+      "name": "VIB Salmon GT-5",
+      "name_de": "VIB Salmon GT-5",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2201,
+      "name": "Expert P1",
+      "name_de": "Expert P1",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2202,
+      "name": "Expert P2",
+      "name_de": "Expert P2",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2203,
+      "name": "Expert P3",
+      "name_de": "Expert P3",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/20/1,1/4/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 1.0,
+          "raw": "1/20/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2207,
+      "name": "Прикорм \"Конфетти\"",
+      "name_de": "Ergänzungsfutter \"Konfetti\"",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/20/2,1/1/1,1/4/1,2/39/2,2/412/2,2/413/2,2/91/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 20,
+          "fish_name": "Голец усатый",
+          "modifier": 2.0,
+          "raw": "1/20/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 4,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/4/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 39,
+          "fish_name": "Карп",
+          "modifier": 2.0,
+          "raw": "2/39/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 2.0,
+          "raw": "2/412/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 413,
+          "fish_name": "Карп голый",
+          "modifier": 2.0,
+          "raw": "2/413/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 2.0,
+          "raw": "2/91/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2219,
+      "name": "Поппер \"Лягушка-III-М1\"",
+      "name_de": "Frosch Popper-III-M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/6,2/110/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 6.0,
+          "raw": "2/128/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 5.0,
+          "raw": "2/110/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2220,
+      "name": "Поппер \"Лягушка-III-М2\"",
+      "name_de": "Frosch Popper-III-M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/6,2/110/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 6.0,
+          "raw": "2/128/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 5.0,
+          "raw": "2/110/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2221,
+      "name": "Поппер \"Лягушка-III-М3\"",
+      "name_de": "Frosch Popper-III-M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/6,2/110/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 6.0,
+          "raw": "2/128/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 5.0,
+          "raw": "2/110/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2232,
+      "name": "JIG Squid M1",
+      "name_de": "JIG Squid M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/19/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2233,
+      "name": "JIG Squid M2",
+      "name_de": "JIG Squid M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/19/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2234,
+      "name": "JIG Squid M3",
+      "name_de": "JIG Squid M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/19/1",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 1.0,
+          "raw": "1/19/1",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2301,
+      "name": "Вареный рис",
+      "name_de": "Gedämpfter Reis",
+      "category": "groundbait",
+      "wtype": 38,
+      "type_name": "Готовый прикорм",
+      "klevprop_raw": "2/587/2,2/589/2,2/588/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 587,
+          "fish_name": "Тилапия голубая",
+          "modifier": 2.0,
+          "raw": "2/587/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 589,
+          "fish_name": "Ильный карп",
+          "modifier": 2.0,
+          "raw": "2/589/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 588,
+          "fish_name": "Вучанг",
+          "modifier": 2.0,
+          "raw": "2/588/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2343,
+      "name": "STK x3RС",
+      "name_de": "STK x3RС",
+      "category": "hook",
+      "wtype": 6,
+      "type_name": "крючок",
+      "klevprop_raw": "1/1/-2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": -2.0,
+          "raw": "1/1/-2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2346,
+      "name": "Прикорм \"Сиг\"",
+      "name_de": "Seeköder (Trocken)",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/34/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 34,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/34/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2430,
+      "name": "Torgsten Pilker",
+      "name_de": "Torgsten Pilker",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2436,
+      "name": "FUNA SeaTooth",
+      "name_de": "FUNA SeaTooth",
+      "category": "hook",
+      "wtype": 6,
+      "type_name": "крючок",
+      "klevprop_raw": "1/19/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 19,
+          "fish_name": "Голавль",
+          "modifier": 2.0,
+          "raw": "1/19/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2437,
+      "name": "PLK Torgsten M0",
+      "name_de": "PLK Torgsten M0",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2438,
+      "name": "PLK Torgsten M1",
+      "name_de": "PLK Torgsten M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2439,
+      "name": "PLK Torgsten M2",
+      "name_de": "PLK Torgsten M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2440,
+      "name": "PLK Torgsten S",
+      "name_de": "PLK Torgsten M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2451,
+      "name": "Arasi Pilker",
+      "name_de": "Arasi Pilker",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2452,
+      "name": "PLK  Arasi M0",
+      "name_de": "PLK  Arasi M0",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2453,
+      "name": "PLK  Arasi M1",
+      "name_de": "PLK  Arasi M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2454,
+      "name": "PLK  Arasi M2",
+      "name_de": "PLK  Arasi M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2455,
+      "name": "PLK  Arasi S",
+      "name_de": "PLK  Arasi S",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2456,
+      "name": "SFCalamar Pilker",
+      "name_de": "SFCalamar Pilker",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2457,
+      "name": "SFC PLK M0",
+      "name_de": "SFC PLK M0",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2458,
+      "name": "SFC PLK M1",
+      "name_de": "SFC PLK M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2459,
+      "name": "SFC PLK M2",
+      "name_de": "SFC PLK M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2460,
+      "name": "SFC PLK M3",
+      "name_de": "SFC PLK M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2461,
+      "name": "SFC PLK S",
+      "name_de": "SFC PLK S",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/5/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 5,
+          "fish_name": "Белоглазка",
+          "modifier": 3.0,
+          "raw": "1/5/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2566,
+      "name": "Balsa Atom - RED",
+      "name_de": "Balsa Atom - ROT",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2567,
+      "name": "Balsa Atom - GREEN",
+      "name_de": "Balsa Atom - GRÜN",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2568,
+      "name": "Balsa Atom - CYAN",
+      "name_de": "Balsa Atom - TÜRKIS",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2578,
+      "name": "CRL GoldRush-V1",
+      "name_de": "CRL GoldRush-V1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2579,
+      "name": "CRL GoldRush-V2",
+      "name_de": "CRL GoldRush-V2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2580,
+      "name": "CRL GoldRush-V3",
+      "name_de": "CRL GoldRush-V3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2584,
+      "name": "VIB GoldRush-C1",
+      "name_de": "VIB GoldRush-C1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2585,
+      "name": "VIB GoldRush-C2",
+      "name_de": "VIB GoldRush-C2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2586,
+      "name": "VIB GoldRush-C3",
+      "name_de": "VIB GoldRush-C3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2587,
+      "name": "Прикорм \"Эльдорадо\"",
+      "name_de": "Futter „Eldorado“",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/9/3,1/11/2,1/8/3,2/84/2,2/412/2,2/492/2,2/91/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 9,
+          "fish_name": "Басс чёрный",
+          "modifier": 3.0,
+          "raw": "1/9/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 8,
+          "fish_name": "Берш",
+          "modifier": 3.0,
+          "raw": "1/8/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 84,
+          "fish_name": "Рак узкопалый",
+          "modifier": 2.0,
+          "raw": "2/84/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 412,
+          "fish_name": "Карп зеркальный",
+          "modifier": 2.0,
+          "raw": "2/412/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 492,
+          "fish_name": "Рак широкопалый",
+          "modifier": 2.0,
+          "raw": "2/492/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 91,
+          "fish_name": "Сазан",
+          "modifier": 2.0,
+          "raw": "2/91/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2589,
+      "name": "WOB GoldRush-B1",
+      "name_de": "WOB GoldRush-B1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2590,
+      "name": "WOB GoldRush-B2",
+      "name_de": "WOB GoldRush-B2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2591,
+      "name": "WOB GoldRush-B3",
+      "name_de": "WOB GoldRush-B3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/6/3,1/7/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 7,
+          "fish_name": "Амур белый",
+          "modifier": 3.0,
+          "raw": "1/7/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2592,
+      "name": "Прикорм \"Золото Севера\"",
+      "name_de": "Futter „Gold des Nordens“",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/26/4,1/1/1,1/2/1,1/14/3,1/3/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 26,
+          "fish_name": "Густера",
+          "modifier": 4.0,
+          "raw": "1/26/4",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 1,
+          "fish_name": "Малек",
+          "modifier": 1.0,
+          "raw": "1/1/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": 1.0,
+          "raw": "1/2/1",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 14,
+          "fish_name": "Вобла",
+          "modifier": 3.0,
+          "raw": "1/14/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 3,
+          "fish_name": "",
+          "modifier": 3.0,
+          "raw": "1/3/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2593,
+      "name": "Прикорм \"Клондайк\"",
+      "name_de": "Futter „Klondike“",
+      "category": "groundbait",
+      "wtype": 37,
+      "type_name": "Сухой прикорм",
+      "klevprop_raw": "1/2/2,1/26/4,1/6/3",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": 2.0,
+          "raw": "1/2/2",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 26,
+          "fish_name": "Густера",
+          "modifier": 4.0,
+          "raw": "1/26/4",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 6,
+          "fish_name": "Белуга",
+          "modifier": 3.0,
+          "raw": "1/6/3",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2606,
+      "name": "Бурундук-NY-M1",
+      "name_de": "Chipmunk-NY-M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2607,
+      "name": "Бурундук-NY-M2",
+      "name_de": "Chipmunk-NY-M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2608,
+      "name": "Бурундук-NY-Серия",
+      "name_de": "Chipmunk-NY-Serie",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/106/6,2/304/6",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 106,
+          "fish_name": "Таймень",
+          "modifier": 6.0,
+          "raw": "2/106/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 304,
+          "fish_name": "Таймень дунайский",
+          "modifier": 6.0,
+          "raw": "2/304/6",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2730,
+      "name": "Abyss Flash MV10",
+      "name_de": "Abyss Flash MV10",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/1,2/624/2,2/105/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 2.0,
+          "raw": "2/624/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 1.0,
+          "raw": "2/105/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2731,
+      "name": "Abyss Flash MV12",
+      "name_de": "Abyss Flash MV12",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/1,2/624/2,2/105/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 2.0,
+          "raw": "2/624/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 1.0,
+          "raw": "2/105/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2732,
+      "name": "Abyss Flash MV14",
+      "name_de": "Abyss Flash MV14",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/1,2/624/2,2/105/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 2.0,
+          "raw": "2/624/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 1.0,
+          "raw": "2/105/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2733,
+      "name": "Abyss Flash MV16",
+      "name_de": "Abyss Flash MV16",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/1,2/624/2,2/105/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 2.0,
+          "raw": "2/624/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 1.0,
+          "raw": "2/105/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2735,
+      "name": "Baiter HF 1",
+      "name_de": "Baiter HF 1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2736,
+      "name": "Baiter HF 2",
+      "name_de": "Baiter HF 2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2737,
+      "name": "Baiter HF 3",
+      "name_de": "Baiter HF 3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2738,
+      "name": "Baiter HF 4",
+      "name_de": "Baiter HF 4",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2739,
+      "name": "Baiter HF 5",
+      "name_de": "Baiter HF 5",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2741,
+      "name": "Vob Gill Walker 23 M1",
+      "name_de": "Vob Gill Walker 23 M1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/624/1,2/105/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2742,
+      "name": "Vob Gill Walker 23 M2",
+      "name_de": "Vob Gill Walker 23 M2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/624/1,2/105/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2743,
+      "name": "Vob Gill Walker 23 M3",
+      "name_de": "Vob Gill Walker 23 M3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/624/1,2/105/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2744,
+      "name": "Vob Gill Walker 23 M4",
+      "name_de": "Vob Gill Walker 23 M4",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/624/1,2/105/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2745,
+      "name": "Vob Gill Walker Chili",
+      "name_de": "Vob Gill Walker Chili",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/624/1,2/105/2",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 2.0,
+          "raw": "2/105/2",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2746,
+      "name": "Baiter HF Tiger",
+      "name_de": "Baiter HF Tiger",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/2,2/624/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 2.0,
+          "raw": "2/128/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 1.0,
+          "raw": "2/624/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2747,
+      "name": "Abyss Flash MV Catcher X",
+      "name_de": "Abyss Flash MV Catcher X",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/99/1,2/128/1,2/624/2,2/105/1",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 1.0,
+          "raw": "2/99/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 624,
+          "fish_name": "Щука испанская",
+          "modifier": 2.0,
+          "raw": "2/624/2",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 105,
+          "fish_name": "Судак",
+          "modifier": 1.0,
+          "raw": "2/105/1",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2749,
+      "name": "Swimmer KF D1",
+      "name_de": "Swimmer KF D1",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/4,2/110/3,2/99/7,2/371/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 4.0,
+          "raw": "2/128/4",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 3.0,
+          "raw": "2/110/3",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 7.0,
+          "raw": "2/99/7",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 371,
+          "fish_name": "Сом канальный",
+          "modifier": 5.0,
+          "raw": "2/371/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2750,
+      "name": "Swimmer KF D2",
+      "name_de": "Swimmer KF D2",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/4,2/110/3,2/99/7,2/371/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 4.0,
+          "raw": "2/128/4",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 3.0,
+          "raw": "2/110/3",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 7.0,
+          "raw": "2/99/7",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 371,
+          "fish_name": "Сом канальный",
+          "modifier": 5.0,
+          "raw": "2/371/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2751,
+      "name": "Swimmer KF D3",
+      "name_de": "Swimmer KF D3",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/4,2/110/3,2/99/7,2/371/5",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 4.0,
+          "raw": "2/128/4",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 3.0,
+          "raw": "2/110/3",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 7.0,
+          "raw": "2/99/7",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 371,
+          "fish_name": "Сом канальный",
+          "modifier": 5.0,
+          "raw": "2/371/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2752,
+      "name": "Swimmer KF Finder",
+      "name_de": "Swimmer KF Finder",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "2/128/1,2/110/1,2/99/9,2/371/9",
+      "modifiers": [
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 1.0,
+          "raw": "2/128/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 1.0,
+          "raw": "2/110/1",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 99,
+          "fish_name": "Сом европейский",
+          "modifier": 9.0,
+          "raw": "2/99/9",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 371,
+          "fish_name": "Сом канальный",
+          "modifier": 9.0,
+          "raw": "2/371/9",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2753,
+      "name": "Swimmer KF D5",
+      "name_de": "Swimmer KF D5",
+      "category": "lure",
+      "wtype": 12,
+      "type_name": "приманка",
+      "klevprop_raw": "1/2/-5,2/128/6,2/110/5",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 2,
+          "fish_name": "",
+          "modifier": -5.0,
+          "raw": "1/2/-5",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 2,
+          "fish_id": 128,
+          "fish_name": "Щука",
+          "modifier": 6.0,
+          "raw": "2/128/6",
+          "meaning": "целевое привлечение"
+        },
+        {
+          "kind": 2,
+          "fish_id": 110,
+          "fish_name": "Щука северная",
+          "modifier": 5.0,
+          "raw": "2/110/5",
+          "meaning": "целевое привлечение"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2773,
+      "name": "Баланс СНЗ - 1",
+      "name_de": "Balance SNZ - 1",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2774,
+      "name": "Баланс СНЗ - 2",
+      "name_de": "Balance SNZ - 2",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2775,
+      "name": "Баланс СНЗ - 3",
+      "name_de": "Balance SNZ - 3",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2776,
+      "name": "Баланс СНЗ - 4",
+      "name_de": "Balance SNZ - 4",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    },
+    {
+      "item_id": 2777,
+      "name": "Баланс СНЗ - 5",
+      "name_de": "Balance SNZ - 5",
+      "category": "float",
+      "wtype": 9,
+      "type_name": "поплавок",
+      "klevprop_raw": "1/15/3,1/11/2",
+      "modifiers": [
+        {
+          "kind": 1,
+          "fish_id": 15,
+          "fish_name": "Вырезуб",
+          "modifier": 3.0,
+          "raw": "1/15/3",
+          "meaning": "базовое влияние"
+        },
+        {
+          "kind": 1,
+          "fish_id": 11,
+          "fish_name": "Валек",
+          "modifier": 2.0,
+          "raw": "1/11/2",
+          "meaning": "базовое влияние"
+        }
+      ],
+      "min_bait_weight": 0.0,
+      "max_bait_weight": 0.0,
+      "fish_ids": [],
+      "fish": []
+    }
+  ],
+  "kind_meanings": {
+    "0": "редкое специфическое",
+    "1": "базовое влияние",
+    "2": "целевое привлечение"
+  }
+}

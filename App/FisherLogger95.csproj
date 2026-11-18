@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- NEXT-95 isolated integration build of the FisherLogger app. Compiles only ..\src\*.cs (except the replay harness). -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>FisherLogger95</AssemblyName>
+    <RootNamespace>FisherLogger</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Deterministic>true</Deterministic>
+    <EmbedAllSources>true</EmbedAllSources>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <!-- RELEASE-02: номер версии (обновления через GitHub сравнивают его с тегом выпуска vX.Y.Z) -->
+    <Version>1.0.0</Version>
+    <Product>Анализатор Fisher Online</Product>
+    <AssemblyTitle>Анализатор Fisher Online</AssemblyTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="SharpPcap" Version="6.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\*.cs" Exclude="src\ReplayProgram.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- DESIGN: window/form icon (Theme.AppIcon) -->
+    <EmbeddedResource Include="Assets\app.ico" LogicalName="FisherLogger.app.ico" />
+    <!-- ADVISOR-02: справочные ресурсы «Советника» (embedded + override через FISHER_RESOURCES_DIR). -->
+    <EmbeddedResource Include="resources\fishing_reference.json" LogicalName="FisherLogger.resources.fishing_reference.json" />
+    <EmbeddedResource Include="resources\fh_fish_weights.json" LogicalName="FisherLogger.resources.fh_fish_weights.json" />
+    <!-- RELEASE-03: английский словарь интерфейса -->
+    <EmbeddedResource Include="resources\ui_en.json" LogicalName="FisherLogger.resources.ui_en.json" />
+  </ItemGroup>
+</Project>

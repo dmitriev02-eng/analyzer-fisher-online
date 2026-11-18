@@ -1,0 +1,4682 @@
+{
+ "format": 1,
+ "generated_by": "NEXT-ANDROID-02 build_bathymetry.py",
+ "source": "NEXT-135 TerrainData heights + SceneData.water (game resources)",
+ "depth_definition": "depth (m) = SceneData.water.world_pos.y − terrain world height; 1 Unity unit = 1 m (checked against recorded depth_cm/cast_y)",
+ "coordinate_system": "Unity world X (east, right) / Z (north, up); px = (X-min_x)/(max_x-min_x)*width, py = (max_z-Z)/(max_z-min_z)*height; continuous pixel coordinates, floor() only for sampling",
+ "map_registry_sha256": "da69958e317ac5c0388c8851a2e890f538aebb5b2f3dcabd39adecc92f34d8fa",
+ "waterbodies": [
+  {
+   "location_id": 1,
+   "name": "Германия: оз. Вассердам",
+   "bundle": "b1",
+   "n_terrains": 1,
+   "water_level_world_y": 16.0,
+   "source": {
+    "terrain_data": "New Terrain 8",
+    "td_pid": -2190084690872648763,
+    "heights_file": "heights_-2190084690872648763.npy",
+    "heights_sha256": "1fc21eb54c3c5ab577f4bb1d16f6a8ff1a467110104478d4c7ab1fe969ad300a",
+    "terrain_position": [
+     -1024.0,
+     0.0,
+     -1024.0
+    ],
+    "terrain_size": [
+     2048.0,
+     60.0,
+     2048.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1024.0,
+    "max_x": 1024.0,
+    "min_z": -1024.0,
+    "max_z": 1024.0
+   },
+   "map_file": "tfbase_001_2048.png",
+   "map_sha256": "91fd3edc7f3f4918a6a9cb32121a1fa72843a2f941ec0a7ee16156e617525bd8",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 12.0,
+   "mean_depth_m": 5.98,
+   "water_fraction": 0.199,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    }
+   ],
+   "grid": {
+    "file": "depth_001_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "516abe2b1f9e3a2b0d249ae169ec14b38fe72619c99d4d2e90e0ba3fe137f0ba",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_001_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "de731de13ebb77fe1363813174b1e891e3714dec00ca2f5bf12168f7503b9dcb",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -341.5,
+     "z": 215.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 661.5,
+     "z": 99.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -585.5,
+     "z": -683.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -116.5,
+     "z": -346.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -512.5,
+     "z": -345.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 249.5,
+     "z": -210.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -592.5,
+     "z": -500.5,
+     "depth_m": 12.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 2,
+   "name": "Россия: р. Пра",
+   "bundle": "b2",
+   "n_terrains": 1,
+   "water_level_world_y": 5.0,
+   "source": {
+    "terrain_data": "New Terrain 9",
+    "td_pid": -6730426572242442022,
+    "heights_file": "heights_-6730426572242442022.npy",
+    "heights_sha256": "7a84bbc205abaaa44ad539272d9bd05750990d3731ec3c3a2c9eb9c252bdcca7",
+    "terrain_position": [
+     -750.0,
+     0.0,
+     -750.0
+    ],
+    "terrain_size": [
+     1500.0,
+     15.0,
+     1500.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -750.0,
+    "max_x": 750.0,
+    "min_z": -750.0,
+    "max_z": 750.0
+   },
+   "map_file": "tfbase_002_2048.png",
+   "map_sha256": "85debac403ca0bf597b4921ca086ede84461c32a1601c93a8fe1d3aae1ee7ef3",
+   "map_confidence": "CONFIRMED",
+   "masked_water_fraction": 0.0002,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 5.0,
+   "mean_depth_m": 2.37,
+   "water_fraction": 0.1209,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 1.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_002_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "508745e3dc34a55cc40821de5ae19142cc970b2c41a3c2818069361de7edafda",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_002_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "e7e259716eea8b747f81c135c1a8626deaab45b5d2f6dfc40d62270b5bb270a4",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -102.17,
+     "z": 119.02,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 137.33,
+     "z": 227.42,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 236.21,
+     "z": -165.16,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -288.94,
+     "z": -305.05,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 192.26,
+     "z": 515.99,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -197.39,
+     "z": -554.81,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -205.44,
+     "z": 485.23,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -42.85,
+     "z": -204.71,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 38.45,
+     "z": -677.86,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -269.17,
+     "z": 502.08,
+     "depth_m": 5.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "CONFIRMED"
+  },
+  {
+   "location_id": 3,
+   "name": "Франция: Пруды Перруше",
+   "bundle": "b3",
+   "n_terrains": 1,
+   "water_level_world_y": 3.5,
+   "source": {
+    "terrain_data": "New Terrain 11",
+    "td_pid": 4137440582732220191,
+    "heights_file": "heights_4137440582732220191.npy",
+    "heights_sha256": "bd4a0f8b685d79e121b916bba48e919ea375ff815a3b13bb8ecfef8b1907e8ca",
+    "terrain_position": [
+     -512.0,
+     0.0,
+     -512.0
+    ],
+    "terrain_size": [
+     1500.0,
+     20.0,
+     1500.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -512.0,
+    "max_x": 988.0,
+    "min_z": -512.0,
+    "max_z": 988.0
+   },
+   "map_file": "tfbase_003_2048.png",
+   "map_sha256": "978117113a00e309e298113c6555d3e1e2e3b87dbae4612889fbfe9c176590eb",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0005,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 3.5,
+   "mean_depth_m": 2.74,
+   "water_fraction": 0.1091,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 1.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_003_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "f265c27a92e2257a2540af3e568dd627bb8f2c22f09f30f9739bd1903873a87e",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_003_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "71a9511fe806853b266cac7b6d44d83a8175a0acd39ac59c2f26876ceeaf9c3a",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 131.43,
+     "z": 328.45,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -191.57,
+     "z": 96.28,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 386.32,
+     "z": 358.48,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 185.63,
+     "z": 74.3,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -137.37,
+     "z": 402.43,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 414.15,
+     "z": 556.97,
+     "depth_m": 3.5,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 4,
+   "name": "Финляндия: оз. Кулгу",
+   "bundle": "b4",
+   "n_terrains": 1,
+   "water_level_world_y": 50.2,
+   "source": {
+    "terrain_data": "New Terrain 2",
+    "td_pid": -1799963853998247242,
+    "heights_file": "heights_-1799963853998247242.npy",
+    "heights_sha256": "12a93f5745473871b3a5821f94340e54883f9ea75f80915ddba82501404b8a13",
+    "terrain_position": [
+     -1000.0,
+     0.0,
+     -1000.0
+    ],
+    "terrain_size": [
+     2000.0,
+     100.0,
+     2000.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1000.0,
+    "max_x": 1000.0,
+    "min_z": -1000.0,
+    "max_z": 1000.0
+   },
+   "map_file": "tfbase_004_2048.png",
+   "map_sha256": "3a86bb02c8c411bbe5f2b9ea8767f4e52dad4906dc16540962c4c27a31c89fd3",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 40.2,
+   "mean_depth_m": 8.92,
+   "water_fraction": 0.252,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 10.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 30.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 30.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 40.0,
+     "to_m": 50.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_004_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "00d50cd805073850e0c0684e6379307dc973ed31a5e84c9bea9024169ce0e3d2",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_004_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "e2f81a8beafea6ad9e35b3ff0ddce7d7c3e6abf6f59c3e0f3ac3aea06be942a1",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 293.46,
+     "z": -5.37,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -83.5,
+     "z": -191.89,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 734.86,
+     "z": -604.98,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 223.14,
+     "z": -360.84,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -464.36,
+     "z": 54.2,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 66.89,
+     "z": -1.46,
+     "depth_m": 40.2,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 5,
+   "name": "Херсон: Дельта Днепра",
+   "bundle": "b5",
+   "n_terrains": 1,
+   "water_level_world_y": 20.0,
+   "source": {
+    "terrain_data": "New Terrain",
+    "td_pid": 2619674199745093023,
+    "heights_file": "heights_2619674199745093023.npy",
+    "heights_sha256": "0c686cc2dfd41505cc8f470c70bb6ab43971a7191d0e4f7a5128cf958d81dac1",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1600.0,
+     40.0,
+     1600.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 1100.0,
+    "min_z": -500.0,
+    "max_z": 1100.0
+   },
+   "map_file": "tfbase_005_2048.png",
+   "map_sha256": "e38688996d35c69eec7c50503ab83d05b699c0677d9d416bb4f60374a559c005",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0073,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 18.0,
+   "mean_depth_m": 5.86,
+   "water_fraction": 0.4738,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 15.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_005_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "2b9c670692d4405f352c8ef98509421784d40dce7db4fbad32d9593ed8d51e28",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_005_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "4c9755d7b99c108825c13a5d1dc556cf1b6a0697ce4cce544eec909a51664674",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 669.14,
+     "z": -181.64,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 390.23,
+     "z": -101.17,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 44.14,
+     "z": 136.33,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 957.42,
+     "z": 100.39,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 352.73,
+     "z": 215.23,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 19.14,
+     "z": 523.83,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 983.2,
+     "z": -434.77,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1094.92,
+     "z": 15.23,
+     "depth_m": 18.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 6,
+   "name": "Беларусь: Пруд Дукора",
+   "bundle": "b6",
+   "n_terrains": 1,
+   "water_level_world_y": 3.0,
+   "source": {
+    "terrain_data": "New Terrain 3",
+    "td_pid": 8454953774510953066,
+    "heights_file": "heights_8454953774510953066.npy",
+    "heights_sha256": "c2f4c9b17676204c45ac8e4992c5c898593b9b94e2607e45559da235edb9fa0c",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     20.0,
+     1000.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_006_2048.png",
+   "map_sha256": "db6a46c0877a0db8b7d8f66a5286965a54fcd7dc8231bbbb0090507fa4452e60",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 3.0,
+   "mean_depth_m": 1.75,
+   "water_fraction": 0.0641,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 0.5,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 0.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 0.5,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 1.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 1.5,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 2.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 2.5,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 3.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.7
+    }
+   ],
+   "grid": {
+    "file": "depth_006_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "50aac8718666c67ed63b5ac82de12e5d484f1dec0b9c41227d1d6beb8b6061c6",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_006_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "ee2a3e7719d58a81a2a0d514938e4842ca5076a20de05e2ccdd66f80e5502965",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 73.0,
+     "z": 276.12,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 198.49,
+     "z": -327.39,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -14.89,
+     "z": -44.68,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 240.97,
+     "z": 329.35,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -127.2,
+     "z": 83.25,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 76.42,
+     "z": -212.16,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 370.85,
+     "z": 187.26,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 436.77,
+     "z": 25.15,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -47.61,
+     "z": 130.62,
+     "depth_m": 3.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 7,
+   "name": "Италия: р. По",
+   "bundle": "b7",
+   "n_terrains": 1,
+   "water_level_world_y": 8.0,
+   "source": {
+    "terrain_data": "New Terrain 4",
+    "td_pid": -6383937477869868097,
+    "heights_file": "heights_-6383937477869868097.npy",
+    "heights_sha256": "673fa883056fdebcf6b6a25bc66c0b5a2b89ce45d41f43970e09a5b2fe767453",
+    "terrain_position": [
+     -800.0,
+     0.0,
+     -800.0
+    ],
+    "terrain_size": [
+     1024.0,
+     60.0,
+     1024.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -800.0,
+    "max_x": 224.0,
+    "min_z": -800.0,
+    "max_z": 224.0
+   },
+   "map_file": "tfbase_007_2048.png",
+   "map_sha256": "d044ae6a2da8e461a357b8d3439cd5863f0cf1dfcf3b58d47ba3663248b07536",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0025,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 8.0,
+   "mean_depth_m": 5.28,
+   "water_fraction": 0.2234,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 8.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_007_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "020d8efa576caeff0762f80b490b520b71d7debac6b3e9e1b2c9c298820429c9",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_007_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "61d51a78f8a448f30bf25ca48e734d7e5c37dc2a6f2f67e90e1dc3413dd3cab4",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -623.75,
+     "z": -520.25,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -26.75,
+     "z": -75.25,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -505.75,
+     "z": -351.25,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -774.75,
+     "z": -643.75,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -317.25,
+     "z": -134.75,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 114.25,
+     "z": -333.75,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 188.75,
+     "z": 122.75,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 157.25,
+     "z": -161.25,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 210.75,
+     "z": 132.75,
+     "depth_m": 8.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 8,
+   "name": "Польша: Карпаты",
+   "bundle": "b8",
+   "n_terrains": 1,
+   "water_level_world_y": 2.8,
+   "source": {
+    "terrain_data": "New Terrain 5",
+    "td_pid": 8424640277780514037,
+    "heights_file": "heights_8424640277780514037.npy",
+    "heights_sha256": "59d617cc95ea466ab4ecd6982c5731edfeb6da8e5b32dd45bc2055955ed6d2bd",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     100.0,
+     1000.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_008_2048.png",
+   "map_sha256": "9d3e8d8333217d8a49943096064b4e7f2b99c4c43c2b2cc810536436a07adbea",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 2.8,
+   "mean_depth_m": 1.84,
+   "water_fraction": 0.21,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 0.5,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 0.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 0.5,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 1.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 1.5,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 2.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 2.5,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_008_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "a9f87c78128b5055583f427ecd3f245b8fff18cc25a547d3e32cc7e64c540bdc",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_008_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "3c9f263f0b1426da131f5ebe794b6959d37f9bcf2692a0059827e88207009d86",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 18.8,
+     "z": 227.78,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 161.38,
+     "z": 67.63,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -75.44,
+     "z": 41.75,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 392.33,
+     "z": -83.25,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -462.65,
+     "z": -113.53,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 274.17,
+     "z": -214.6,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -287.35,
+     "z": -53.96,
+     "depth_m": 1.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 356.2,
+     "z": -463.62,
+     "depth_m": 1.5,
+     "kind": "isobath"
+    },
+    {
+     "x": 427.0,
+     "z": -289.31,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -8.54,
+     "z": 194.09,
+     "depth_m": 2.8,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 9,
+   "name": "Сербия: р. Дунай",
+   "bundle": "b9",
+   "n_terrains": 1,
+   "water_level_world_y": 15.0,
+   "source": {
+    "terrain_data": "New Terrain 6",
+    "td_pid": 7703147029812819819,
+    "heights_file": "heights_7703147029812819819.npy",
+    "heights_sha256": "f08cc7f7075bef95c8dc037675b556715a1a0e49ac7d06cc06cce244d073da2b",
+    "terrain_position": [
+     -2000.0,
+     0.0,
+     -2000.0
+    ],
+    "terrain_size": [
+     4000.0,
+     100.0,
+     4000.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -2000.0,
+    "max_x": 2000.0,
+    "min_z": -2000.0,
+    "max_z": 2000.0
+   },
+   "map_file": "tfbase_009_2048.png",
+   "map_sha256": "361370077e8bd00874c3d4eb2bb4a8b09282a0606d57899be6687ac491765726",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0008,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 15.0,
+   "mean_depth_m": 10.32,
+   "water_fraction": 0.2481,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 15.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_009_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "b2b80252e1f23dc40e48fb803c8ab6cfc59ffaf472b02a1aba62e7a0c5935b8c",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_009_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "45255f74365c42be3236cd7a72817f71101e0e264de019e1eb5cfd32d6bd2182",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 96.68,
+     "z": 1081.05,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -256.84,
+     "z": -1260.74,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1243.16,
+     "z": 1397.46,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -708.01,
+     "z": 163.09,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -661.13,
+     "z": -1827.15,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1051.76,
+     "z": -1065.43,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 155.27,
+     "z": 225.59,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1102.54,
+     "z": 1436.52,
+     "depth_m": 15.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 10,
+   "name": "Азербайджан: Каспий",
+   "bundle": "b10",
+   "n_terrains": 1,
+   "water_level_world_y": 40.0,
+   "source": {
+    "terrain_data": "CaspTerrain",
+    "td_pid": -6095604192459173479,
+    "heights_file": "heights_-6095604192459173479.npy",
+    "heights_sha256": "efa8e6b20e86c5a2bf412ae7dcd76de5baee9b43befe2cf32f3838aab935b845",
+    "terrain_position": [
+     -2000.0,
+     0.0,
+     -2000.0
+    ],
+    "terrain_size": [
+     4000.0,
+     200.0,
+     4000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -2000.0,
+    "max_x": 2000.0,
+    "min_z": -2000.0,
+    "max_z": 2000.0
+   },
+   "map_file": "tfbase_010_2048.png",
+   "map_sha256": "8f6ee85e8b4878456d620058247ed5e16ebb3cab5854122801098f7502b1e7ec",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0044,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 40.0,
+   "mean_depth_m": 27.7,
+   "water_fraction": 0.4769,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 10.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 30.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 30.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 40.0,
+     "to_m": 50.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_010_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "4bb36429e1d5b993148cc9b363bc6f74146b8c4d9f1ad910ef245c87fe37796f",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_010_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "af5fa74e7e1a491126fe11bbb3ca917b8d24291865368ff4bc05d6741342102e",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -83.01,
+     "z": 786.13,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1319.34,
+     "z": 1180.66,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 583.01,
+     "z": -1872.07,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -100.59,
+     "z": -866.21,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 231.45,
+     "z": -53.71,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 700.2,
+     "z": 897.46,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 809.57,
+     "z": -1016.6,
+     "depth_m": 30.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1913.09,
+     "z": 875.98,
+     "depth_m": 30.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 903.32,
+     "z": -4.88,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1391.6,
+     "z": 1022.46,
+     "depth_m": 40.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 11,
+   "name": "Норвегия: Нейдагер-фьорд",
+   "bundle": "b11",
+   "n_terrains": 1,
+   "water_level_world_y": 115.0,
+   "source": {
+    "terrain_data": "Terrain_0_0-20240201 - 014625",
+    "td_pid": -8382157043844952424,
+    "heights_file": "heights_-8382157043844952424.npy",
+    "heights_sha256": "2f3c27c58fa3baf95213acf9abebe0b28544b8392771c8360e95a53db6002ffc",
+    "terrain_position": [
+     -2048.0,
+     0.0,
+     -2048.0
+    ],
+    "terrain_size": [
+     4096.0,
+     850.0,
+     4096.0
+    ],
+    "resolution": 4097,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -2048.0,
+    "max_x": 2048.0,
+    "min_z": -2048.0,
+    "max_z": 2048.0
+   },
+   "map_file": "tfbase_011_2048.png",
+   "map_sha256": "3a3fb35b754f51e26a36cecae03ee79cdc22b9e42c12632ab87b43332221847d",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.171,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 115.0,
+   "mean_depth_m": 64.18,
+   "water_fraction": 0.2548,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 20.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 40.0,
+     "to_m": 60.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 60.0,
+     "to_m": 80.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 80.0,
+     "to_m": 100.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 100.0,
+     "to_m": 120.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_011_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "99e28a19c53f6c01fe841f806b5cc1f2b048f96004a5b5d876b1065199cf4f88",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_011_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "061f6b58f01b24321b064e224301469cf43179dd47876cee00330b26b6714951",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -451.0,
+     "z": -231.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 153.0,
+     "z": 575.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 287.0,
+     "z": -1005.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -845.0,
+     "z": -879.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 555.0,
+     "z": -337.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 389.0,
+     "z": 1261.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 965.0,
+     "z": -1173.0,
+     "depth_m": 60.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1149.0,
+     "z": -259.0,
+     "depth_m": 60.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -163.0,
+     "z": -1527.0,
+     "depth_m": 80.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 157.0,
+     "z": -17.0,
+     "depth_m": 115.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 12,
+   "name": "Чехия: пруд Рыбавицы",
+   "bundle": "b12",
+   "n_terrains": 1,
+   "water_level_world_y": 24.8,
+   "source": {
+    "terrain_data": "New Terrain",
+    "td_pid": 8199424242419884758,
+    "heights_file": "heights_8199424242419884758.npy",
+    "heights_sha256": "e20a5912a4e47dcfc1f5a5f12388ad441d4e39916dc487cbb91a730905ab5460",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     600.0,
+     1000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_012_2048.png",
+   "map_sha256": "98b1589ee5034690169563fc5bf7eb5c47183ab4e8148dcb91717ba2260d72a4",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0004,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 6.8,
+   "mean_depth_m": 2.64,
+   "water_fraction": 0.1276,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_012_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "3740c9efe87e19d3db8f3a31fd7471c037c31d42ffd2473e8c0716617a7433b1",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_012_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "224fbd561920d473729a491c8552d08d3527358c350acaec7d4802429fff6b63",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -130.62,
+     "z": -17.33,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 151.12,
+     "z": 193.6,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -334.72,
+     "z": -265.38,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 225.83,
+     "z": 0.24,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 216.55,
+     "z": -214.6,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 120.85,
+     "z": -459.72,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 238.53,
+     "z": 73.49,
+     "depth_m": 6.8,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 13,
+   "name": "США: \"1000 островов\"",
+   "bundle": "b13",
+   "n_terrains": 1,
+   "water_level_world_y": 20.0,
+   "source": {
+    "terrain_data": "New Terrain 14",
+    "td_pid": 6354953122731504494,
+    "heights_file": "heights_6354953122731504494.npy",
+    "heights_sha256": "6b0ecba4e03cd3c982921b7a801e62f9eb0171e0c6d398108a4ccbb048c40933",
+    "terrain_position": [
+     -1000.0,
+     0.0,
+     -1000.0
+    ],
+    "terrain_size": [
+     2000.0,
+     100.0,
+     2000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1000.0,
+    "max_x": 1000.0,
+    "min_z": -1000.0,
+    "max_z": 1000.0
+   },
+   "map_file": "tfbase_013_2048.png",
+   "map_sha256": "f3888afba78f8180aa8606a013fc0268bb52b0ba99715c9e362756f62a46a747",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0049,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 20.0,
+   "mean_depth_m": 8.49,
+   "water_fraction": 0.5152,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 15.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 25.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_013_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "769533c52913214f0b57ced2b4cb4ed9030ce64399b62c0c2fea7b9906c4ad11",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_013_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "4fe819c621c2b0cfa909e609d79be22f421fb3a412a09e11776579a1000c9bb7",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 488.77,
+     "z": 646.97,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 112.79,
+     "z": 242.68,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -332.52,
+     "z": -218.26,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -189.94,
+     "z": -736.82,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -319.82,
+     "z": 246.58,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 290.53,
+     "z": -164.55,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -764.16,
+     "z": -408.69,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -130.37,
+     "z": 521.97,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -562.01,
+     "z": -697.75,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -485.84,
+     "z": 96.19,
+     "depth_m": 20.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 14,
+   "name": "Нидерланды: канал",
+   "bundle": "b14",
+   "n_terrains": 1,
+   "water_level_world_y": 10.0,
+   "source": {
+    "terrain_data": "New Terrain 13",
+    "td_pid": 3089794165230230678,
+    "heights_file": "heights_3089794165230230678.npy",
+    "heights_sha256": "23bf2abe0c488347b49e05fe58b7ae628c79b4696abc603e99911c3a6f6ff2dd",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     60.0,
+     1000.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_014_2048.png",
+   "map_sha256": "0548d246ab46ef1e32f73388acbcc601319d16fde664a1a0df907a36d0a7be2f",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 9.0,
+   "mean_depth_m": 6.4,
+   "water_fraction": 0.328,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 8.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_014_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "81dded74cbc93a9985beebc934d21f6a2d03ccfe0e333b25bd706c490f9d52d9",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_014_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "bae223f979dd1177224baf06aba408d4d1026290e7b62ebb0a1ea421aff4706b",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -219.97,
+     "z": 205.32,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 418.7,
+     "z": -240.97,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 380.62,
+     "z": 22.71,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -448.97,
+     "z": -97.41,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -221.44,
+     "z": 2.69,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 68.12,
+     "z": 163.33,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -427.49,
+     "z": 192.63,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 427.98,
+     "z": -432.37,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 275.63,
+     "z": -112.55,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -426.51,
+     "z": 377.69,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 136.96,
+     "z": -9.52,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -46.63,
+     "z": 4.15,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -454.83,
+     "z": 499.76,
+     "depth_m": 9.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 15,
+   "name": "Атом: пустоши",
+   "bundle": "b15",
+   "n_terrains": 1,
+   "water_level_world_y": 14.0,
+   "source": {
+    "terrain_data": "New Terrain 15",
+    "td_pid": -1125967793797534893,
+    "heights_file": "heights_-1125967793797534893.npy",
+    "heights_sha256": "5fa890182c285c10201e4fbd81317b5a11e73fcb6fd88289782c6f048760273d",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     50.0,
+     1000.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_015_2048.png",
+   "map_sha256": "fb0c5ad46dc8b2be36a503081709978761b34a0bcd44c3fe1c66a7f20eccd4d8",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0577,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 14.0,
+   "mean_depth_m": 7.37,
+   "water_fraction": 0.2838,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    }
+   ],
+   "grid": {
+    "file": "depth_015_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "d669c305b12d0e8cf50db35a07ddf6df9db49ef73046ceff006a760323479572",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_015_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "c9feb89d34e39e3fa7007c445a45a4dd767edc0572cf6b9d77aede3d9de5adc8",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 210.69,
+     "z": 140.87,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 173.1,
+     "z": -173.58,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -108.64,
+     "z": -101.32,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -58.84,
+     "z": -393.8,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 238.53,
+     "z": -334.23,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 283.45,
+     "z": -12.94,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 119.38,
+     "z": -236.57,
+     "depth_m": 14.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 16,
+   "name": "Россия: р. Енисей",
+   "bundle": "b16",
+   "n_terrains": 1,
+   "water_level_world_y": 5.0,
+   "source": {
+    "terrain_data": "New Terrain 16",
+    "td_pid": 1542203446494067656,
+    "heights_file": "heights_1542203446494067656.npy",
+    "heights_sha256": "3b5fe303d8311387f623f0ec7048206f1f4b40783453625448d56e71f02b4ae5",
+    "terrain_position": [
+     -1000.0,
+     0.0,
+     -1000.0
+    ],
+    "terrain_size": [
+     2000.0,
+     400.0,
+     2000.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1000.0,
+    "max_x": 1000.0,
+    "min_z": -1000.0,
+    "max_z": 1000.0
+   },
+   "map_file": "tfbase_016_2048.png",
+   "map_sha256": "637991be7beb6eb62ead5f36d03bab147ecb7f63067b7fba81c75b2218649f12",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 5.0,
+   "mean_depth_m": 3.8,
+   "water_fraction": 0.2492,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 1.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_016_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "3aff1749264240978a4888cb7da4e0aa0105029c21220818e45eaa346127077a",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_016_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "0a9f5f29a4b1e25453b2b7133f494a172fccc15da51ea27478ee7e2ba112dca6",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -255.37,
+     "z": 257.32,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 52.25,
+     "z": -511.23,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 881.35,
+     "z": -852.05,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 430.18,
+     "z": -573.73,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -210.45,
+     "z": -136.23,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 224.12,
+     "z": 506.35,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 783.69,
+     "z": 472.17,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -261.23,
+     "z": 688.96,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 146.97,
+     "z": -90.33,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -292.48,
+     "z": 999.51,
+     "depth_m": 5.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 17,
+   "name": "Шотландия: Лох-Мaро",
+   "bundle": "b17",
+   "n_terrains": 1,
+   "water_level_world_y": 36.08,
+   "source": {
+    "terrain_data": "Mountains_Valley_terrain",
+    "td_pid": -325435915868904430,
+    "heights_file": "heights_-325435915868904430.npy",
+    "heights_sha256": "afa3357292d9d3703526f2af091fa626467e2a6708272b872b6794c2fc280f73",
+    "terrain_position": [
+     -1500.0,
+     0.0,
+     -1500.0
+    ],
+    "terrain_size": [
+     3500.0,
+     800.0,
+     3500.0
+    ],
+    "resolution": 4097,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1500.0,
+    "max_x": 2000.0,
+    "min_z": -1500.0,
+    "max_z": 2000.0
+   },
+   "map_file": "tfbase_017_2048.png",
+   "map_sha256": "5b4e1721ca215ca77583559f366cd987908f82e8ae6f0eb3040ab07f52b23531",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 36.08,
+   "mean_depth_m": 17.52,
+   "water_fraction": 0.0819,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 10.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 30.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 30.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_017_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "cd534daf0bda8958213d790e55f6a84a047b1d5c595bc556cfad03b5b8f7c0df",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_017_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "20434c315ddbc69f8a434d5bf8e499d63bf1712692fe328531e48ba9642371f7",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -313.11,
+     "z": -5.49,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 661.01,
+     "z": 766.97,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 702.03,
+     "z": 173.95,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 223.51,
+     "z": -289.18,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 158.57,
+     "z": 406.37,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 418.33,
+     "z": 281.62,
+     "depth_m": 36.1,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 18,
+   "name": "Казахстан: оз Жусымбай",
+   "bundle": "b18",
+   "n_terrains": 1,
+   "water_level_world_y": 15.0,
+   "source": {
+    "terrain_data": "Terrain_0_0-20220907 - 134753",
+    "td_pid": -1386473323579115771,
+    "heights_file": "heights_-1386473323579115771.npy",
+    "heights_sha256": "b328e19907a7b4adc89dcf454f986ad41a6f20f8ab9a6bd205e578d1b972ea62",
+    "terrain_position": [
+     -1024.0,
+     0.0,
+     -1024.0
+    ],
+    "terrain_size": [
+     2048.0,
+     2048.0,
+     2048.0
+    ],
+    "resolution": 4097,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1024.0,
+    "max_x": 1024.0,
+    "min_z": -1024.0,
+    "max_z": 1024.0
+   },
+   "map_file": "tfbase_018_2048.png",
+   "map_sha256": "0f6f8c1f7b9883f6e57e1d857584d5531b765707b29b93c771863eff1dac1e64",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 15.0,
+   "mean_depth_m": 7.12,
+   "water_fraction": 0.2424,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 15.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_018_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "ffcb62adc5b2c6064d93048b47cc8dbc4a8316ded1647a05801e601698777ce3",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_018_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "6c17cc39f3a7e230fbb84cd8b28889732e60e148cb4640b2bff1c269b066f133",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 487.5,
+     "z": -307.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 17.5,
+     "z": -537.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -103.5,
+     "z": -40.5,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 487.5,
+     "z": 461.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 340.5,
+     "z": 151.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -159.5,
+     "z": 436.5,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -505.5,
+     "z": 210.5,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 317.5,
+     "z": 456.5,
+     "depth_m": 15.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 19,
+   "name": "Коми: Верхняя Печора",
+   "bundle": "b19",
+   "n_terrains": 1,
+   "water_level_world_y": 9.3,
+   "source": {
+    "terrain_data": "New Terrain 19",
+    "td_pid": -7711002832144438729,
+    "heights_file": "heights_-7711002832144438729.npy",
+    "heights_sha256": "f10cee2cd395f6bbc21e97d96c5f0d18ca5199a484a8877685ee0702f5ea121f",
+    "terrain_position": [
+     -1500.0,
+     0.0,
+     -1500.0
+    ],
+    "terrain_size": [
+     3000.0,
+     100.0,
+     3000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1500.0,
+    "max_x": 1500.0,
+    "min_z": -1500.0,
+    "max_z": 1500.0
+   },
+   "map_file": "tfbase_019_2048.png",
+   "map_sha256": "446b2b3b1a3a010b05efd975b3068915c96fa1c23cfb7fbad7f09e0b67489760",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 9.3,
+   "mean_depth_m": 4.93,
+   "water_fraction": 0.3244,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 8.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_019_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "51d7eb1720be95501fff376bc7f4b0d37d044e2d93ef3a3b09e49ed6266ff4cf",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_019_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "71b0476e688e93400d2a633b80c2dc64913c1dd26431353b2c915da89ccf38ec",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -434.33,
+     "z": 175.05,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -2.2,
+     "z": -274.66,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 566.16,
+     "z": 690.67,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1020.26,
+     "z": -1269.29,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 851.81,
+     "z": 147.22,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -602.78,
+     "z": -532.47,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -359.62,
+     "z": 819.58,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 88.62,
+     "z": -863.53,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 22.71,
+     "z": 478.27,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1034.91,
+     "z": -816.65,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 195.56,
+     "z": 1121.34,
+     "depth_m": 8.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 431.4,
+     "z": 1157.96,
+     "depth_m": 9.3,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 20,
+   "name": "Архипелаг Мадейра",
+   "bundle": "b20",
+   "n_terrains": 1,
+   "water_level_world_y": 100.0,
+   "source": {
+    "terrain_data": "New Terrain 21",
+    "td_pid": -313070142460455783,
+    "heights_file": "heights_-313070142460455783.npy",
+    "heights_sha256": "804e49d76ba2daf2611358f40a5882cdf778ff96a6bd3117138c6a1cacda2802",
+    "terrain_position": [
+     -2048.0,
+     0.0,
+     -2048.0
+    ],
+    "terrain_size": [
+     4096.0,
+     500.0,
+     4096.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "status": "NOT_PUBLISHED_NO_VERIFIED_MAP",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "вычислимо (не публикуется)",
+   "note": "рельеф есть, но карты этого водоёма нет в реестре (исключена в NEXT-135) — совмещение не подтверждено, слой не публикуется",
+   "max_depth_m": 100.0
+  },
+  {
+   "location_id": 21,
+   "name": "Россия: р.Дон",
+   "bundle": "b21",
+   "n_terrains": 1,
+   "water_level_world_y": 20.0,
+   "source": {
+    "terrain_data": "New Terrain 22",
+    "td_pid": -5500142485357558607,
+    "heights_file": "heights_-5500142485357558607.npy",
+    "heights_sha256": "d86625656fc8c79b6a1e102e5dfa8f74890fb4bce2957ef7e99359090352638a",
+    "terrain_position": [
+     -1500.0,
+     0.0,
+     -1500.0
+    ],
+    "terrain_size": [
+     3000.0,
+     100.0,
+     3000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1500.0,
+    "max_x": 1500.0,
+    "min_z": -1500.0,
+    "max_z": 1500.0
+   },
+   "map_file": "tfbase_021_2048.png",
+   "map_sha256": "e5e4bd019083142f1c30148d4878795c1986e52b5abb6896e6990c7e2b457192",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 15.63,
+   "mean_depth_m": 6.49,
+   "water_fraction": 0.0806,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 15.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    }
+   ],
+   "grid": {
+    "file": "depth_021_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "c0d7fa87146a29ce897663eb6b5c3cdd4796c2833b5f6e68b6027b4b5bc9eab4",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_021_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "20fc2713a2ad8b6bc56d300679e62e6d421eab24bfbf7d2779ad7e8f336105df",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -579.35,
+     "z": 923.58,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -730.22,
+     "z": -393.31,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -78.37,
+     "z": -1365.97,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 120.85,
+     "z": 192.63,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -260.01,
+     "z": 1415.77,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -82.76,
+     "z": 857.67,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -572.02,
+     "z": 388.92,
+     "depth_m": 15.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -598.39,
+     "z": 460.69,
+     "depth_m": 15.6,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 22,
+   "name": "Швейцария: Альпы",
+   "bundle": "b22",
+   "n_terrains": 1,
+   "water_level_world_y": 9.98,
+   "source": {
+    "terrain_data": "New Terrain 7",
+    "td_pid": 4144318939944175395,
+    "heights_file": "heights_4144318939944175395.npy",
+    "heights_sha256": "dfb85d5a0eb8327b14194be8e97a159e34d277ecece7c4595ae328d8279e8717",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     300.0,
+     1000.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_022_2048.png",
+   "map_sha256": "d53a627a9a922774dbc11510a06cd44ab20a0f3f0489966e50304e7a06ab2f0b",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 9.98,
+   "mean_depth_m": 5.71,
+   "water_fraction": 0.1514,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 8.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_022_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "5392e834621f1f9c23158466f125b3bc40d17c07aec4945cce1b2d6bbea934f9",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_022_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "c42dcc576465b909878c4d42d59d9bfc9460395e7fa2df89a1b00ab148b56837",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 23.19,
+     "z": 194.58,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 127.2,
+     "z": -118.41,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -82.28,
+     "z": 324.46,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -73.0,
+     "z": -211.67,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 166.26,
+     "z": 73.0,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -52.49,
+     "z": 32.96,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -150.63,
+     "z": 169.19,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -158.94,
+     "z": 265.38,
+     "depth_m": 10.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 23,
+   "name": "Китай: оз. Хэнань",
+   "bundle": "b23",
+   "n_terrains": 1,
+   "water_level_world_y": 10.0,
+   "source": {
+    "terrain_data": "ChinaTerrain",
+    "td_pid": 8764009783853404005,
+    "heights_file": "heights_8764009783853404005.npy",
+    "heights_sha256": "73b616638a133ca3fd74d73f89cadd839907e68b55c553f74635b7662ffbebe9",
+    "terrain_position": [
+     -1024.0,
+     0.0,
+     -1024.0
+    ],
+    "terrain_size": [
+     2048.0,
+     200.0,
+     2048.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1024.0,
+    "max_x": 1024.0,
+    "min_z": -1024.0,
+    "max_z": 1024.0
+   },
+   "map_file": "tfbase_023_2048.png",
+   "map_sha256": "a4047874bcb4c20181d89ce8402a9f5dfb5c48cef46771e62194fc0f37657ef2",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 10.0,
+   "mean_depth_m": 4.5,
+   "water_fraction": 0.3287,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 2.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 8.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 8.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 12.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_023_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "7d590f873802f80a2799bbf1aab68b656dbaede659b3a01a015d7bda75ddcb33",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_023_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "75e45448b95e3f59c1a811e548451ebaa4cca652c910dab5de0d2b0190c37ff9",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -364.5,
+     "z": 475.5,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 213.5,
+     "z": -322.5,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 661.5,
+     "z": -182.5,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -100.5,
+     "z": 212.5,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -9.5,
+     "z": -621.5,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 377.5,
+     "z": 574.5,
+     "depth_m": 4.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -270.5,
+     "z": -227.5,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -552.5,
+     "z": 64.5,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 641.5,
+     "z": 345.5,
+     "depth_m": 6.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -54.5,
+     "z": 28.5,
+     "depth_m": 10.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 24,
+   "name": "Гренландия: Тинитекилаак",
+   "bundle": "b24",
+   "n_terrains": 1,
+   "water_level_world_y": 100.0,
+   "source": {
+    "terrain_data": "Terrain_0_0-20240113 - 174013",
+    "td_pid": -1219174224911992928,
+    "heights_file": "heights_-1219174224911992928.npy",
+    "heights_sha256": "01467dfcf008f4dfec4be49a48e4d51acbe0dbfde84f3d9eca208998f4aaad92",
+    "terrain_position": [
+     -2048.0,
+     0.0,
+     -2048.0
+    ],
+    "terrain_size": [
+     4096.0,
+     2048.0,
+     4096.0
+    ],
+    "resolution": 4097,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -2048.0,
+    "max_x": 2048.0,
+    "min_z": -2048.0,
+    "max_z": 2048.0
+   },
+   "map_file": "tfbase_024_2048.png",
+   "map_sha256": "c6be6689ac6e0abcc0eb060ed0e24ec4f774fb2e61e1845ef36014d2ae8b0e59",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 100.0,
+   "mean_depth_m": 42.67,
+   "water_fraction": 0.4616,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 20.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 40.0,
+     "to_m": 60.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 60.0,
+     "to_m": 80.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 80.0,
+     "to_m": 100.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 100.0,
+     "to_m": 120.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_024_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "669b66e2c942ca2bf3cbb1f324b984e180399f62be606a75b999320d4d9ffde4",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_024_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "683b08e53c438b6f6c392600823129eff0113feb77a22dd651388eec79fbfb4c",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -1447.0,
+     "z": -1831.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 265.0,
+     "z": 1027.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1375.0,
+     "z": -307.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1755.0,
+     "z": 1929.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1617.0,
+     "z": 469.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -39.0,
+     "z": -989.0,
+     "depth_m": 40.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -635.0,
+     "z": 1471.0,
+     "depth_m": 60.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -739.0,
+     "z": -917.0,
+     "depth_m": 60.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1805.0,
+     "z": 1239.0,
+     "depth_m": 60.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1967.0,
+     "z": -1091.0,
+     "depth_m": 80.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1095.0,
+     "z": 955.0,
+     "depth_m": 80.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1593.0,
+     "z": 2047.0,
+     "depth_m": 100.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 25,
+   "name": "Болгария: Луда Камчия",
+   "bundle": "b25",
+   "n_terrains": 3,
+   "water_level_world_y": 6.0,
+   "status": "NOT_IMPLEMENTED_MULTI_TERRAIN",
+   "underwater_relief": "есть (3 террейна)",
+   "absolute_depth_m": "не определено",
+   "note": "несколько террейнов: активный террейн и рамка карты не определены (как в NEXT-135) — батиметрия не строится"
+  },
+  {
+   "location_id": 26,
+   "name": "Россия: р.Волга",
+   "bundle": "b26",
+   "status": "NO_SOURCE",
+   "underwater_relief": "нет данных",
+   "absolute_depth_m": "нет",
+   "note": "бандл сцены не найден в данных NEXT-135 — рельефа нет"
+  },
+  {
+   "location_id": 27,
+   "name": "Бавария: р.Лех",
+   "bundle": "b27",
+   "n_terrains": 1,
+   "water_level_world_y": 4.0,
+   "source": {
+    "terrain_data": "New Terrain 4",
+    "td_pid": 1672302439731982896,
+    "heights_file": "heights_1672302439731982896.npy",
+    "heights_sha256": "b623ced2e6a219cefe71694d9bb6c8c4454ba0d06c459a1df92632aa5e532742",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     100.0,
+     1000.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -500.0,
+    "max_x": 500.0,
+    "min_z": -500.0,
+    "max_z": 500.0
+   },
+   "map_file": "tfbase_027_2048.png",
+   "map_sha256": "11f9a4396a6023d085b4fda6c3954179d52aadc3876f1ef1a490e61855a9afdb",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0575,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 4.0,
+   "mean_depth_m": 1.94,
+   "water_fraction": 0.0619,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 1.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_027_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "94341b18404cb2709c9b86e4110150b243033523c55f9813183c435b10153f32",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_027_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "1f768357f4bce27076dfd22ee889b31c5420c1d3a9254ff9d0a40e2cb3856ee1",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 221.92,
+     "z": 103.76,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -121.83,
+     "z": -11.96,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -10.01,
+     "z": 129.15,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -277.59,
+     "z": -89.6,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 197.51,
+     "z": 157.96,
+     "depth_m": 4.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 28,
+   "name": "Россия: р. Кола",
+   "bundle": "b28",
+   "n_terrains": 1,
+   "water_level_world_y": 15.0,
+   "source": {
+    "terrain_data": "NorwayRiver",
+    "td_pid": 3037685660262466302,
+    "heights_file": "heights_3037685660262466302.npy",
+    "heights_sha256": "a6d72be3fb4ee2c9218f685831733d9e453a8ce50b2d8becbdde70d4655fb79e",
+    "terrain_position": [
+     -1000.0,
+     0.0,
+     -1000.0
+    ],
+    "terrain_size": [
+     2000.0,
+     100.0,
+     2000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -1000.0,
+    "max_x": 1000.0,
+    "min_z": -1000.0,
+    "max_z": 1000.0
+   },
+   "map_file": "tfbase_028_2048.png",
+   "map_sha256": "d178803ac3c4528c455fa0189611f0acecd4a3c870af8c3352055e5152bbc1d5",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 13.0,
+   "mean_depth_m": 4.72,
+   "water_fraction": 0.0856,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 5.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 15.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    }
+   ],
+   "grid": {
+    "file": "depth_028_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "2524ea61ad4d10f278b366760fc85d527dac3554d5b40a7aab18454e7c1bb5e3",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_028_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "9c2c6df18343bf4cdcc2a6cd9cc03c6222a40bebddb4e0639aac8cafb1442e2f",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -0.49,
+     "z": 235.84,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 415.53,
+     "z": 285.64,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 671.39,
+     "z": -12.21,
+     "depth_m": 5.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -334.47,
+     "z": 67.87,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 228.03,
+     "z": 344.24,
+     "depth_m": 13.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 29,
+   "name": "Испания водхр. Эбро",
+   "bundle": "b29",
+   "n_terrains": 1,
+   "water_level_world_y": 50.0,
+   "source": {
+    "terrain_data": "Terrain_0_0-20250514 - 134528",
+    "td_pid": -8887527403640954072,
+    "heights_file": "heights_-8887527403640954072.npy",
+    "heights_sha256": "bc9d9f5549389f9306962975cfed2f76959683dc3a9e6fabc62eb3c8bee92e1f",
+    "terrain_position": [
+     -2048.0,
+     0.0,
+     -2048.0
+    ],
+    "terrain_size": [
+     4096.0,
+     2048.0,
+     4096.0
+    ],
+    "resolution": 4097,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -2048.0,
+    "max_x": 2048.0,
+    "min_z": -2048.0,
+    "max_z": 2048.0
+   },
+   "map_file": "tfbase_029_2048.png",
+   "map_sha256": "176f1a97e44749e0255fe8edd175a7fc300fb8514fe8e328492cf89d7fffce67",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0002,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 50.0,
+   "mean_depth_m": 17.37,
+   "water_fraction": 0.1512,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 10.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 10.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 10.0,
+     "to_m": 20.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 20.0,
+     "to_m": 30.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 30.0,
+     "to_m": 40.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 40.0,
+     "to_m": 50.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 50.0,
+     "to_m": 60.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    }
+   ],
+   "grid": {
+    "file": "depth_029_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "aa19034ce96846a2f07df3b1b3df5707e57832d8ca3b5e33295746f70489e319",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_029_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "bd9013e8cad40211810b8f061828c2773bbcaf35b79894adbce9c546bbd33d6d",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": -439.0,
+     "z": -535.0,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1429.0,
+     "z": -1067.0,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 1369.0,
+     "z": 375.0,
+     "depth_m": 10.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1633.0,
+     "z": -143.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -949.0,
+     "z": 43.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 699.0,
+     "z": 179.0,
+     "depth_m": 20.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -1253.0,
+     "z": -499.0,
+     "depth_m": 46.5,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 30,
+   "name": "Беларусь рыбхоз Ельский",
+   "bundle": "b30",
+   "status": "NO_SOURCE",
+   "underwater_relief": "нет данных",
+   "absolute_depth_m": "нет",
+   "note": "бандл сцены не найден в данных NEXT-135 — рельефа нет"
+  },
+  {
+   "location_id": 31,
+   "name": "Вьетнам р. Меконг",
+   "bundle": "b31",
+   "status": "NO_SOURCE",
+   "underwater_relief": "нет данных",
+   "absolute_depth_m": "нет",
+   "note": "бандл сцены не найден в данных NEXT-135 — рельефа нет"
+  },
+  {
+   "location_id": 100,
+   "name": "Дом рыбака: Нёман",
+   "bundle": "b100",
+   "n_terrains": 1,
+   "water_level_world_y": 2.19,
+   "source": {
+    "terrain_data": "New Terrain 17",
+    "td_pid": -2909506195483496030,
+    "heights_file": "heights_-2909506195483496030.npy",
+    "heights_sha256": "1c2d90fae30c4a4585a070bfcdce8e2fb531d295dc5bf520d276cc91986580ea",
+    "terrain_position": [
+     -250.0,
+     0.0,
+     -250.0
+    ],
+    "terrain_size": [
+     500.0,
+     30.0,
+     500.0
+    ],
+    "resolution": 513,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": -250.0,
+    "max_x": 250.0,
+    "min_z": -250.0,
+    "max_z": 250.0
+   },
+   "map_file": "tfbase_100_2048.png",
+   "map_sha256": "db54a101ff0fa9decd180b4af7884f9bf41602eb69bcc1d4539a3fe1e8e9a0a2",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0004,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 2.19,
+   "mean_depth_m": 1.51,
+   "water_fraction": 0.188,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 0.5,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 0.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 0.5,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 1.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 1.5,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 2.5,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    }
+   ],
+   "grid": {
+    "file": "depth_100_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "967ed621f21b1f6433f50faf3d79f92e12568cc65f67804002ef59ae54126b27",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_100_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "77082ecc3e514d30e4ad0b9d4d5289a435f76698451fabbdc2ba59433ce82040",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 55.05,
+     "z": -108.52,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -78.98,
+     "z": -208.13,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -87.77,
+     "z": 71.66,
+     "depth_m": 0.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -11.84,
+     "z": -14.28,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -72.14,
+     "z": 194.21,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 17.7,
+     "z": -183.47,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": -162.72,
+     "z": 172.73,
+     "depth_m": 1.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -160.77,
+     "z": -224.73,
+     "depth_m": 1.5,
+     "kind": "isobath"
+    },
+    {
+     "x": -110.23,
+     "z": 245.97,
+     "depth_m": 2.2,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
+  },
+  {
+   "location_id": 101,
+   "name": "Поместье Карпинских",
+   "bundle": "b101",
+   "n_terrains": 1,
+   "water_level_world_y": 5.0,
+   "source": {
+    "terrain_data": "New Terrain 24",
+    "td_pid": 3504533806490462853,
+    "heights_file": "heights_3504533806490462853.npy",
+    "heights_sha256": "01f6097916d61c4fb26eeab51ef6308858ba7c9b573f12117f0206192dac8c56",
+    "terrain_position": [
+     -500.0,
+     0.0,
+     -500.0
+    ],
+    "terrain_size": [
+     1000.0,
+     600.0,
+     1000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "status": "NOT_PUBLISHED_NO_VERIFIED_MAP",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "вычислимо (не публикуется)",
+   "note": "рельеф есть, но карты этого водоёма нет в реестре (исключена в NEXT-135) — совмещение не подтверждено, слой не публикуется",
+   "max_depth_m": 5.0
+  },
+  {
+   "location_id": 102,
+   "name": "Таверна \"Гарцующий карп\"",
+   "bundle": "b102",
+   "status": "NO_SOURCE",
+   "underwater_relief": "нет данных",
+   "absolute_depth_m": "нет",
+   "note": "бандл сцены не найден в данных NEXT-135 — рельефа нет"
+  },
+  {
+   "location_id": 180,
+   "name": "Зимняя сказка",
+   "bundle": "b180",
+   "status": "NO_SOURCE",
+   "underwater_relief": "нет данных",
+   "absolute_depth_m": "нет",
+   "note": "бандл сцены не найден в данных NEXT-135 — рельефа нет"
+  },
+  {
+   "location_id": 185,
+   "name": "Спасение «Челюскина»",
+   "bundle": "b185",
+   "n_terrains": 1,
+   "water_level_world_y": 100.0,
+   "source": {
+    "terrain_data": "New Terrain",
+    "td_pid": -8072718336241960529,
+    "heights_file": "heights_-8072718336241960529.npy",
+    "heights_sha256": "1dd4f45ed50af150a7c7a18dc63a7c6c2db216f67fae08a3e6113f36d7cb1524",
+    "terrain_position": [
+     -1000.0,
+     0.0,
+     -1000.0
+    ],
+    "terrain_size": [
+     2000.0,
+     300.0,
+     2000.0
+    ],
+    "resolution": 2049,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "status": "NOT_PUBLISHED_NO_VERIFIED_MAP",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "вычислимо (не публикуется)",
+   "note": "рельеф есть, но карты этого водоёма нет в реестре (исключена в NEXT-135) — совмещение не подтверждено, слой не публикуется",
+   "max_depth_m": 100.0
+  }
+ ]
+}

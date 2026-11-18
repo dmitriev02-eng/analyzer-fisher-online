@@ -1,0 +1,1990 @@
+[
+ {
+  "id": 341,
+  "name": "Acidfish",
+  "latin": null,
+  "large": "~10 kg",
+  "unique": "~20 kg"
+ },
+ {
+  "id": 338,
+  "name": "Adour Minnow",
+  "latin": "Phoxinus bigerri",
+  "large": "~0.017 kg",
+  "unique": "~0.02 kg"
+ },
+ {
+  "id": 336,
+  "name": "Adriatic Sturgeon",
+  "latin": "Acipenser naccarii",
+  "large": "~0 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 148,
+  "name": "Alaska Pollock",
+  "latin": "Gadus chalcogrammus",
+  "large": "~3 kg",
+  "unique": "~4 kg"
+ },
+ {
+  "id": 251,
+  "name": "Albino Wels",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~20 kg"
+ },
+ {
+  "id": 246,
+  "name": "Allis Shad",
+  "latin": "Alosa alosa",
+  "large": "~1.61 kg",
+  "unique": "~2.2 kg"
+ },
+ {
+  "id": 223,
+  "name": "Alosa Danube",
+  "latin": null,
+  "large": "~0.22 kg",
+  "unique": "~0.28 kg"
+ },
+ {
+  "id": 323,
+  "name": "Alpine Bullhead",
+  "latin": "Cottus poecilopus",
+  "large": "~0 kg",
+  "unique": "~0.02 kg"
+ },
+ {
+  "id": 346,
+  "name": "Altufa",
+  "latin": null,
+  "large": "~50 kg",
+  "unique": "~87.31 kg"
+ },
+ {
+  "id": 180,
+  "name": "Amur Black Bream",
+  "latin": "Megalobrama terminalis",
+  "large": "~1.56 kg",
+  "unique": "~2.1 kg"
+ },
+ {
+  "id": 100,
+  "name": "Amur Black Carp",
+  "latin": "Mylopharyngodon piceus",
+  "large": "~10.8 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 218,
+  "name": "Amur loach",
+  "latin": "Misgurnus anguillicaudatus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 179,
+  "name": "Amur White Bream",
+  "latin": "Parabramis pekinensis",
+  "large": "~1.54 kg",
+  "unique": "~2.1 kg"
+ },
+ {
+  "id": 333,
+  "name": "Andalusian Barbel",
+  "latin": "Luciobarbus sclateri",
+  "large": "~5.55 kg",
+  "unique": "~7.5 kg"
+ },
+ {
+  "id": 319,
+  "name": "Angler Fish",
+  "latin": "Lophius piscatorius",
+  "large": "~0 kg",
+  "unique": "~25 kg"
+ },
+ {
+  "id": 335,
+  "name": "Aquitanian Pike",
+  "latin": "Esox aquitanicus",
+  "large": "~5.52 kg",
+  "unique": "~7.5 kg"
+ },
+ {
+  "id": 196,
+  "name": "Aral Roach",
+  "latin": "Rutilus aralensis",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 202,
+  "name": "Aral Shemaia",
+  "latin": "Chalcalburnus aralensis",
+  "large": "~0.332 kg",
+  "unique": "~0.47 kg"
+ },
+ {
+  "id": 201,
+  "name": "Aral White-Eye",
+  "latin": null,
+  "large": "~0.8 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 14,
+  "name": "Arctic Char",
+  "latin": "Salvelinus alpinus",
+  "large": "~10.8 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 54,
+  "name": "Arctic Omul",
+  "latin": "Coregonus autumnalis",
+  "large": "~2.16 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 22,
+  "name": "Asp",
+  "latin": "Aspius aspius",
+  "large": "~5.12 kg",
+  "unique": "~7.11 kg"
+ },
+ {
+  "id": 308,
+  "name": "Atka Mackerel",
+  "latin": "Pleurogrammus monopterygius",
+  "large": "~1.22 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 282,
+  "name": "Atlantic Bonito",
+  "latin": "Sarda sarda",
+  "large": "~0 kg",
+  "unique": "~5 kg"
+ },
+ {
+  "id": 252,
+  "name": "Atlantic Cod",
+  "latin": "Gadus morhua",
+  "large": "~8.64 kg",
+  "unique": "~12 kg"
+ },
+ {
+  "id": 136,
+  "name": "Atlantic Herring",
+  "latin": "Clupea harengus",
+  "large": "~1.35 kg",
+  "unique": "~1.8 kg"
+ },
+ {
+  "id": 283,
+  "name": "Atlantic Mackerel",
+  "latin": "Scomber scombrus",
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 138,
+  "name": "Atlantic Pollock",
+  "latin": "Pollachius pollachius",
+  "large": "~5.04 kg",
+  "unique": "~7 kg"
+ },
+ {
+  "id": 207,
+  "name": "Atlantic Salmon",
+  "latin": "Salmo salar",
+  "large": "~19.09 kg",
+  "unique": "~26.52 kg"
+ },
+ {
+  "id": 280,
+  "name": "Atlantic Wahoo",
+  "latin": "Acanthocybium solandri",
+  "large": "~10 kg",
+  "unique": "~20 kg"
+ },
+ {
+  "id": 144,
+  "name": "Atlantic Wolffish",
+  "latin": "Anarhichas lupus",
+  "large": "~0 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 241,
+  "name": "Aurata Dorade",
+  "latin": "Sparus aurata",
+  "large": "~5 kg",
+  "unique": "~9.5 kg"
+ },
+ {
+  "id": 355,
+  "name": "Axe Fish",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 318,
+  "name": "Balkan Trout",
+  "latin": null,
+  "large": "~1.1 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 206,
+  "name": "Baltic Salmon",
+  "latin": null,
+  "large": "~18.11 kg",
+  "unique": "~25.15 kg"
+ },
+ {
+  "id": 13,
+  "name": "Barbatula",
+  "latin": "Barbatula barbatula",
+  "large": "~0.082 kg",
+  "unique": "~0.11 kg"
+ },
+ {
+  "id": 300,
+  "name": "Barbatus",
+  "latin": "Mullus barbatus",
+  "large": "~0.374 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 96,
+  "name": "Barbel",
+  "latin": "Barbus barbus",
+  "large": "~2.04 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 302,
+  "name": "Bekko Koi",
+  "latin": "Cyprinus rubrofuscus",
+  "large": "~5 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 269,
+  "name": "Belomor Salmon",
+  "latin": "Salmo salar",
+  "large": "~0 kg",
+  "unique": "~8.2 kg"
+ },
+ {
+  "id": 303,
+  "name": "Benigoi Koi",
+  "latin": "Cyprinus rubrofuscus",
+  "large": "~5 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 205,
+  "name": "Bester",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~17 kg"
+ },
+ {
+  "id": 15,
+  "name": "Bigmouth buffalo",
+  "latin": "Ictiobus cyprinellus",
+  "large": "~5 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 5,
+  "name": "Black Bass",
+  "latin": "Micropterus salmoides",
+  "large": "~2.37 kg",
+  "unique": "~3.3 kg"
+ },
+ {
+  "id": 263,
+  "name": "Black Crappie",
+  "latin": "Pomoxis nigromaculatus",
+  "large": "~0 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 348,
+  "name": "Black Crayfish",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 107,
+  "name": "Black perch",
+  "latin": null,
+  "large": "~4.5 kg",
+  "unique": "~6 kg"
+ },
+ {
+  "id": 286,
+  "name": "Blackspot Seabream",
+  "latin": "Pagellus bogaraveo",
+  "large": "~0 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 95,
+  "name": "Bleak",
+  "latin": "Alburnus alburnus",
+  "large": "~0.047 kg",
+  "unique": "~0.06 kg"
+ },
+ {
+  "id": 268,
+  "name": "Blue Catfish",
+  "latin": "Ictalurus furcatus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 279,
+  "name": "Blue Marlin",
+  "latin": "Makaira nigricans",
+  "large": "~0 kg",
+  "unique": "~100 kg"
+ },
+ {
+  "id": 304,
+  "name": "Blue Tilapia",
+  "latin": "Oreochromis aureus",
+  "large": "~0.892 kg",
+  "unique": "~1.23 kg"
+ },
+ {
+  "id": 278,
+  "name": "Bluefin Tuna",
+  "latin": "Thunnus thynnus",
+  "large": "~0 kg",
+  "unique": "~100 kg"
+ },
+ {
+  "id": 244,
+  "name": "Bluefish",
+  "latin": "Pomatomus saltatrix",
+  "large": "~5.76 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 237,
+  "name": "Bluegill",
+  "latin": "Lepomis gibbosus",
+  "large": "~0.331 kg",
+  "unique": "~0.46 kg"
+ },
+ {
+  "id": 289,
+  "name": "Bogue",
+  "latin": "Boops boops",
+  "large": "~0.75 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 39,
+  "name": "Bream",
+  "latin": "Abramis brama",
+  "large": "~4.12 kg",
+  "unique": "~5.72 kg"
+ },
+ {
+  "id": 61,
+  "name": "Brook Charr",
+  "latin": "Salvelinus lepechini",
+  "large": "~3.96 kg",
+  "unique": "~5.5 kg"
+ },
+ {
+  "id": 73,
+  "name": "Brook Trout",
+  "latin": null,
+  "large": "~0.796 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 262,
+  "name": "Brown Trout",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~12 kg"
+ },
+ {
+  "id": 48,
+  "name": "Burbot",
+  "latin": "Lota lota",
+  "large": "~7.2 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 191,
+  "name": "Capoeta Sevangi",
+  "latin": "Varicorhinus capoeta",
+  "large": "~0 kg",
+  "unique": "~1.8 kg"
+ },
+ {
+  "id": 350,
+  "name": "Cardan",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~100 kg"
+ },
+ {
+  "id": 26,
+  "name": "Carp",
+  "latin": "Cyprinus carpio",
+  "large": "~10 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 238,
+  "name": "Caspian Salmon",
+  "latin": "Salmo caspius",
+  "large": "~18.11 kg",
+  "unique": "~25.15 kg"
+ },
+ {
+  "id": 126,
+  "name": "Channel Catfish",
+  "latin": "Ictalurus punctatus",
+  "large": "~5.76 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 347,
+  "name": "Chernobyl Catfish",
+  "latin": null,
+  "large": "~45 kg",
+  "unique": "~60 kg"
+ },
+ {
+  "id": 58,
+  "name": "Chinese Crucian",
+  "latin": "Carassius auratus",
+  "large": "~0.96 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 71,
+  "name": "Chinese Sleeper",
+  "latin": "Perccottus glenii",
+  "large": "~0.24 kg",
+  "unique": "~0.3 kg"
+ },
+ {
+  "id": 307,
+  "name": "Chinese Sturgeon",
+  "latin": "Acipenser sinensis",
+  "large": "~0 kg",
+  "unique": "~30 kg"
+ },
+ {
+  "id": 139,
+  "name": "Chinook Salmon",
+  "latin": "Oncorhynchus tshawytscha",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 49,
+  "name": "Chir",
+  "latin": "Coregonus nasus",
+  "large": "~0 kg",
+  "unique": "~6.11 kg"
+ },
+ {
+  "id": 124,
+  "name": "Chop",
+  "latin": "Zingel zingel",
+  "large": "~0.72 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 12,
+  "name": "Chub",
+  "latin": "Squalius cephalus",
+  "large": "~3.25 kg",
+  "unique": "~4.52 kg"
+ },
+ {
+  "id": 325,
+  "name": "Common Ling",
+  "latin": "Molva molva",
+  "large": "~0 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 159,
+  "name": "Common Nase",
+  "latin": "Chondrostoma nasus",
+  "large": "~0.923 kg",
+  "unique": "~1.28 kg"
+ },
+ {
+  "id": 24,
+  "name": "Crucian",
+  "latin": "Carassius gibelio",
+  "large": "~1.25 kg",
+  "unique": "~1.71 kg"
+ },
+ {
+  "id": 324,
+  "name": "Cusk",
+  "latin": "Brosme brosme",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 18,
+  "name": "Dace",
+  "latin": "Leuciscus leuciscus",
+  "large": "~0 kg",
+  "unique": "~0.1 kg"
+ },
+ {
+  "id": 127,
+  "name": "Danuba Herring",
+  "latin": "Alosa immaculata",
+  "large": "~0.71 kg",
+  "unique": "~0.9 kg"
+ },
+ {
+  "id": 317,
+  "name": "Danube Bleak",
+  "latin": "Alburnus mento",
+  "large": "~0.116 kg",
+  "unique": "~0.15 kg"
+ },
+ {
+  "id": 119,
+  "name": "Danube Dace",
+  "latin": "Telestes souffia",
+  "large": "~0.075 kg",
+  "unique": "~0.1 kg"
+ },
+ {
+  "id": 236,
+  "name": "Dnieper Barbel",
+  "latin": "Barbus borysthenicus",
+  "large": "~3.24 kg",
+  "unique": "~4.5 kg"
+ },
+ {
+  "id": 349,
+  "name": "Dragonfish",
+  "latin": null,
+  "large": "~3.8 kg",
+  "unique": "~5.31 kg"
+ },
+ {
+  "id": 257,
+  "name": "Dutch Perch",
+  "latin": "Perca fluviatilis",
+  "large": "~2 kg",
+  "unique": "~3.1 kg"
+ },
+ {
+  "id": 94,
+  "name": "Eel",
+  "latin": "Anguilla anguilla",
+  "large": "~4.32 kg",
+  "unique": "~6 kg"
+ },
+ {
+  "id": 327,
+  "name": "Eelpout",
+  "latin": "Zoarces viviparus",
+  "large": "~0.47 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 281,
+  "name": "European Conger",
+  "latin": "Conger conger",
+  "large": "~22 kg",
+  "unique": "~35 kg"
+ },
+ {
+  "id": 212,
+  "name": "European Crayfish",
+  "latin": "Astacus astacus",
+  "large": "~0.324 kg",
+  "unique": "~0.45 kg"
+ },
+ {
+  "id": 277,
+  "name": "European Garfish",
+  "latin": "Belone belone",
+  "large": "~0.35 kg",
+  "unique": "~0.51 kg"
+ },
+ {
+  "id": 211,
+  "name": "European Grayling",
+  "latin": "Thymallus thymallus",
+  "large": "~0.655 kg",
+  "unique": "~0.9 kg"
+ },
+ {
+  "id": 137,
+  "name": "European Hake",
+  "latin": "Merluccius merluccius",
+  "large": "~6.48 kg",
+  "unique": "~9 kg"
+ },
+ {
+  "id": 42,
+  "name": "Farmed Salmon",
+  "latin": "Salmo salar",
+  "large": "~10.5 kg",
+  "unique": "~15.08 kg"
+ },
+ {
+  "id": 292,
+  "name": "Fera Whitefish",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~2.1 kg"
+ },
+ {
+  "id": 254,
+  "name": "Ferox Trout",
+  "latin": "Salmo ferox",
+  "large": "~4.19 kg",
+  "unique": "~5.5 kg"
+ },
+ {
+  "id": 245,
+  "name": "Fint",
+  "latin": "Alosa fallax",
+  "large": "~0.835 kg",
+  "unique": "~1.1 kg"
+ },
+ {
+  "id": 229,
+  "name": "Flathead Mullet",
+  "latin": "Mugil cephalus",
+  "large": "~1.87 kg",
+  "unique": "~2.6 kg"
+ },
+ {
+  "id": 40,
+  "name": "Frog",
+  "latin": null,
+  "large": "~0.216 kg",
+  "unique": "~0.3 kg"
+ },
+ {
+  "id": 276,
+  "name": "Glosa Flounder",
+  "latin": null,
+  "large": "~1.95 kg",
+  "unique": "~2.6 kg"
+ },
+ {
+  "id": 297,
+  "name": "Goblin Goby",
+  "latin": "Proterorhinus marmoratus",
+  "large": "~0.11 kg",
+  "unique": "~0.15 kg"
+ },
+ {
+  "id": 320,
+  "name": "Goblin Shark",
+  "latin": "Mitsukurina owstoni",
+  "large": "~0 kg",
+  "unique": "~20 kg"
+ },
+ {
+  "id": 92,
+  "name": "Golden Carp",
+  "latin": null,
+  "large": "~10 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 25,
+  "name": "Golden Crucian",
+  "latin": "Carassius carassius",
+  "large": "~0.955 kg",
+  "unique": "~1.3 kg"
+ },
+ {
+  "id": 291,
+  "name": "Golden Orfa Ide",
+  "latin": null,
+  "large": "~2.9 kg",
+  "unique": "~4 kg"
+ },
+ {
+  "id": 264,
+  "name": "Golden Shiner",
+  "latin": "Notemigonus crysoleucas",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 271,
+  "name": "Golden Tench",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 108,
+  "name": "Golden Trout",
+  "latin": "Oncorhynchus aguabonita",
+  "large": "~1.3 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 3,
+  "name": "Grass Carp",
+  "latin": "Ctenopharyngodon idella",
+  "large": "~10.3 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 6,
+  "name": "Grass Goby",
+  "latin": "Zosterisessor ophiocephalus",
+  "large": "~0.089 kg",
+  "unique": "~0.12 kg"
+ },
+ {
+  "id": 102,
+  "name": "Grass Pike",
+  "latin": "Esox lucius",
+  "large": "~5.83 kg",
+  "unique": "~8.1 kg"
+ },
+ {
+  "id": 344,
+  "name": "Grass Rockfish",
+  "latin": "Sebastes rastrelliger",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 343,
+  "name": "Gray Rockfish",
+  "latin": "Sebastes glaucus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 97,
+  "name": "Grayling Black",
+  "latin": null,
+  "large": "~1.84 kg",
+  "unique": "~2.56 kg"
+ },
+ {
+  "id": 284,
+  "name": "Great Barracuda",
+  "latin": "Sphyraena barracuda",
+  "large": "~0 kg",
+  "unique": "~18 kg"
+ },
+ {
+  "id": 131,
+  "name": "Greenland Halibut",
+  "latin": "Reinhardtius hippoglossoides",
+  "large": "~0 kg",
+  "unique": "~20 kg"
+ },
+ {
+  "id": 62,
+  "name": "Gudgeon",
+  "latin": "Gobio gobio",
+  "large": "~0.057 kg",
+  "unique": "~0.08 kg"
+ },
+ {
+  "id": 166,
+  "name": "Haddock",
+  "latin": "Melanogrammus aeglefinus",
+  "large": "~2.3 kg",
+  "unique": "~3.2 kg"
+ },
+ {
+  "id": 255,
+  "name": "Haddy Charr",
+  "latin": "Salvelinus killinensis",
+  "large": "~0 kg",
+  "unique": "~4 kg"
+ },
+ {
+  "id": 130,
+  "name": "Halibut",
+  "latin": "Hippoglossus hippoglossus",
+  "large": "~45.22 kg",
+  "unique": "~62.8 kg"
+ },
+ {
+  "id": 113,
+  "name": "Hucho Taimen",
+  "latin": "Hucho hucho",
+  "large": "~15 kg",
+  "unique": "~28 kg"
+ },
+ {
+  "id": 68,
+  "name": "Humpback Whitefish",
+  "latin": "Coregonus pidschian",
+  "large": "~1.44 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 2,
+  "name": "Huso",
+  "latin": "Huso huso",
+  "large": "~42.9 kg",
+  "unique": "~60.5 kg"
+ },
+ {
+  "id": 249,
+  "name": "Hybrid F1 Carp",
+  "latin": null,
+  "large": "~2.29 kg",
+  "unique": "~3.18 kg"
+ },
+ {
+  "id": 331,
+  "name": "Iberian Barbel",
+  "latin": "Luciobarbus bocagei",
+  "large": "~5.55 kg",
+  "unique": "~7.5 kg"
+ },
+ {
+  "id": 328,
+  "name": "Iberian Gudgeon",
+  "latin": "Gobio lozanoi",
+  "large": "~0.06 kg",
+  "unique": "~0.076 kg"
+ },
+ {
+  "id": 275,
+  "name": "Icy Grayling",
+  "latin": "Ignota species",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 274,
+  "name": "Icy Trout",
+  "latin": "Ignota species",
+  "large": "~0 kg",
+  "unique": "~7.6 kg"
+ },
+ {
+  "id": 103,
+  "name": "Ide",
+  "latin": "Leuciscus idus",
+  "large": "~2.74 kg",
+  "unique": "~3.8 kg"
+ },
+ {
+  "id": 199,
+  "name": "Italian Barbel",
+  "latin": "Barbus plebejus",
+  "large": "~0 kg",
+  "unique": "~2.6 kg"
+ },
+ {
+  "id": 29,
+  "name": "Keta",
+  "latin": "Oncorhynchus keta",
+  "large": "~5.76 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 301,
+  "name": "Kigoi Koi",
+  "latin": "Cyprinus rubrofuscus",
+  "large": "~5 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 72,
+  "name": "Knout Goby",
+  "latin": "Mesogobius batrachocephalus",
+  "large": "~0.23 kg",
+  "unique": "~0.31 kg"
+ },
+ {
+  "id": 354,
+  "name": "Krokodus",
+  "latin": null,
+  "large": "~66 kg",
+  "unique": "~100 kg"
+ },
+ {
+  "id": 194,
+  "name": "Kutum",
+  "latin": null,
+  "large": "~2.4 kg",
+  "unique": "~3.2 kg"
+ },
+ {
+  "id": 293,
+  "name": "Lake Char",
+  "latin": "Salvelinus umbla",
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 109,
+  "name": "Lake Minnow",
+  "latin": "Rhynchocypris percnurus",
+  "large": "~0.064 kg",
+  "unique": "~0.09 kg"
+ },
+ {
+  "id": 273,
+  "name": "Lake Salmon",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~6 kg"
+ },
+ {
+  "id": 228,
+  "name": "Lake Sturgeon",
+  "latin": "Acipenser fulvescens",
+  "large": "~0 kg",
+  "unique": "~30 kg"
+ },
+ {
+  "id": 260,
+  "name": "Lake Trout",
+  "latin": "Salvelinus namaycush",
+  "large": "~0 kg",
+  "unique": "~9 kg"
+ },
+ {
+  "id": 185,
+  "name": "Lake Whitefish",
+  "latin": "Coregonus lavaretus",
+  "large": "~4.46 kg",
+  "unique": "~6.2 kg"
+ },
+ {
+  "id": 232,
+  "name": "Lavrak Seabass",
+  "latin": "Dicentrarchus labrax",
+  "large": "~6.84 kg",
+  "unique": "~9.5 kg"
+ },
+ {
+  "id": 298,
+  "name": "Leaping Mullet",
+  "latin": "Chelon saliens",
+  "large": "~0.374 kg",
+  "unique": "~0.5 kg"
+ },
+ {
+  "id": 163,
+  "name": "Leather Carp",
+  "latin": "Cyprinus carpio",
+  "large": "~10 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 59,
+  "name": "Leech",
+  "latin": null,
+  "large": "~0.015 kg",
+  "unique": "~0.022 kg"
+ },
+ {
+  "id": 31,
+  "name": "Lenok",
+  "latin": "Brachymystax lenok",
+  "large": "~4.1 kg",
+  "unique": "~5.7 kg"
+ },
+ {
+  "id": 329,
+  "name": "Leopard Barbel",
+  "latin": "Luciobarbus terrasancristinae",
+  "large": "~0 kg",
+  "unique": "~1.8 kg"
+ },
+ {
+  "id": 312,
+  "name": "Lingcod",
+  "latin": "Ophiodon elongatus",
+  "large": "~11.66 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 337,
+  "name": "Lisbon Arched-Mouth Nase",
+  "latin": "Iberochondrostoma lemmingii",
+  "large": "~0.08 kg",
+  "unique": "~0.11 kg"
+ },
+ {
+  "id": 11,
+  "name": "Loach",
+  "latin": "Misgurnus fossilis",
+  "large": "~0.086 kg",
+  "unique": "~0.1 kg"
+ },
+ {
+  "id": 161,
+  "name": "Longnose Gar",
+  "latin": "Lepisosteus osseus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 120,
+  "name": "Macedonian Vimba",
+  "latin": "Vimba melanops",
+  "large": "~0.504 kg",
+  "unique": "~0.7 kg"
+ },
+ {
+  "id": 172,
+  "name": "Mandarin Fish",
+  "latin": "Siniperca chuatsi",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 250,
+  "name": "Marble Trout",
+  "latin": "Salmo marmoratus",
+  "large": "~0 kg",
+  "unique": "~4.6 kg"
+ },
+ {
+  "id": 326,
+  "name": "Marine Pink Salmon",
+  "latin": "Oncorhynchus gorbuscha",
+  "large": "~0 kg",
+  "unique": "~4.3 kg"
+ },
+ {
+  "id": 99,
+  "name": "Marsh Turtle",
+  "latin": "Emys orbicularis",
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 285,
+  "name": "Midnight Parrotfish",
+  "latin": "Scarus coelestinus",
+  "large": "~0 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 351,
+  "name": "Minion Ktulhu",
+  "latin": null,
+  "large": "~20 kg",
+  "unique": "~40 kg"
+ },
+ {
+  "id": 162,
+  "name": "Mirror Carp",
+  "latin": "Cyprinus carpio",
+  "large": "~13.13 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 43,
+  "name": "Mollusc",
+  "latin": null,
+  "large": "~0.18 kg",
+  "unique": "~0.25 kg"
+ },
+ {
+  "id": 121,
+  "name": "Moustache Balkan",
+  "latin": "Barbus meridionalis",
+  "large": "~0.432 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 306,
+  "name": "Mudcarp",
+  "latin": "Cirrhinus molitorella",
+  "large": "~0 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 45,
+  "name": "Muksun",
+  "latin": "Coregonus muksun",
+  "large": "~2.16 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 261,
+  "name": "Muskie",
+  "latin": "Esox masquinongy",
+  "large": "~10.5 kg",
+  "unique": "~15.36 kg"
+ },
+ {
+  "id": 198,
+  "name": "Naked Osman",
+  "latin": "Diptychus dybowskii",
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 70,
+  "name": "Narrow Crayfish",
+  "latin": "Astacus leptodactylus",
+  "large": "~0.36 kg",
+  "unique": "~0.5 kg"
+ },
+ {
+  "id": 93,
+  "name": "Northern Pike",
+  "latin": "Esox lucius",
+  "large": "~10.5 kg",
+  "unique": "~16.8 kg"
+ },
+ {
+  "id": 309,
+  "name": "Norwegian Saithe",
+  "latin": "Pollachius virens",
+  "large": "~0 kg",
+  "unique": "~12 kg"
+ },
+ {
+  "id": 258,
+  "name": "Orkney Charr",
+  "latin": "Salvelinus inframundus",
+  "large": "~0 kg",
+  "unique": "~3.5 kg"
+ },
+ {
+  "id": 342,
+  "name": "Pacific Perch",
+  "latin": "Sebastes alutus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 143,
+  "name": "Passera Flounder",
+  "latin": "Platichthys flesus",
+  "large": "~2.24 kg",
+  "unique": "~3.15 kg"
+ },
+ {
+  "id": 60,
+  "name": "Peled",
+  "latin": "Coregonus peled",
+  "large": "~1.94 kg",
+  "unique": "~2.7 kg"
+ },
+ {
+  "id": 20,
+  "name": "Percarina",
+  "latin": "Gymnocephalus acerinus",
+  "large": "~0.36 kg",
+  "unique": "~0.5 kg"
+ },
+ {
+  "id": 53,
+  "name": "Perch",
+  "latin": "Perca fluviatilis",
+  "large": "~1.01 kg",
+  "unique": "~1.4 kg"
+ },
+ {
+  "id": 235,
+  "name": "Persian Sturgeon",
+  "latin": "Acipenser persicus",
+  "large": "~39.64 kg",
+  "unique": "~55.05 kg"
+ },
+ {
+  "id": 154,
+  "name": "Piked Dogfish",
+  "latin": "Squalus acanthias",
+  "large": "~9 kg",
+  "unique": "~12.5 kg"
+ },
+ {
+  "id": 231,
+  "name": "Pilengas Mullet",
+  "latin": "Planiliza haematocheilus",
+  "large": "~5.18 kg",
+  "unique": "~7.2 kg"
+ },
+ {
+  "id": 16,
+  "name": "Pink Salmon",
+  "latin": "Oncorhynchus gorbuscha",
+  "large": "~4.32 kg",
+  "unique": "~6 kg"
+ },
+ {
+  "id": 141,
+  "name": "Polar Shark",
+  "latin": "Somniosus microcephalus",
+  "large": "~86.4 kg",
+  "unique": "~120 kg"
+ },
+ {
+  "id": 52,
+  "name": "Pond Trout",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~5 kg"
+ },
+ {
+  "id": 79,
+  "name": "Pontic Shad",
+  "latin": "Alosa immaculata",
+  "large": "~0.864 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 256,
+  "name": "Powan Whitefish",
+  "latin": "Coregonus clupeoides",
+  "large": "~0 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 217,
+  "name": "Predatory Carp",
+  "latin": "Chanodichthys erythropterus",
+  "large": "~0 kg",
+  "unique": "~5 kg"
+ },
+ {
+  "id": 208,
+  "name": "Rainbow Smelt",
+  "latin": "Osmerus mordax",
+  "large": "~0 kg",
+  "unique": "~0.22 kg"
+ },
+ {
+  "id": 247,
+  "name": "Ramada Mullet",
+  "latin": "Chelon ramada",
+  "large": "~2.23 kg",
+  "unique": "~3.1 kg"
+ },
+ {
+  "id": 345,
+  "name": "Red King Crab",
+  "latin": "Paralithodes camtschaticus",
+  "large": "~5 kg",
+  "unique": "~7.3 kg"
+ },
+ {
+  "id": 287,
+  "name": "Red Porgy",
+  "latin": "Pagrus pagrus",
+  "large": "~0 kg",
+  "unique": "~4 kg"
+ },
+ {
+  "id": 340,
+  "name": "Red Swamp Crayfish",
+  "latin": "Procambarus clarkii",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 193,
+  "name": "Redlipped Asp",
+  "latin": "Aspius taeniatus",
+  "large": "~0 kg",
+  "unique": "~7.11 kg"
+ },
+ {
+  "id": 295,
+  "name": "Rhone Trout",
+  "latin": "Salmo rhodanensis",
+  "large": "~0 kg",
+  "unique": "~3 kg"
+ },
+ {
+  "id": 75,
+  "name": "Ripus",
+  "latin": "Coregonus albula",
+  "large": "~0.288 kg",
+  "unique": "~0.4 kg"
+ },
+ {
+  "id": 35,
+  "name": "River Trout",
+  "latin": "Salmo trutta",
+  "large": "~0 kg",
+  "unique": "~5 kg"
+ },
+ {
+  "id": 64,
+  "name": "Roach",
+  "latin": "Rutilus rutilus",
+  "large": "~0.3 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 242,
+  "name": "Rose Dorade",
+  "latin": "Sparus aurata",
+  "large": "~4 kg",
+  "unique": "~9 kg"
+ },
+ {
+  "id": 296,
+  "name": "Round Goby",
+  "latin": "Neogobius melanostomus",
+  "large": "~0.158 kg",
+  "unique": "~0.2 kg"
+ },
+ {
+  "id": 243,
+  "name": "Royale Dorade",
+  "latin": "Sparus aurata",
+  "large": "~5.76 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 34,
+  "name": "Rudd",
+  "latin": "Scardinius erythrophthalmus",
+  "large": "~0.527 kg",
+  "unique": "~0.8 kg"
+ },
+ {
+  "id": 19,
+  "name": "Ruffe",
+  "latin": "Gymnocephalus cernuus",
+  "large": "~0.144 kg",
+  "unique": "~0.2 kg"
+ },
+ {
+  "id": 115,
+  "name": "Sablefish",
+  "latin": "Anoplopoma fimbria",
+  "large": "~5.47 kg",
+  "unique": "~7.6 kg"
+ },
+ {
+  "id": 101,
+  "name": "Sabrefish",
+  "latin": "Pelecus cultratus",
+  "large": "~0.474 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 152,
+  "name": "Saffron Cod",
+  "latin": "Eleginus gracilis",
+  "large": "~0 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 133,
+  "name": "Saika",
+  "latin": "Boreogadus saida",
+  "large": "~0.92 kg",
+  "unique": "~1.2 kg"
+ },
+ {
+  "id": 222,
+  "name": "Saimen Trout",
+  "latin": null,
+  "large": "~5.82 kg",
+  "unique": "~8.08 kg"
+ },
+ {
+  "id": 134,
+  "name": "Saira",
+  "latin": "Cololabis saira",
+  "large": "~0 kg",
+  "unique": "~0.15 kg"
+ },
+ {
+  "id": 313,
+  "name": "Salmon Shark",
+  "latin": "Lamna ditropis",
+  "large": "~0 kg",
+  "unique": "~65 kg"
+ },
+ {
+  "id": 299,
+  "name": "Saposhnikovi Shad",
+  "latin": "Alosa saposchnikowii",
+  "large": "~0.384 kg",
+  "unique": "~0.48 kg"
+ },
+ {
+  "id": 188,
+  "name": "Sattar Snowtrout",
+  "latin": "Schizothorax intermedius",
+  "large": "~0 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 226,
+  "name": "Sauger",
+  "latin": "Sander canadensis",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 203,
+  "name": "Scaly Osman",
+  "latin": "Diptychus maculatus",
+  "large": "~0.88 kg",
+  "unique": "~1.1 kg"
+ },
+ {
+  "id": 322,
+  "name": "Scaparinx",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~39 kg"
+ },
+ {
+  "id": 259,
+  "name": "Scottish Whitefish",
+  "latin": "Coregonus vandesius",
+  "large": "~1.58 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 239,
+  "name": "Sea Zander",
+  "latin": "Sander marinus",
+  "large": "~11.3 kg",
+  "unique": "~15.7 kg"
+ },
+ {
+  "id": 151,
+  "name": "Sebastes Norvegicus",
+  "latin": "Sebastes borealis",
+  "large": "~5.76 kg",
+  "unique": "~8 kg"
+ },
+ {
+  "id": 200,
+  "name": "Sevan Trout",
+  "latin": "Salmo ischchan",
+  "large": "~1 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 265,
+  "name": "Shad",
+  "latin": "Alosa sapidissima",
+  "large": "~1.79 kg",
+  "unique": "~2.24 kg"
+ },
+ {
+  "id": 178,
+  "name": "Sharpbelly",
+  "latin": "Hemiculter leucisculus",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 125,
+  "name": "Shemaiah",
+  "latin": "Alburnus chalcoides",
+  "large": "~0.273 kg",
+  "unique": "~0.38 kg"
+ },
+ {
+  "id": 270,
+  "name": "Shigure Koi",
+  "latin": "Cyprinus rubrofuscus",
+  "large": "~5 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 164,
+  "name": "Ship Sturgeon",
+  "latin": "Acipenser sturio",
+  "large": "~20.16 kg",
+  "unique": "~28 kg"
+ },
+ {
+  "id": 145,
+  "name": "Shortspine Thornyhead",
+  "latin": "Sebastolobus macrochir",
+  "large": "~0 kg",
+  "unique": "~0.95 kg"
+ },
+ {
+  "id": 140,
+  "name": "Shrimp",
+  "latin": null,
+  "large": "~0.054 kg",
+  "unique": "~0.075 kg"
+ },
+ {
+  "id": 57,
+  "name": "Siberian Bream",
+  "latin": "Abramis brama",
+  "large": "~1.44 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 67,
+  "name": "Siberian Dace",
+  "latin": null,
+  "large": "~0.13 kg",
+  "unique": "~0.15 kg"
+ },
+ {
+  "id": 51,
+  "name": "Siberian Grayling",
+  "latin": "Thymallus arcticus",
+  "large": "~0.804 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 21,
+  "name": "Siberian Lamprey",
+  "latin": "Lethenteron kessleri",
+  "large": "~0.064 kg",
+  "unique": "~0.08 kg"
+ },
+ {
+  "id": 86,
+  "name": "Siberian Sculpin",
+  "latin": "Cottus gobio",
+  "large": "~0.025 kg",
+  "unique": "~0.03 kg"
+ },
+ {
+  "id": 23,
+  "name": "Siberian Sturgeon",
+  "latin": "Acipenser baerii",
+  "large": "~39.6 kg",
+  "unique": "~55 kg"
+ },
+ {
+  "id": 272,
+  "name": "Signal Crayfish",
+  "latin": "Pacifastacus leniusculus",
+  "large": "~0.4 kg",
+  "unique": "~0.5 kg"
+ },
+ {
+  "id": 17,
+  "name": "Silver Bream",
+  "latin": "Blicca bjoerkna",
+  "large": "~0.895 kg",
+  "unique": "~1.21 kg"
+ },
+ {
+  "id": 128,
+  "name": "Silver Carp Motley",
+  "latin": "Hypophthalmichthys nobilis",
+  "large": "~20.35 kg",
+  "unique": "~28.26 kg"
+ },
+ {
+  "id": 91,
+  "name": "Silver Carp White",
+  "latin": "Hypophthalmichthys molitrix",
+  "large": "~10.88 kg",
+  "unique": "~15.11 kg"
+ },
+ {
+  "id": 117,
+  "name": "Silver Salmon",
+  "latin": "Oncorhynchus kisutch",
+  "large": "~0 kg",
+  "unique": "~8.62 kg"
+ },
+ {
+  "id": 230,
+  "name": "Singil Mullet",
+  "latin": "Chelon auratus",
+  "large": "~0.792 kg",
+  "unique": "~1.1 kg"
+ },
+ {
+  "id": 314,
+  "name": "Skipjack Tuna",
+  "latin": "Katsuwonus pelamis",
+  "large": "~0 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 330,
+  "name": "Smallhead Barbel",
+  "latin": "Luciobarbus microcephalus",
+  "large": "~5.59 kg",
+  "unique": "~7.5 kg"
+ },
+ {
+  "id": 234,
+  "name": "Smallmouth Bass",
+  "latin": "Micropterus dolomieu",
+  "large": "~1.66 kg",
+  "unique": "~2.3 kg"
+ },
+ {
+  "id": 33,
+  "name": "Smelt",
+  "latin": "Osmerus eperlanus",
+  "large": "~0.144 kg",
+  "unique": "~0.2 kg"
+ },
+ {
+  "id": 173,
+  "name": "Snakehead",
+  "latin": "Channa argus",
+  "large": "~5.5 kg",
+  "unique": "~7 kg"
+ },
+ {
+  "id": 153,
+  "name": "Sockeye Salmon",
+  "latin": "Oncorhynchus nerka",
+  "large": "~0 kg",
+  "unique": "~4.5 kg"
+ },
+ {
+  "id": 294,
+  "name": "South-West Nase",
+  "latin": "Parachondrostoma toxostoma",
+  "large": "~0.26 kg",
+  "unique": "~0.35 kg"
+ },
+ {
+  "id": 334,
+  "name": "Spanish Trout",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 316,
+  "name": "Spinytail Skate",
+  "latin": "Bathyraja spinicauda",
+  "large": "~0 kg",
+  "unique": "~25 kg"
+ },
+ {
+  "id": 311,
+  "name": "Spotted Wolffish",
+  "latin": "Anarhichas minor",
+  "large": "~0 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 142,
+  "name": "Squid",
+  "latin": null,
+  "large": "~1.44 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 78,
+  "name": "Starry Sturgeon",
+  "latin": "Acipenser stellatus",
+  "large": "~28.8 kg",
+  "unique": "~40 kg"
+ },
+ {
+  "id": 219,
+  "name": "Stellate Flounder",
+  "latin": "Platichthys stellatus",
+  "large": "~6.63 kg",
+  "unique": "~9.21 kg"
+ },
+ {
+  "id": 111,
+  "name": "Stellate Sturgeon",
+  "latin": "Acipenser sturio",
+  "large": "~54.04 kg",
+  "unique": "~75.05 kg"
+ },
+ {
+  "id": 87,
+  "name": "Sterlet",
+  "latin": "Acipenser ruthenus",
+  "large": "~7.2 kg",
+  "unique": "~10 kg"
+ },
+ {
+  "id": 118,
+  "name": "Striped Ruffe",
+  "latin": "Gymnocephalus schraetser",
+  "large": "~0.18 kg",
+  "unique": "~0.25 kg"
+ },
+ {
+  "id": 240,
+  "name": "Striped Seabass",
+  "latin": "Morone saxatilis",
+  "large": "~10.44 kg",
+  "unique": "~14.5 kg"
+ },
+ {
+  "id": 56,
+  "name": "Sturgeon",
+  "latin": "Acipenser gueldenstaedtii",
+  "large": "~39.64 kg",
+  "unique": "~55.05 kg"
+ },
+ {
+  "id": 321,
+  "name": "Swallow",
+  "latin": null,
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 290,
+  "name": "Syrman Goby",
+  "latin": "Ponticola syrman",
+  "large": "~0.11 kg",
+  "unique": "~0.15 kg"
+ },
+ {
+  "id": 89,
+  "name": "Taimen",
+  "latin": "Hucho taimen",
+  "large": "~15 kg",
+  "unique": "~28 kg"
+ },
+ {
+  "id": 90,
+  "name": "Taran",
+  "latin": "Rutilus heckelii",
+  "large": "~0.72 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 41,
+  "name": "Tench",
+  "latin": "Tinca tinca",
+  "large": "~2.23 kg",
+  "unique": "~3.1 kg"
+ },
+ {
+  "id": 248,
+  "name": "Thicklip Mullet",
+  "latin": "Chelon labrosus",
+  "large": "~1.3 kg",
+  "unique": "~1.8 kg"
+ },
+ {
+  "id": 315,
+  "name": "Thornback Ray",
+  "latin": "Raja clavata",
+  "large": "~0 kg",
+  "unique": "~10.56 kg"
+ },
+ {
+  "id": 37,
+  "name": "Trout",
+  "latin": "Oncorhynchus mykiss",
+  "large": "~3.54 kg",
+  "unique": "~4.6 kg"
+ },
+ {
+  "id": 47,
+  "name": "Tugun",
+  "latin": "Coregonus tugun",
+  "large": "~0.062 kg",
+  "unique": "~0.075 kg"
+ },
+ {
+  "id": 233,
+  "name": "Tuna Alalunga",
+  "latin": "Thunnus alalunga",
+  "large": "~28.8 kg",
+  "unique": "~40 kg"
+ },
+ {
+  "id": 253,
+  "name": "Turbot",
+  "latin": "Scophthalmus maximus",
+  "large": "~9.07 kg",
+  "unique": "~12.6 kg"
+ },
+ {
+  "id": 195,
+  "name": "Turkestan ide",
+  "latin": "Leuciscus idus",
+  "large": "~2.9 kg",
+  "unique": "~4 kg"
+ },
+ {
+  "id": 74,
+  "name": "Vimba",
+  "latin": "Vimba vimba",
+  "large": "~1.5 kg",
+  "unique": "~2.09 kg"
+ },
+ {
+  "id": 9,
+  "name": "Vobla",
+  "latin": "Rutilus caspicus",
+  "large": "~0.576 kg",
+  "unique": "~0.801 kg"
+ },
+ {
+  "id": 4,
+  "name": "Volga Zander",
+  "latin": "Sander volgensis",
+  "large": "~1.17 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 225,
+  "name": "Walleye",
+  "latin": "Sander vitreus",
+  "large": "~0 kg",
+  "unique": "~5.2 kg"
+ },
+ {
+  "id": 84,
+  "name": "Wels Catfish",
+  "latin": "Silurus glanis",
+  "large": "~43.2 kg",
+  "unique": "~60 kg"
+ },
+ {
+  "id": 266,
+  "name": "White Bass",
+  "latin": "Morone chrysops",
+  "large": "~0 kg",
+  "unique": "~2.4 kg"
+ },
+ {
+  "id": 339,
+  "name": "White Carp",
+  "latin": null,
+  "large": "~10 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 50,
+  "name": "White Salmon",
+  "latin": "Stenodus leucichthys",
+  "large": "~10.8 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 288,
+  "name": "White Seabream",
+  "latin": "Diplodus sargus",
+  "large": "~0 kg",
+  "unique": "~1.5 kg"
+ },
+ {
+  "id": 267,
+  "name": "White Sucker",
+  "latin": "Catostomus commersonii",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 1,
+  "name": "White-Eye Bream",
+  "latin": "Ballerus sapa",
+  "large": "~0.76 kg",
+  "unique": "~1 kg"
+ },
+ {
+  "id": 80,
+  "name": "Whitefish",
+  "latin": "Coregonus lavaretus",
+  "large": "~4.39 kg",
+  "unique": "~6.11 kg"
+ },
+ {
+  "id": 310,
+  "name": "Whiting",
+  "latin": "Merlangius merlangus",
+  "large": "~2.6 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 76,
+  "name": "Wild Carp",
+  "latin": "Cyprinus carpio",
+  "large": "~5 kg",
+  "unique": "~15 kg"
+ },
+ {
+  "id": 305,
+  "name": "Wuchang Bream",
+  "latin": "Megalobrama amblycephala",
+  "large": "~1.5 kg",
+  "unique": "~2 kg"
+ },
+ {
+  "id": 227,
+  "name": "Yellow Perch",
+  "latin": "Perca flavescens",
+  "large": "~0 kg",
+  "unique": "~0.6 kg"
+ },
+ {
+  "id": 181,
+  "name": "Yellowcheek",
+  "latin": "Elopichthys bambusa",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 114,
+  "name": "Yellowfin Flounder",
+  "latin": "Limanda aspera",
+  "large": "~1.3 kg",
+  "unique": "~1.8 kg"
+ },
+ {
+  "id": 183,
+  "name": "Yellowhead Catfish",
+  "latin": "Tachysurus fulvidraco",
+  "large": "~0 kg",
+  "unique": "~0 kg"
+ },
+ {
+  "id": 88,
+  "name": "Zander",
+  "latin": "Sander lucioperca",
+  "large": "~5.54 kg",
+  "unique": "~7.7 kg"
+ },
+ {
+  "id": 204,
+  "name": "Zeravshan Dace",
+  "latin": "Leuciscus lehmanni",
+  "large": "~0 kg",
+  "unique": "~0.2 kg"
+ },
+ {
+  "id": 82,
+  "name": "Zope",
+  "latin": "Ballerus ballerus",
+  "large": "~0.518 kg",
+  "unique": "~0.72 kg"
+ }
+]
