@@ -77,10 +77,11 @@ namespace FisherLogger
         public void Save() => JsonFile.Save(FilePath, this);
     }
 
-    /// <summary>Обмен данными с сервером — только подготовка. По умолчанию выключен; включается только с согласия.</summary>
+    /// <summary>Обмен данными с сервером. FEAT-07: по решению владельца включён по умолчанию — условия показываются при установке
+    /// (окно выбора языка) и в README; выключается в «Обмен данными с сервером…». Отправляются только новые события.</summary>
     public sealed class ServerSettings
     {
-        public bool Enabled { get; set; } = false;
+        public bool Enabled { get; set; } = true;
         public string Url { get; set; } = ServerUploader.DefaultUrl;
         /// <summary>SERVER-01: номер установки на сервере (= отпечаток ключа), последнее отправленное событие текущей базы, итог.</summary>
         public string? RemoteId { get; set; }
@@ -88,8 +89,10 @@ namespace FisherLogger
         public string? LastDb { get; set; }
         public string? LastResult { get; set; }
         public string? LastUtc { get; set; }
-        public bool Consent { get; set; } = false;
+        public bool Consent { get; set; } = true;   // FEAT-07: принято условиями использования при установке
         public string? ConsentUtc { get; set; }
+        /// <summary>FEAT-07: пользователь видел условия обмена данными (при установке или один раз после обновления).</summary>
+        public bool TermsShown { get; set; }
         public static string? PathOverride { get; set; }
         public static string FilePath => PathOverride ?? Path.Combine(AppInfo.UserDir, "server.json");
         public static ServerSettings Load() => JsonFile.Load<ServerSettings>(FilePath);

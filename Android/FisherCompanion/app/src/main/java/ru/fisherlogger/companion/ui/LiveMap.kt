@@ -57,6 +57,8 @@ object LiveCol {
     fun frame(w: Int?) = when (w) { 0 -> Color(0xFF969696); 1 -> Color(0xFF4CAF50); 2 -> Color(0xFF4285F4); 3 -> Color(0xFFF7C84A); else -> Color(0xFF5E6E72) }
     fun name(w: Int?) = when (w) { 0 -> Color(0xFFFFFFC7); 1 -> Color(0xFF80FF60); 2 -> Color(0xFF7896FF); 3 -> Color(0xFFFFA020); else -> Color(0xFFE5EDEB) }
     fun grade(w: Int?) = when (w) { 0 -> "обычный"; 1 -> "хороший"; 2 -> "крупный"; 3 -> "трофейный"; else -> "" }
+    /** FEAT-07: зона клёва — 2 выше обычного (зелёный), 1 как обычно (жёлтый), 0 ниже (серый); как Theme.AccentGreen/Warning/TextMuted на ПК. */
+    fun spot(level: Int) = when (level) { 2 -> Color(0xFF7FCB8F); 1 -> Color(0xFFEDB84E); else -> Color(0xFF8EA4A1) }
 }
 
 /** Мини-карта «Сейчас»: круг вокруг игрока, север вверх, сектор взгляда, забросы по удочкам с состоянием. */
@@ -66,7 +68,7 @@ fun LiveMapCard(vm: AppViewModel) {
     val loc = live.optInt("locationId", -1)
     val player = live.optJSONObject("player")
     val casts = (0 until (live.optJSONArray("casts")?.length() ?: 0)).mapNotNull { live.optJSONArray("casts")?.optJSONObject(it) }
-    if (player == null && casts.isEmpty()) return
+    if (player == null && casts.isEmpty() && liveSpots(live).isEmpty()) return
     val meta = (0 until (vm.maps?.length() ?: 0)).mapNotNull { vm.maps?.optJSONObject(it) }.firstOrNull { it.optInt("locationId", -2) == loc }
     LaunchedEffect(loc) { if (loc >= 0 && meta != null) vm.loadMap(loc) }
     var radius by rememberSaveable { mutableIntStateOf(100) }
@@ -78,7 +80,7 @@ fun LiveMapCard(vm: AppViewModel) {
             }
         }
         val age = player?.optInt("ageSec", 9999) ?: 9999
-        LiveMapCanvas(vm, meta, loc, player, casts, radius, age <= 25)
+        LiveMapCanvas(vm, meta, loc, player, casts, liveSpots(live), radius, age <= 25)
         Spacer(Modifier.height(6.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             listOf("вы" to LiveCol.Player, "в воде" to LiveCol.Wait, "поклёвка" to LiveCol.Bite, "подсечка" to LiveCol.Hook, "улов" to LiveCol.Catch).forEach { (t, c) ->
@@ -92,15 +94,16 @@ fun LiveMapCard(vm: AppViewModel) {
 }
 
 @Composable
-private fun LiveMapCanvas(vm: AppViewModel, meta: JSONObject?, loc: Int, player: JSONObject?, casts: List<JSONObject>, radius: Int, livePose: Boolean) {
+internal fun LiveMapCanvas(vm: AppViewModel, meta: JSONObject?, loc: Int, player: JSONObject?, casts: List<JSONObject>, spots: List<JSONObject>, radius: Int, livePose: Boolean,
+                           modifier: Modifier = Modifier.fillMaxWidth().widthIn(max = 520.dp).aspectRatio(1f).padding(top = 8.dp)) {
     val tm = rememberTextMeasurer()
     val onSurface = MaterialTheme.colorScheme.onSurface
     val bmp = if (meta != null) vm.mapImages[loc] else null
     val img = remember(bmp) { bmp?.asImageBitmap() }
     val active = casts.filter { it.optBoolean("active") }
-    val cX = player?.optDouble("x") ?: active.map { it.optDouble("x") }.average().takeIf { !it.isNaN() } ?: casts.first().optDouble("x")
-    val cZ = player?.optDouble("z") ?: active.map { it.optDouble("z") }.average().takeIf { !it.isNaN() } ?: casts.first().optDouble("z")
-    Canvas(Modifier.fillMaxWidth().widthIn(max = 520.dp).aspectRatio(1f).padding(top = 8.dp)) {
+    val cX = player?.optDouble("x") ?: active.map { it.optDouble("x") }.average().takeIf { !it.isNaN() } ?: casts.firstOrNull()?.optDouble("x") ?: spots.firstOrNull()?.optDouble("x") ?: 0.0
+    val cZ = player?.optDouble("z") ?: active.map { it.optDouble("z") }.average().takeIf { !it.isNaN() } ?: casts.firstOrNull()?.optDouble("z") ?: spots.firstOrNull()?.optDouble("z") ?: 0.0
+    Canvas(modifier) {
         val cx = size.width / 2f; val cy = size.height / 2f; val rPx = min(cx, cy) - 4f
         val s = rPx / radius.toFloat()                                   // пикселей на метр
         fun sx(x: Double) = cx + ((x - cX) * s).toFloat()
@@ -112,6 +115,15 @@ private fun LiveMapCanvas(vm: AppViewModel, meta: JSONObject?, loc: Int, player:
                 val minX = meta.optDouble("minX"); val maxX = meta.optDouble("maxX"); val minZ = meta.optDouble("minZ"); val maxZ = meta.optDouble("maxZ")
                 val l = sx(minX); val t = sy(maxZ); val r = sx(maxX); val b = sy(minZ)
                 drawImage(img, dstOffset = IntOffset(l.toInt(), t.toInt()), dstSize = IntSize((r - l).toInt().coerceAtLeast(1), (b - t).toInt().coerceAtLeast(1)))
+            }
+            // FEAT-07: зоны клёва, как на ПК: круг 12 м, цвет — выше/как/ниже обычного для своей снасти, подпись — % от обычного
+            spots.forEach { sp ->
+                val p = Offset(sx(sp.optDouble("x")), sy(sp.optDouble("z")))
+                val rr = (sp.optDouble("radius", 12.0) * s).toFloat().coerceAtLeast(14f)
+                val col = LiveCol.spot(sp.optInt("level", 0))
+                val fade = (1f - sp.optDouble("ageMin", 0.0).toFloat() / 60f).coerceIn(0.45f, 1f)
+                drawCircle(col.copy(alpha = 0.30f * fade), rr, p)
+                drawCircle(col.copy(alpha = 0.85f * fade), rr, p, style = Stroke(2f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(4f, 4f))))
             }
             // где стоял игрок → наживка (только в воде)
             active.forEach { k ->
@@ -137,6 +149,16 @@ private fun LiveMapCanvas(vm: AppViewModel, meta: JSONObject?, loc: Int, player:
                 if (livePose) { drawCircle(Color.White, 10f, p); drawCircle(LiveCol.Player, 8f, p) }
                 else drawCircle(LiveCol.Player, 9f, p, style = Stroke(3f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 5f))))
             }
+        }
+        // подписи зон — поверх всего, чтобы не прятались под забросами
+        spots.forEach { sp ->
+            val p = Offset(sx(sp.optDouble("x")), sy(sp.optDouble("z")))
+            if ((p - Offset(cx, cy)).getDistance() > rPx - 10f) return@forEach
+            val t = L.t(sp.optString("label"))
+            val lay = tm.measure(t, TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFF06201D)))
+            val w = lay.size.width + 10f; val h = lay.size.height + 2f
+            drawRoundRect(Color.White.copy(alpha = 0.78f), Offset(p.x - w / 2f, p.y - h / 2f), Size(w, h), androidx.compose.ui.geometry.CornerRadius(h / 2f))
+            drawText(lay, topLeft = Offset(p.x - lay.size.width / 2f, p.y - lay.size.height / 2f))
         }
         // кольца: край и половина радиуса; «С» — север
         drawCircle(onSurface.copy(alpha = 0.5f), rPx, Offset(cx, cy), style = Stroke(2f))
@@ -167,3 +189,6 @@ fun EmptyBitesList(rod: JSONObject) {
         }
     }
 }
+
+/** FEAT-07: зоны клёва из /api/live (старый ПК — пусто). */
+fun liveSpots(live: JSONObject?): List<JSONObject> = (0 until (live?.optJSONArray("spots")?.length() ?: 0)).mapNotNull { live?.optJSONArray("spots")?.optJSONObject(it) }

@@ -1,5 +1,20 @@
 # Что нового / Changelog
 
+## 1.2.0 — 21.11.2026
+**Русский**
+- Исправлено: в 1.1.0 мини-карта и уведомления о поклёвках на телефоне не получали данных с ПК.
+- Зоны клёва на картах (окно в игре, карта водоёма, телефон) подписаны в % от обычного для этой наживки и крючка: 100% — как обычно. Снасть без истории — «новая». Цвет: зелёная — выше обычного, жёлтая — как обычно, серая — ниже.
+- Телефон: кнопка «Мини-карта» вверху «Сейчас» — карта на весь экран с зонами клёва и вкладками «Мои уловы / Лента / Советы».
+- Телефон: уведомление «Слежу за поклёвками» тихое, с кнопкой «Остановить»; само исчезает, если ПК не отвечает 5 минут.
+- Обмен данными с сервером включён по умолчанию по условиям использования (показываются при установке, см. README). Выключить: «Для разработчика ▾ → Обмен данными с сервером…». Отправляются только новые поклёвки и уловы, без ника, чата и учётной записи.
+
+**English**
+- Fixed: in 1.1.0 the phone mini-map and bite notifications got no data from the PC.
+- Bite zones on maps (in-game window, water map, phone) are labelled in % of usual for this bait and hook: 100% = usual. Tackle without history — "new". Colour: green above usual, yellow usual, grey below.
+- Phone: "Mini-map" button at the top of "Now" — full-screen map with bite zones and "My catches / Feed / Tips" tabs.
+- Phone: the "Watching for bites" notification is silent, has a "Stop" button and disappears by itself if the PC does not answer for 5 minutes.
+- Server data sharing is on by default under the terms of use (shown at installation, see README). Turn off: "Developer ▾ → Server data sharing…". Only new bites and catches are sent, no nickname, chat or account.
+
 ## 1.1.0 — 20.11.2026
 **Русский**
 - По каждой удочке — список последних пустых поклёвок: рыба, вес и класс (цветом класса). Сколько показывать (1–10) — в настройках.

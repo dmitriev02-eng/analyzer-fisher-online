@@ -19,6 +19,25 @@ namespace FisherLogger
             _uploader.Start();
         }
 
+        /// <summary>FEAT-07: условия обмена данными — один раз. Новая установка видела их в окне выбора языка; после обновления
+        /// с прежней версии — короткое окно «оставить включённым?».</summary>
+        private void ShowTermsOnce()
+        {
+            var ss = ServerSettings.Load();
+            if (ss.TermsShown) return;
+            if (!LanguageForm.TermsJustShown)
+            {
+                var r = UiText.Box(this, "Новое в этой версии: программа отправляет на сервер проекта ваши новые поклёвки и уловы, " +
+                    "чтобы собирать общие места клёва.\n\nОтправляется: вид, вес и класс рыбы, водоём, клетка 5 м, игровое время, удочка, наживка, шанс.\n" +
+                    "Не отправляется: ник, чат, учётная запись, прошлая история.\n\nОставить обмен данными включённым? " +
+                    "Изменить можно в любой момент: «Для разработчика ▾» → «Обмен данными с сервером…».", "Обмен данными с сервером", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (r == DialogResult.No) { ss.Enabled = false; ss.Consent = false; }
+            }
+            ss.TermsShown = true; ss.ConsentUtc ??= ss.Consent ? DateTime.UtcNow.ToString("o") : null;
+            try { ss.Save(); } catch { }
+            Log("[SERVER] обмен данными " + (ss.CanSend ? "включён (условия использования)" : "выключен пользователем"));
+        }
+
         /// <summary>SERVER-01: согласие на обмен данными — что уходит, что никогда, как выключить.</summary>
         private void ShowServerConsent()
         {
@@ -27,7 +46,8 @@ namespace FisherLogger
             string text = "Обмен данными помогает всем: из поклёвок многих игроков сервер собирает общие места клёва.\n\n" +
                           "Отправляется: вид, вес и класс рыбы, водоём, клетка 5 м, игровое время, номер удочки, наживка и крючок, шанс клёва.\n" +
                           "Никогда не отправляется: ник, номер игрока, чат, сведения о других игроках, учётная запись.\n" +
-                          "Вместо имени — случайный ключ этой установки. История до включения не отправляется.\n\n" + state + "\n\n" +
+                          "Вместо имени — случайный ключ этой установки. История до включения не отправляется.\n" +
+                          "Обмен включается сам по условиям использования, которые показываются при установке (README → «Обмен данными»).\n\n" + state + "\n\n" +
                           (ss.CanSend ? "Выключить обмен данными?" : "Включить обмен данными?");
             if (UiText.Box(this, text, "Обмен данными с сервером", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
             ss.Enabled = ss.Consent = !ss.CanSend;
@@ -71,7 +91,7 @@ namespace FisherLogger
         {
             if (_updateCheckStarted) return; _updateCheckStarted = true;
             try { if (Shortcuts.EnsureOnce(Application.ExecutablePath) is string sc) Log("[INSTALL] " + sc); } catch { }   // RELEASE-03
-            try { if (!_suppressPersistence) StartUploader(); } catch { }   // SERVER-01: сам ничего не шлёт без согласия
+            try { if (!_suppressPersistence) { ShowTermsOnce(); StartUploader(); } } catch { }   // FEAT-07: шлёт по условиям использования; выключается в меню
             var us = UpdateSettings.Load();
             if (!us.DueForCheck(DateTime.UtcNow)) return;
             _ = Task.Run(async () =>

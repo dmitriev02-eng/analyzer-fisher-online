@@ -34,6 +34,7 @@ namespace FisherLogger
             public int[] Ticks = new int[8], Bites = new int[8]; public int Total;
             public double[]? P;                 // своя калибровка (≥ MinGroupTicks), иначе null
             public double Lo, Hi;               // обычный шанс этой снасти: 25–75 % тактов
+            public double Med;                  // FEAT-07: медиана тактов этой снасти — «100 %» на карте
             internal List<double> Vals = new();
         }
         public const int MinGroupTicks = 1500, MinTypicalTicks = 300;
@@ -50,6 +51,10 @@ namespace FisherLogger
         public double[] PFor(string? key) => Find(key, g => g.P != null)?.P ?? P;
         /// <summary>Обычный шанс для этой снасти (на этом водоёме, если хватает тактов): 25–75 % тактов.</summary>
         public (double lo, double hi)? Typical(string? key) => Find(key, g => g.Total >= MinTypicalTicks) is { } g ? (g.Lo, g.Hi) : null;
+        /// <summary>FEAT-07: обычный (медианный) шанс этой снасти — 100 % для подписи пятна; мало тактов — null.</summary>
+        public double? Usual(string? key) => Find(key, g => g.Total >= MinUsualTicks && g.Med > 0) is { } g ? g.Med : null;
+        /// <summary>FEAT-07: для процента хватает ~13 мин ловли этой снастью (100 тактов по 8 с); цвет зоны — по-прежнему от 300.</summary>
+        public const int MinUsualTicks = 100;
 
         /// <summary>
         /// LOGFIX-03 (тренер): уловы этой снасти на ЭТОМ водоёме — при каком шансе (среднее тактов до поклёвки, без прогрева) и через
@@ -180,7 +185,7 @@ namespace FisherLogger
             }
             foreach (var g in lb.Groups.Values)
             {
-                if (g.Vals.Count > 0) { g.Vals.Sort(); g.Lo = g.Vals[(int)(0.25 * (g.Vals.Count - 1))]; g.Hi = g.Vals[(int)(0.75 * (g.Vals.Count - 1))]; }
+                if (g.Vals.Count > 0) { g.Vals.Sort(); g.Lo = g.Vals[(int)(0.25 * (g.Vals.Count - 1))]; g.Hi = g.Vals[(int)(0.75 * (g.Vals.Count - 1))]; g.Med = g.Vals[g.Vals.Count / 2]; }
                 g.Vals.Clear();
                 if (g.Total >= MinGroupTicks)
                 {

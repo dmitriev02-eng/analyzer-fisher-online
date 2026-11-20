@@ -214,18 +214,31 @@ namespace FisherLogger
     public sealed class LanguageForm : Form
     {
         public string Choice { get; private set; } = "ru";
+        /// <summary>FEAT-07: окно с условиями показано при этом запуске (новая установка).</summary>
+        public static bool TermsJustShown;
         public LanguageForm()
         {
             Text = "Анализатор Fisher Online"; FormBorderStyle = FormBorderStyle.FixedDialog; MaximizeBox = MinimizeBox = false;
-            StartPosition = FormStartPosition.CenterScreen; ClientSize = new Size(420, 170); BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui;
+            StartPosition = FormStartPosition.CenterScreen; ClientSize = new Size(460, 330); BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui;
             try { Icon = Theme.AppIcon; } catch { }
-            var lbl = new Label { Text = "Выберите язык / Choose language", AutoSize = false, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter };
-            var ru = new Button { Text = "Русский", Size = new Size(160, 48), Location = new Point(40, 90) };
-            var en = new Button { Text = "English", Size = new Size(160, 48), Location = new Point(220, 90) };
+            var lbl = new Label { Text = "Выберите язык / Choose language", AutoSize = false, Dock = DockStyle.Top, Height = 56, TextAlign = ContentAlignment.MiddleCenter };
+            var ru = new Button { Text = "Русский", Size = new Size(170, 48), Location = new Point(50, 70) };
+            var en = new Button { Text = "English", Size = new Size(170, 48), Location = new Point(240, 70) };
+            // FEAT-07: условия использования — обмен данными включается сам; текст двуязычный (язык ещё не выбран)
+            var terms = new Label
+            {
+                AutoSize = false, Location = new Point(16, 132), Size = new Size(428, 190), ForeColor = Theme.TextMuted,
+                Text = "Выбирая язык, вы принимаете условия: программа автоматически и анонимно отправляет на сервер проекта " +
+                       "ваши новые поклёвки и уловы (вид, вес, класс рыбы, водоём, клетка 5 м, игровое время, удочка, наживка, шанс). " +
+                       "Ник, чат и учётная запись не отправляются, прошлая история тоже. Выключить: «Для разработчика ▾» → «Обмен данными с сервером…».\n\n" +
+                       "By choosing a language you accept the terms: the program automatically and anonymously sends your new bites and " +
+                       "catches (species, weight, grade, water, 5 m cell, game time, rod, bait, chance) to the project server. " +
+                       "No nickname, chat or account; no past history. Turn off: \"Developer ▾\" → \"Server data sharing…\"."
+            };
             try { Theme.StyleButton(ru, Theme.ButtonNeutral); Theme.StyleButton(en, Theme.ButtonNeutral); } catch { }
             ru.Click += (s, e) => { Choice = "ru"; DialogResult = DialogResult.OK; };
             en.Click += (s, e) => { Choice = "en"; DialogResult = DialogResult.OK; };
-            Controls.AddRange(new Control[] { ru, en, lbl });
+            Controls.AddRange(new Control[] { ru, en, terms, lbl });
         }
 
         /// <summary>Загрузить язык; на первом запуске установленной копии — спросить.</summary>
@@ -235,6 +248,7 @@ namespace FisherLogger
             {
                 using var f = new LanguageForm();
                 UiText.Set(f.ShowDialog() == DialogResult.OK ? f.Choice : "ru");
+                TermsJustShown = true;   // FEAT-07: условия обмена данными уже показаны в этом окне
             }
             UiText.Load();
         }

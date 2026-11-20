@@ -194,7 +194,10 @@ fun DashboardScreen(vm: AppViewModel, wide: Boolean) {
         if (st != null) item {
             AppCard {
                 val clock = coach?.str("clock")
-                Text(clock ?: ("В игре ≈ " + st.optString("gameTime")), fontWeight = FontWeight.SemiBold, fontSize = 17.sp)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(clock ?: ("В игре ≈ " + st.optString("gameTime")), fontWeight = FontWeight.SemiBold, fontSize = 17.sp, modifier = Modifier.weight(1f))
+                    if (!stale) MiniMapButton(vm)   // FEAT-07: окно мини-карты, как на ПК
+                }
                 if (stale) Muted("на момент последней связи с ПК")
                 val loc = coach?.str("location")?.takeIf { it.isNotEmpty() } ?: st.str("currentLocationName")
                 if (!loc.isNullOrEmpty()) Text("Водоём: $loc", fontSize = 15.sp)

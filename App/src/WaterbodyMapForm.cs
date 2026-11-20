@@ -546,7 +546,7 @@ namespace FisherLogger
                 Color col = sp.Level == 2 ? Theme.AccentGreen : sp.Level == 1 ? Theme.Warning : Color.FromArgb(150, 160, 175);   // SPOTS-05: относительно своей снасти
                 using (var b = new SolidBrush(Color.FromArgb(90, col))) g.FillEllipse(b, s.X - rad, s.Y - rad, 2 * rad, 2 * rad);
                 using (var pn = new Pen(Color.FromArgb(230, col), 2f)) g.DrawEllipse(pn, s.X - rad, s.Y - rad, 2 * rad, 2 * rad);
-                OverlayForm.SpotLabel(g, sp.Median.ToString(sp.Median < 10 ? "0.0" : "0", CultureInfo.GetCultureInfo("ru-RU")), s, placed);
+                OverlayForm.SpotLabel(g, sp.Label, s, placed);   // FEAT-07
                 // SPOTS-05: точка с большим преимуществом (≥2× других точек этой снасти) — зелёное кольцо и какая рыба здесь брала
                 if (sp.Strong && !ReferenceEquals(sp, BestSpot))
                 {

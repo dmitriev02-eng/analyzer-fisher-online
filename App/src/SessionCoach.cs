@@ -349,6 +349,7 @@ namespace FisherLogger
                 {
                     var tp2 = spt.Tackle.Split('|');
                     if (live.Typical(LiveBite.Key(snap.LocationId, spt.Bait, tp2.Length > 1 ? tp2[1] : "")) is { } ty2) { spt.Lo = ty2.lo; spt.Hi = ty2.hi; }
+                    spt.Usual = live.Usual(LiveBite.Key(snap.LocationId, spt.Bait, tp2.Length > 1 ? tp2[1] : ""));   // FEAT-07
                 }
                 if ((GoalOverride ?? CurrentGoal()) is { } goal && goal.fish > 0 && goal.cls >= 1)
                     snap.Trophy = TrophyProfile.For(db, goal.fish, goal.cls, snap.LocationId, now);

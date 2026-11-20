@@ -41,6 +41,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     /** FEAT-06: мини-карта «Сейчас» (/api/live) и уведомления о поклёвках. */
     var live by mutableStateOf<JSONObject?>(null); private set
+    /** FEAT-07: окно мини-карты на весь экран (как окно в игре на ПК) и его вкладка: 0 — мои уловы, 1 — лента, 2 — советы. */
+    var miniMap by mutableStateOf(false)
+    var miniTab by mutableStateOf(2)
     private var liveJob: kotlinx.coroutines.Job? = null
     var biteAlerts by mutableStateOf(BiteService.enabled(app)); private set
     var emptyAlerts by mutableStateOf(BiteService.empties(app)); private set
@@ -51,7 +54,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         liveJob?.cancel()
         liveJob = viewModelScope.launch {
             while (isActive) {
-                if (api.active != null && screen == Screen.Dashboard)
+                if (api.active != null && (screen == Screen.Dashboard || miniMap))
                     try { live = withContext(Dispatchers.IO) { api.getJson("/api/live") } } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) { }
                 delay(2000)
             }

@@ -86,7 +86,7 @@ fun FisherApp(vm: AppViewModel) {
                             Spacer(Modifier.padding(top = 8.dp))
                             ConnDot(vm.conn)
                             items.forEach { (s, label, icon) ->
-                                NavigationRailItem(selected = vm.screen == s, onClick = { vm.screen = s },
+                                NavigationRailItem(selected = vm.screen == s, onClick = { vm.miniMap = false; vm.screen = s },
                                     icon = { Icon(icon, label) }, label = { Text(label, fontSize = 12.sp) })
                             }
                         }
@@ -98,7 +98,7 @@ fun FisherApp(vm: AppViewModel) {
                         Box(Modifier.weight(1f).fillMaxWidth()) { Content(vm, wide = false) }
                         NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                             items.forEach { (s, label, icon) ->
-                                NavigationBarItem(selected = vm.screen == s, onClick = { vm.screen = s },
+                                NavigationBarItem(selected = vm.screen == s, onClick = { vm.miniMap = false; vm.screen = s },
                                     icon = { Icon(icon, label) }, label = { Text(label, fontSize = 11.sp, maxLines = 1) })
                             }
                         }
@@ -111,6 +111,7 @@ fun FisherApp(vm: AppViewModel) {
 
 @Composable
 private fun Content(vm: AppViewModel, wide: Boolean) {
+    if (vm.miniMap) { MiniMapScreen(vm); return }   // FEAT-07: мини-карта на весь экран поверх «Сейчас»
     when (vm.screen) {
         Screen.Dashboard -> DashboardScreen(vm, wide)
         Screen.Analytics -> AdvisorScreen(vm, wide)

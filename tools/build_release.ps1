@@ -1,4 +1,4 @@
-﻿# FEAT-06: build a release package for other PCs (does NOT touch the production App or its bin).
+﻿# FEAT-07: build a release package for other PCs (does NOT touch the production App or its bin).
 # usage: build_release.ps1 -Version 1.0.0 [-Src <app folder with FisherLogger95.csproj>] [-Out <folder>]
 # Result: <Out>\FisherLogger-<ver>-win-x64.zip + SHA256SUMS.txt + RELEASE_NOTES.md (to upload to a GitHub release tagged v<ver>).
 param(
@@ -42,7 +42,8 @@ if (Test-Path "$Data\assets") { robocopy "$Data\assets" "$pub\data\assets" /E /X
    %LOCALAPPDATA%\FisherLogger — их не трогают обновления и переустановка.
 
 Что делает: только читает данные игры на этом ПК. Ничего не отправляет в игру и не управляет ей.
-Обмен данными с сервером выключен; включается только с вашего согласия.
+Обмен данными: программа анонимно отправляет на сервер проекта ваши новые поклёвки и уловы (без ника, чата и
+учётной записи; прошлая история не отправляется). Выключить: «Для разработчика ▾» → «Обмен данными с сервером…».
 Обновления: программа раз в сутки проверяет новую версию на GitHub и спрашивает перед установкой
 (архив сверяется по SHA-256). Меню «Для разработчика ▾» → «О программе и обновления…».
 

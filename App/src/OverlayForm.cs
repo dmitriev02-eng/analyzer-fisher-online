@@ -980,7 +980,7 @@ namespace FisherLogger
                 using (var b = new SolidBrush(Color.FromArgb(alpha / 2, col))) g.FillEllipse(b, s.X - rad, s.Y - rad, 2 * rad, 2 * rad);
                 using (var pn = new Pen(Color.FromArgb(alpha + 60, col), 1f) { DashStyle = DashStyle.Dot }) g.DrawEllipse(pn, s.X - rad, s.Y - rad, 2 * rad, 2 * rad);
                 // SPOTS-02: цифра чёрная жирная на белой подложке — на голубой воде зелёный/оранжевый текст не читался
-                string t = sp.Median.ToString(sp.Median < 10 ? "0.0" : "0", System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
+                string t = sp.Label;   // FEAT-07: % от обычного для этой снасти (100 % — как обычно)
                 SpotLabel(g, t, s, placed);
             }
             foreach (var r in co.Rods.Where(r => r.MoveX.HasValue && r.Setup.X.HasValue))

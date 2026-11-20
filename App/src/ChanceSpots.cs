@@ -36,12 +36,20 @@ namespace FisherLogger
             public double X, Z, Median, AgeMin; public int Ticks, Casts; public string Tackle = "", Bait = "";
             /// <summary>SPOTS-05: обычный шанс этой снасти на этом водоёме (p25–p75, LiveBite) — оценка «выше/ниже обычного».</summary>
             public double? Lo, Hi;
+            /// <summary>FEAT-07: обычный (медианный) шанс этой снасти на водоёме; подпись пятна — % от него.</summary>
+            public double? Usual;
+            /// <summary>FEAT-07: шанс пятна в % от обычного для этой снасти (100 % — как обычно); нет истории снасти — null.</summary>
+            public int? Pct => Usual is double u && u > 0 ? (int)Math.Round(Median / u * 100) : null;
+            /// <summary>FEAT-07: подпись на карте: «250%» или «новая» (снасть без истории — сравнивать не с чем).</summary>
+            public string Label => Pct is int p ? (p >= 1000 ? (p / 100 * 100).ToString(CultureInfo.InvariantCulture) : p.ToString(CultureInfo.InvariantCulture)) + "%" : "новая";
             /// <summary>SPOTS-05: шанс ≥2× медианы других точек той же снасти — пометка на карте; Note — какая рыба здесь брала на эту наживку.</summary>
             public bool Strong; public double Ratio; public string Note = "";
             /// <summary>SPOTS-05: оценка простым словом относительно своей снасти (нет обычного — по общей шкале).</summary>
             public string Grade => Lo.HasValue && Hi.HasValue ? (Median >= Hi.Value ? "выше обычного для этой снасти" : Median >= Lo.Value ? "как обычно для этой снасти" : "ниже обычного для этой снасти")
-                                                              : (Median >= 5 ? "хорошо" : Median >= 1 ? "средне" : "слабо");
-            public int Level => Lo.HasValue && Hi.HasValue ? (Median >= Hi.Value ? 2 : Median >= Lo.Value ? 1 : 0) : (Median >= 5 ? 2 : Median >= 1 ? 1 : 0);
+                                                              : Pct is int pg ? (pg > 150 ? "выше обычного для этой снасти" : pg >= 50 ? "как обычно для этой снасти" : "ниже обычного для этой снасти") : (Median >= 5 ? "хорошо" : Median >= 1 ? "средне" : "слабо");
+            public int Level => Lo.HasValue && Hi.HasValue ? (Median >= Hi.Value ? 2 : Median >= Lo.Value ? 1 : 0)
+                             // FEAT-07: диапазона ещё нет, но обычный известен — ±50 % (граница «похожего» шанса, MECH-02)
+                             : Pct is int p ? (p > 150 ? 2 : p >= 50 ? 1 : 0) : (Median >= 5 ? 2 : Median >= 1 ? 1 : 0);
             internal List<double> Vals = new();
         }
 

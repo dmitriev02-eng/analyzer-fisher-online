@@ -37,6 +37,9 @@ fun NotifyCard(vm: AppViewModel) {
             Switch(checked = vm.biteAlerts, onCheckedChange = { if (it) turnOn() else vm.setBiteAlerts(false) })
         }
         Muted("Номер удочки, рыба с картинкой, вес и класс — даже когда приложение свёрнуто. Телефон и ПК в одной Wi-Fi сети.", 13)
+        // FEAT-07: объяснить тихое уведомление и автоостановку
+        Muted("Пока идёт слежение, в шторке висит тихое уведомление «Слежу за поклёвками» с кнопкой «Остановить». " +
+              "Если ПК не отвечает 5 минут, слежение остановится само и включится снова, когда вы откроете приложение.", 12)
         if (vm.biteAlerts) {
             Spacer(Modifier.height(6.dp))
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {

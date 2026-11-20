@@ -149,7 +149,7 @@ namespace FisherLogger
     public sealed class CompanionServer : IDisposable
     {
         /// <summary>ANDROID-UX-01: новые возможности API (версия не меняется: старые клиенты их не видят).</summary>
-        public static readonly string[] Features = { "advisor", "depthgrid", "icons", "gridTransform", "pointWindex", "hours", "coach" };
+        public static readonly string[] Features = { "advisor", "depthgrid", "icons", "gridTransform", "pointWindex", "hours", "coach", "live", "events", "empties" };
         public const int ApiVersion = 1; // NEXT-ANDROID-03: поля serverId/dataVersion только добавлены — версия API не меняется (совместимость)
         public const int PairCodeSeconds = 120;
         public const int PairMaxAttempts = 5;
@@ -502,6 +502,8 @@ namespace FisherLogger
             else if (r.Path == "/api/options") inner = Options(r);
             else if (r.Path == "/api/analytics") inner = Analytics(r);
             else if (r.Path == "/api/catches") inner = Catches(r);
+            else if (r.Path == "/api/live") inner = Live();            // FEAT-06: мини-карта телефона
+            else if (r.Path == "/api/events") inner = Events(r);       // FEAT-06: уведомления о поклёвках
             else if (r.Path == "/api/public") inner = PublicFeed(r);
             else if (r.Path == "/api/maps") inner = Maps(r);
             else if (parts.Length == 4 && parts[0] == "api" && parts[1] == "maps" && uint.TryParse(parts[2], out uint mid) && parts[3] == "image") inner = MapImage(mid);
@@ -683,6 +685,7 @@ namespace FisherLogger
         private DateTime _coachAt = DateTime.MinValue; private object? _coachVal;
         private SoakCurve? _coachCurve; private DateTime _coachCurveAt = DateTime.MinValue; private int _coachCurveLoading;
 
+        private List<object> _coachSpots = new();
         private object? CoachJson(CompanionContext ctx, DateTime now)
         {
             try
@@ -692,12 +695,16 @@ namespace FisherLogger
                 if ((_coachCurve == null || (now - _coachCurveAt).TotalMinutes > 10) && Interlocked.Exchange(ref _coachCurveLoading, 1) == 0)
                     Task.Run(() => { try { _coachCurve = BiteAnalytics.Load(db, new AnalyticsSettings()).Soak ?? _coachCurve; } catch { } _coachCurveAt = DateTime.Now; _coachCurveLoading = 0; });
                 var snap = SessionCoach.Build(db, _coachCurve, now, LocName);
+                // FEAT-07: пятна клёва для мини-карты телефона — подпись «% от обычного для этой снасти», как на ПК
+                _coachSpots = snap.Spots.Where(sp => sp.Ticks >= ChanceSpots.MinTicks).OrderByDescending(sp => sp.Median)
+                    .Select(sp => (object)new { x = sp.X, z = sp.Z, radius = ChanceSpots.MergeM, label = sp.Label, pct = sp.Pct, level = sp.Level,
+                                                ageMin = Math.Round(sp.AgeMin, 1), bait = sp.Bait, grade = sp.Grade }).ToList();
                 var val = new
                 {
                     clock = DayParts.Clock(now),
                     fishing = snap.HasData,
                     location = snap.LocationName,
-                    rods = snap.Rods.Select(r => new { slot = r.Slot + 1, rod = SoakCurve.RodName(r.RodCode), bait = r.Setup.Bait, status = r.Status, level = r.Level, active = r.Active,
+                    rods = snap.Rods.Select(r => new { slot = r.Slot + 1, rod = SoakCurve.RodName(r.RodCode), bait = r.Setup.Bait, status = r.Status, level = r.Level, active = r.Active, bites = r.Bites, empty = r.Empty,
                         empties = r.RecentEmpty.Select(e => new { fishId = e.Fish, fish = e.Name, weight = e.Weight, windex = e.Windex, time = e.At > DateTime.MinValue ? e.At.ToString("HH:mm", CultureInfo.InvariantCulture) : null }).ToList() }).ToList(),   // FEAT-06
                     hints = snap.Hints.Where(h => !h.StartsWith("В игре ", StringComparison.Ordinal)).ToList()
                 };
@@ -705,6 +712,64 @@ namespace FisherLogger
                 return val;
             }
             catch { return null; }
+        }
+
+        /// <summary>FEAT-06: игрок (последняя поза из трафика) и забросы последних 90 мин — как мини-карта ПК (север вверх).</summary>
+        private Resp Live()
+        {
+            var ctx = _ctx(); var now = DateTime.Now;
+            var pose = _parser?.Track.Last;
+            List<OverlayCastMark> casts = new();
+            try
+            {
+                using var con = new SqliteConnection("Data Source=" + ctx.CurrentDb + ";Mode=ReadOnly;Pooling=False");
+                con.Open();
+                casts = OverlayDataSource.ReadCastMarks(con, null, now, _parser?.Track);
+            }
+            catch { }
+            CoachJson(ctx, now);   // FEAT-07: обновляет пятна (кэш 5 с)
+            return Resp.Json(new
+            {
+                spots = _coachSpots,
+                locationId = ctx.CurrentLocationId, locationName = LocName(ctx.CurrentLocationId),
+                player = pose == null ? null : new { x = pose.X, z = pose.Z, yaw = pose.Yaw, ageSec = (int)Math.Max(0, (now - pose.Time).TotalSeconds) },
+                casts = casts.Select(c => new { id = c.Id, rod = c.Rod + 1, x = c.X, z = c.Z, state = c.State, active = c.Active,
+                                                minutes = Math.Round((now - c.Time).TotalMinutes, 1), playerX = c.PlayerX, playerZ = c.PlayerZ }).ToList()
+            });
+        }
+
+        /// <summary>FEAT-06: поклёвки, пустые поклёвки и уловы новее since (id cast_events текущей базы). since &lt; 0 — только номер последнего
+        /// события (чтобы телефон не уведомлял о старом). Вид, вес и класс сообщает сервер игры.</summary>
+        private Resp Events(Req r)
+        {
+            long since = r.Query.TryGetValue("since", out var s) && long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long v) ? v : -1;
+            var ctx = _ctx(); long last = 0; var list = new List<object>();
+            try
+            {
+                using var con = new SqliteConnection("Data Source=" + ctx.CurrentDb + ";Mode=ReadOnly;Pooling=False");
+                con.Open();
+                using (var q = new SqliteCommand("SELECT ifnull(max(id),0) FROM cast_events", con)) last = Convert.ToInt64(q.ExecuteScalar() ?? 0L, CultureInfo.InvariantCulture);
+                if (since >= 0)
+                {
+                    using var q = new SqliteCommand("SELECT e.id, e.timestamp, e.event_type, e.fish_lang_id, e.weight, e.windex, c.rod_index FROM cast_events e " +
+                                                    "LEFT JOIN casts c ON c.id = e.cast_id WHERE e.id > $s AND e.event_type IN ('bite','empty_bite','catch') ORDER BY e.id LIMIT 50", con);
+                    q.Parameters.AddWithValue("$s", since);
+                    using var rd = q.ExecuteReader();
+                    while (rd.Read())
+                    {
+                        uint? fid = rd.IsDBNull(3) ? null : (uint)rd.GetInt64(3);
+                        list.Add(new
+                        {
+                            id = rd.GetInt64(0), time = rd.IsDBNull(1) ? null : rd.GetString(1), kind = rd.GetString(2),
+                            fishId = fid, fish = fid.HasValue ? SessionCoach.FishNameOf(fid.Value) : null,
+                            weight = rd.IsDBNull(4) ? (int?)null : (int)rd.GetInt64(4), windex = rd.IsDBNull(5) ? (int?)null : (int)rd.GetInt64(5),
+                            rod = rd.IsDBNull(6) ? (int?)null : rd.GetInt32(6) + 1
+                        });
+                    }
+                }
+            }
+            catch { }
+            return Resp.Json(new { last, events = list });
         }
 
         private Resp Status()

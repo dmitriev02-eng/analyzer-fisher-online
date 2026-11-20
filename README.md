@@ -61,7 +61,13 @@ FisherLogger — программа, которая **только читает*
 
 ## Приватность
 
-Обмен данными с сервером **выключен**. Если он появится — только с вашего согласия, **без ника, номера игрока и чата**. Вместо имени используется **случайный номер установки**.
+## Обмен данными (условия использования)
+
+Устанавливая программу и выбирая язык, вы принимаете эти условия. Программа **автоматически и анонимно** отправляет на сервер проекта ваши **новые** поклёвки и уловы, чтобы собирать общие места клёва: вид, вес и класс рыбы, водоём, клетку 5 м, игровое время, номер удочки, наживку и крючок, шанс клёва.
+
+**Никогда не отправляется:** ник, номер игрока, чат, сведения о других игроках, учётная запись, прошлая история (до установки). Вместо имени — **случайный ключ установки**. Данные подписываются этим ключом, сервер отклоняет подделанные и неправдоподобные данные.
+
+Выключить обмен можно в любой момент: меню **«Для разработчика ▾» → «Обмен данными с сервером…»**. После обновления с прежней версии программа один раз спросит, оставить ли обмен включённым.
 
 ## Если что-то не работает
 
@@ -145,7 +151,13 @@ To update the phone app, use the **"Check for updates"** button on the **"PC"** 
 
 ## Privacy
 
-Server data exchange is **off**. If it ever appears, it will be only with your consent, **without your nickname, player number or chat**. A **random installation number** is used instead of a name.
+## Data sharing (terms of use)
+
+By installing the program and choosing a language you accept these terms. The program **automatically and anonymously** sends your **new** bites and catches to the project server to build shared bite spots: fish species, weight and grade, water, 5 m cell, game time, rod number, bait and hook, bite chance.
+
+**Never sent:** nickname, player number, chat, other players' data, account, past history (before installation). A **random installation key** is used instead of a name. Data is signed with this key; the server rejects forged and implausible data.
+
+You can turn sharing off at any time: menu **"Developer ▾" → "Server data sharing…"**. After updating from an earlier version the program asks once whether to keep sharing on.
 
 ## Troubleshooting
 

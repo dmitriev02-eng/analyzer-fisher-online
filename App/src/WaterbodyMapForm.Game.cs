@@ -42,6 +42,7 @@ namespace FisherLogger
                 {
                     var parts = sp.Tackle.Split('|');
                     if (lb.Typical(LiveBite.Key(loc, sp.Bait, parts.Length > 1 ? parts[1] : "")) is { } ty) { sp.Lo = ty.lo; sp.Hi = ty.hi; }
+                    sp.Usual = lb.Usual(LiveBite.Key(loc, sp.Bait, parts.Length > 1 ? parts[1] : ""));   // FEAT-07
                 }
                 foreach (var grp in Canvas.Spots.Where(s => s.Ticks >= ChanceSpots.MinTicks).GroupBy(s => s.Tackle).Where(gr => gr.Count() >= 3))
                     foreach (var sp in grp)
@@ -265,7 +266,8 @@ namespace FisherLogger
                                 (Canvas.BestFish.Length > 0 ? "На эту наживку здесь у вас ловились: " + Canvas.BestFish + ". " : "На эту наживку здесь у вас уловов ещё не было. ") +
                                 "В непроверенных местах может быть лучше — проверяйте забросами в 25–30 м друг от друга.\r\n");
             if (spot != null)
-                lines.Insert(spot == Canvas.BestSpot ? 1 : 0, "Шанс здесь " + spot.Median.ToString(spot.Median < 10 ? "0.0" : "0", ci) + " — " + spot.Grade +
+                lines.Insert(spot == Canvas.BestSpot ? 1 : 0, (spot.Pct is int pc ? "Клёв здесь " + pc + "% от обычного для этой снасти (шанс " : "Новая снасть, сравнить не с чем (шанс ") +   // FEAT-07
+                                spot.Median.ToString(spot.Median < 10 ? "0.0" : "0", ci) + ") — " + spot.Grade +
                                 (spot.Lo.HasValue ? " (обычно " + spot.Lo.Value.ToString("0.0", ci) + "–" + spot.Hi!.Value.ToString("0.0", ci) + ")" : "") +
                                 (spot.Strong ? $", в {spot.Ratio.ToString("0.#", ci)} раза лучше других ваших точек этой снасти" + (spot.Note.Length > 0 ? " (" + spot.Note.Split('×')[0].Trim() + ")" : "") : "") +
                                 " (ваши забросы " + Math.Max(1, Math.Round(spot.AgeMin)).ToString("0", ci) + " мин назад" + (spot.Bait.Length > 0 ? ", наживка «" + spot.Bait + "»" : "") +

@@ -1,5 +1,6 @@
 {
 "Деньги": "Money",
+"зона: % от обычного": "zone: % of usual",
 "Опыт": "Experience",
 "Титул": "Title",
 "Опыт фракции": "Faction Experience",
@@ -4004,5 +4005,22 @@
 "трофейный": "trophy",
 "уловов (ваших и других игроков)": "catches (yours and other players')",
 "ярлыки созданы: ": "shortcuts created: ",
-"ярлыки создать не удалось": "could not create shortcuts"
+"ярлыки создать не удалось": "could not create shortcuts",
+"Обмен включается сам по условиям использования, которые показываются при установке (README → «Обмен данными»).": "Sharing turns on by itself under the terms of use shown at installation (README → \"Data sharing\").",
+"Новое в этой версии: программа отправляет на сервер проекта ваши новые поклёвки и уловы, чтобы собирать общие места клёва.\n\nОтправляется: вид, вес и класс рыбы, водоём, клетка 5 м, игровое время, удочка, наживка, шанс.\nНе отправляется: ник, чат, учётная запись, прошлая история.\n\nОставить обмен данными включённым? Изменить можно в любой момент: «Для разработчика ▾» → «Обмен данными с сервером…».": "New in this version: the program sends your new bites and catches to the project server to build shared bite spots.\n\nSent: fish species, weight and grade, water, 5 m cell, game time, rod, bait, chance.\nNot sent: nickname, chat, account, past history.\n\nKeep data sharing on? You can change it at any time: \"Developer ▾\" → \"Server data sharing…\".",
+"Клёв здесь": "Bites here",
+"% от обычного для этой снасти": "% of usual for this tackle",
+"Новая снасть, сравнить не с чем": "New tackle, nothing to compare with",
+"шанс": "chance",
+"новая": "new",
+"Нет связи с ПК — мини-карта обновится, когда связь вернётся.": "No connection to the PC — the mini-map will update when the connection is back.",
+"Загружаю данные с ПК…": "Loading data from the PC…",
+"Пока пусто: вы и забросы появятся здесь после входа на водоём и первого заброса.": "Empty for now: you and your casts will appear here after you enter a water and make the first cast.",
+"Зоны: клёв в % от обычного для этой наживки и крючка (100% — как обычно). Зелёная — выше обычного, жёлтая — как обычно, серая — ниже.": "Zones: bite rate in % of usual for this bait and hook (100% = usual). Green — above usual, yellow — usual, grey — below.",
+"Ленты пока нет: уловы других игроков появятся при игре с включённым захватом на ПК.": "No feed yet: other players' catches appear while you play with capture running on the PC.",
+"Сейчас вы не рыбачите. Советы появятся после заброса.": "You are not fishing now. Tips will appear after a cast.",
+"поклёвок": "bites",
+"пустых": "empty",
+"Остановить": "Stop",
+"Пока идёт слежение, в шторке висит тихое уведомление «Слежу за поклёвками» с кнопкой «Остановить». Если ПК не отвечает 5 минут, слежение остановится само и включится снова, когда вы откроете приложение.": "While watching, a silent \"Watching for bites\" notification with a \"Stop\" button stays in the shade. If the PC does not answer for 5 minutes, watching stops by itself and starts again when you open the app."
 }

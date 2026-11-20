@@ -36,10 +36,15 @@ object Shared {
  * Раз в 3 с спрашивает у ПК новые события (/api/events). Уведомление: «Удочка 2 · Кои широ», вес и класс,
  * картинка рыбы в рамке цвета класса, название цветом класса. Пустые поклёвки — по настройке.
  * Постоянное уведомление «Слежу за поклёвками» обязательно для фоновой работы в Android (его можно скрыть в настройках канала).
+ * FEAT-07: уведомление тихое (канал MIN), в нём кнопка «Остановить»; служба сама останавливается, если ПК не отвечает 5 минут
+ * (программа на ПК закрыта, ПК выключен, телефон вне сети). При следующем открытии приложения слежение включится снова.
  */
 class BiteService : Service() {
     companion object {
         const val CH_BITES = "bites"; const val CH_RUN = "watch"; const val RUN_ID = 1
+        const val ACTION_STOP = "ru.fisherlogger.companion.STOP_WATCH"
+        /** FEAT-07: сколько ждать ответа ПК, прежде чем остановиться и убрать уведомление. */
+        const val IDLE_STOP_MS = 5 * 60_000L
         const val PREFS = "bite_alerts"
         fun enabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean("on", false)
         fun empties(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean("empties", false)
@@ -64,15 +69,31 @@ class BiteService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    @Volatile private var lastOk = System.currentTimeMillis()
+
+    private fun runNote(text: String): Notification {
+        val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE)
+        val stop = PendingIntent.getService(this, 2, Intent(this, BiteService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
+        return NotificationCompat.Builder(this, CH_RUN).setSmallIcon(android.R.drawable.ic_menu_view)
+            .setContentTitle(L.t("Слежу за поклёвками")).setContentText(text)
+            .setOngoing(true).setSilent(true).setShowWhen(false).setContentIntent(open).setPriority(NotificationCompat.PRIORITY_MIN)
+            .addAction(0, L.t("Остановить"), stop).build()
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         channels(this)
-        val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE)
-        val n = NotificationCompat.Builder(this, CH_RUN).setSmallIcon(android.R.drawable.ic_menu_view)
-            .setContentTitle(L.t("Слежу за поклёвками")).setContentText(L.t("Уведомлю, когда клюнет на любой удочке"))
-            .setOngoing(true).setContentIntent(open).setPriority(NotificationCompat.PRIORITY_MIN).build()
+        val n = runNote(L.t("Уведомлю, когда клюнет на любой удочке"))
         if (Build.VERSION.SDK_INT >= 34) startForeground(RUN_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC) else startForeground(RUN_ID, n)
+        if (intent?.action == ACTION_STOP) { stopNow(); return START_NOT_STICKY }   // «Остановить» в уведомлении
+        lastOk = System.currentTimeMillis()
         if (!running) { running = true; thread = Thread(::loop, "bite-watch").also { it.isDaemon = true; it.start() } }
-        return START_STICKY
+        return START_NOT_STICKY   // FEAT-07: без приложения (нет подключения) перезапускать незачем
+    }
+
+    private fun stopNow() {
+        running = false; thread?.interrupt()
+        if (Build.VERSION.SDK_INT >= 24) stopForeground(STOP_FOREGROUND_REMOVE) else @Suppress("DEPRECATION") stopForeground(true)
+        stopSelf()
     }
 
     override fun onDestroy() { running = false; thread?.interrupt(); super.onDestroy() }
@@ -86,8 +107,11 @@ class BiteService : Service() {
                     val ev = j.optJSONArray("events")
                     if (last >= 0 && ev != null) for (i in 0 until ev.length()) ev.optJSONObject(i)?.let { show(it) }
                     last = maxOf(last, j.optLong("last", last))
+                    lastOk = System.currentTimeMillis()
                 }
             } catch (_: InterruptedException) { return } catch (_: Exception) { }
+            // FEAT-07: ПК молчит 5 минут — останавливаемся, уведомление уходит
+            if (System.currentTimeMillis() - lastOk > IDLE_STOP_MS) { android.os.Handler(mainLooper).post { stopNow() }; return }
             try { Thread.sleep(3000) } catch (_: InterruptedException) { return }
         }
     }
