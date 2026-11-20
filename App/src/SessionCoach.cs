@@ -85,6 +85,13 @@ namespace FisherLogger
         }
     }
 
+    /// <summary>FEAT-06: пустая поклёвка — вид, вес и класс сообщает сервер игры (s2c 1122).</summary>
+    public sealed class EmptyBite
+    {
+        public uint Fish; public int Weight; public int? Windex; public DateTime At;
+        public string Name => SessionCoach.FishNameOf(Fish);
+    }
+
     public sealed class CoachRod
     {
         public int Slot; public long RodUid; public int? RodCode; public long CastId;
@@ -109,6 +116,8 @@ namespace FisherLogger
         public bool Patient;
         /// <summary>LOGFIX-01: кто трогал наживку на текущем забросе (s2c 1122: вид и вес рыбы, которая не засеклась).</summary>
         public List<(uint fish, int weight)> EmptyFish = new();
+        /// <summary>FEAT-06: последние пустые поклёвки этой удочки за рыбалку (новые первыми, не больше EmptyListSize).</summary>
+        public List<EmptyBite> RecentEmpty = new();
         public double? MoveX, MoveZ, MoveDist, MoveChance, MoveAge;
         public string Status = "";
     }
@@ -226,12 +235,20 @@ namespace FisherLogger
             LiveBite live = LiveBite.For(db, now);
             // LOGFIX-01: пустые поклёвки с видом и весом (сервер сообщает, какая рыба трогала наживку)
             var emptyBy = new Dictionary<long, List<(uint fish, int weight)>>();
+            var emptyAll = new Dictionary<long, List<EmptyBite>>();   // FEAT-06: с классом и временем
             try
             {
-                using var q = new SqliteCommand("SELECT cast_id, fish_lang_id, weight FROM cast_events WHERE cast_id IN (" + string.Join(",", casts.Keys) + ") AND event_type = 'empty_bite' AND fish_lang_id IS NOT NULL AND timestamp <= $n", c);
+                using var q = new SqliteCommand("SELECT cast_id, fish_lang_id, weight, windex, timestamp FROM cast_events WHERE cast_id IN (" + string.Join(",", casts.Keys) + ") AND event_type = 'empty_bite' AND fish_lang_id IS NOT NULL AND timestamp <= $n", c);
                 q.Parameters.AddWithValue("$n", nowS);
                 using var r = q.ExecuteReader();
-                while (r.Read()) { long id = r.GetInt64(0); if (!emptyBy.TryGetValue(id, out var el)) emptyBy[id] = el = new(); el.Add(((uint)r.GetInt64(1), r.IsDBNull(2) ? 0 : (int)r.GetInt64(2))); }
+                while (r.Read())
+                {
+                    long id = r.GetInt64(0); uint fid = (uint)r.GetInt64(1); int w = r.IsDBNull(2) ? 0 : (int)r.GetInt64(2);
+                    if (!emptyBy.TryGetValue(id, out var el)) emptyBy[id] = el = new(); el.Add((fid, w));
+                    if (!emptyAll.TryGetValue(id, out var ea)) emptyAll[id] = ea = new();
+                    ea.Add(new EmptyBite { Fish = fid, Weight = w, Windex = r.IsDBNull(3) ? null : (int)r.GetInt64(3),
+                                           At = DateTime.TryParse(r.IsDBNull(4) ? "" : r.GetString(4), CultureInfo.InvariantCulture, DateTimeStyles.None, out var at) ? at : DateTime.MinValue });
+                }
             }
             catch { }
             var tk = new Dictionary<long, (string hook, string hookPar, string bait)>();
@@ -292,6 +309,8 @@ namespace FisherLogger
                     if (ev.TryGetValue(kv.Key, out var l)) { rod.Bites += l.Count(x => x == "bite"); rod.Empty += l.Count(x => x == "empty_bite"); rod.Caught += l.Count(x => x == "catch"); }
                 if (ev.TryGetValue(cur.Key, out var cl)) { rod.CastBites = cl.Count(x => x == "bite"); rod.CastEmpty = cl.Count(x => x == "empty_bite"); }
                 if (emptyBy.TryGetValue(cur.Key, out var efl)) rod.EmptyFish = efl;
+                rod.RecentEmpty = all.SelectMany(kv => emptyAll.TryGetValue(kv.Key, out var ea) ? ea : new List<EmptyBite>())
+                                     .OrderByDescending(x => x.At).Take(Math.Clamp(EmptyListSize, 1, 10)).ToList();   // FEAT-06
                 if (tk.TryGetValue(cur.Key, out var t)) { rod.Hook = t.hook; rod.HookPar = t.hookPar; rod.Bait = t.bait; }
                 rod.Setup = SetupOf(cur.Key, cur.Value.code);
                 rod.Water = curWater;
@@ -428,6 +447,14 @@ namespace FisherLogger
                           + (Plain.Tech ? " [там было " + Num(sp.Median) + "]" : "");
             }
         }
+
+        /// <summary>FEAT-06: сколько последних пустых поклёвок показывать по каждой удочке (1–10; из настроек «Вид»).</summary>
+        public static int EmptyListSize { get; set; } = 5;
+
+        /// <summary>FEAT-06: «Лещ белый 0,39 кг · хороший».</summary>
+        public static string EmptyText(EmptyBite e)
+            => e.Name + " " + (e.Weight / 1000.0).ToString("0.00", CultureInfo.GetCultureInfo("ru-RU")) + " кг" + (e.Windex is int w ? " · " + GradeWord(w) : "");
+        public static string GradeWord(int w) => w switch { 0 => "обычный", 1 => "хороший", 2 => "крупный", 3 => "трофейный", _ => "" };
 
         private static Dictionary<uint, string>? _fishNames;
         /// <summary>Название вида по id (fish_full_database.json); нет — «вид N».</summary>

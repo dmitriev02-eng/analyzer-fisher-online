@@ -37,7 +37,26 @@ data class AnalyticsFilterUi(
 
 class AppViewModel(app: Application) : AndroidViewModel(app) {
     val store = PairingStore(app)
-    private val api = FisherApi(store)
+    private val api = FisherApi(store).also { Shared.api = it }   // FEAT-06: служба уведомлений использует то же подключение
+
+    /** FEAT-06: мини-карта «Сейчас» (/api/live) и уведомления о поклёвках. */
+    var live by mutableStateOf<JSONObject?>(null); private set
+    private var liveJob: kotlinx.coroutines.Job? = null
+    var biteAlerts by mutableStateOf(BiteService.enabled(app)); private set
+    var emptyAlerts by mutableStateOf(BiteService.empties(app)); private set
+    fun setBiteAlerts(on: Boolean, empties: Boolean = emptyAlerts) {
+        biteAlerts = on; emptyAlerts = empties; BiteService.set(getApplication(), on, empties)
+    }
+    private fun startLive() {
+        liveJob?.cancel()
+        liveJob = viewModelScope.launch {
+            while (isActive) {
+                if (api.active != null && screen == Screen.Dashboard)
+                    try { live = withContext(Dispatchers.IO) { api.getJson("/api/live") } } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) { }
+                delay(2000)
+            }
+        }
+    }
 
     /** Сопряжённые ПК (для экрана «ПК»). */
     var pairings by mutableStateOf(store.all()); private set
@@ -150,7 +169,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    init { viewModelScope.launch { loadCache() } }
+    init { viewModelScope.launch { loadCache() }; if (BiteService.enabled(app)) BiteService.set(app, true) }   // FEAT-06: после перезапуска телефона/приложения
 
     private fun sc() = if (filter.allSessions) "all" else "current"
 
@@ -379,7 +398,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun setForeground(fg: Boolean) {
         if (fg == foreground) return
         foreground = fg
-        if (fg) { if (store.hasPairings) startPolling() } else { poller?.cancel(); poller = null }
+        if (fg) { if (store.hasPairings) { startPolling(); startLive() } } else { poller?.cancel(); poller = null; liveJob?.cancel(); liveJob = null }
     }
 
     fun saveAddress(host: String, port: Int) { store.host = host.trim(); store.port = port }
@@ -585,6 +604,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun onStatus(st: JSONObject) {
         status = st
+        Shared.icons = icons   // FEAT-06: картинки рыб для уведомлений
         lastOk = System.currentTimeMillis()
         viewModelScope.launch(Dispatchers.IO) { try { offline.putJson("status.json", st) } catch (e: Exception) {} }
         conn = ConnState.Connected

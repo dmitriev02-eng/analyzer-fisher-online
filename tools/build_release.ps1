@@ -1,4 +1,4 @@
-﻿# RELEASE-02: build a release package for other PCs (does NOT touch the production App or its bin).
+﻿# FEAT-06: build a release package for other PCs (does NOT touch the production App or its bin).
 # usage: build_release.ps1 -Version 1.0.0 [-Src <app folder with FisherLogger95.csproj>] [-Out <folder>]
 # Result: <Out>\FisherLogger-<ver>-win-x64.zip + SHA256SUMS.txt + RELEASE_NOTES.md (to upload to a GitHub release tagged v<ver>).
 param(

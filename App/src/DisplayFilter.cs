@@ -21,8 +21,12 @@ namespace FisherLogger
         public int NotifyMinClass { get; set; } = 0;
         /// <summary>DESIGN-02: показывать технические данные (числа шанса, id, номера забросов). По умолчанию выключено.</summary>
         public bool ShowTech { get; set; }
+        /// <summary>FEAT-06: сколько последних пустых поклёвок показывать по каждой удочке (1–10).</summary>
+        public int EmptyListSize { get; set; } = 5;
         public void Normalize()
         {
+            EmptyListSize = Math.Clamp(EmptyListSize, 1, 10);
+            SessionCoach.EmptyListSize = EmptyListSize;
             if (Mode is < -1 or > 2) Mode = -1;
             MaxRows = Math.Clamp(MaxRows, 50, 2000);
             NotifyMinClass = Math.Clamp(NotifyMinClass, 0, 3);

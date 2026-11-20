@@ -10,6 +10,33 @@ namespace FisherLogger
     public partial class Form1
     {
         private bool _updateCheckStarted, _npcapWarned;
+        private ServerUploader? _uploader;   // SERVER-01
+
+        private void StartUploader()
+        {
+            if (_uploader != null) return;
+            _uploader = new ServerUploader(() => AppPaths.CatchDb, () => _currentBaseId.HasValue && _currentBaseId.Value >= 0 ? (uint)_currentBaseId.Value : null, () => _serverOffset, Log);
+            _uploader.Start();
+        }
+
+        /// <summary>SERVER-01: согласие на обмен данными — что уходит, что никогда, как выключить.</summary>
+        private void ShowServerConsent()
+        {
+            var ss = ServerSettings.Load();
+            string state = ss.CanSend ? "Сейчас: ВКЛЮЧЕНО" + (ss.LastResult != null ? " (последний обмен: " + ss.LastResult + ")" : "") : "Сейчас: выключено";
+            string text = "Обмен данными помогает всем: из поклёвок многих игроков сервер собирает общие места клёва.\n\n" +
+                          "Отправляется: вид, вес и класс рыбы, водоём, клетка 5 м, игровое время, номер удочки, наживка и крючок, шанс клёва.\n" +
+                          "Никогда не отправляется: ник, номер игрока, чат, сведения о других игроках, учётная запись.\n" +
+                          "Вместо имени — случайный ключ этой установки. История до включения не отправляется.\n\n" + state + "\n\n" +
+                          (ss.CanSend ? "Выключить обмен данными?" : "Включить обмен данными?");
+            if (UiText.Box(this, text, "Обмен данными с сервером", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+            ss.Enabled = ss.Consent = !ss.CanSend;
+            ss.ConsentUtc = ss.Consent ? DateTime.UtcNow.ToString("o") : null;
+            if (string.IsNullOrWhiteSpace(ss.Url)) ss.Url = ServerUploader.DefaultUrl;
+            try { ss.Save(); } catch { }
+            Log("[SERVER] обмен данными " + (ss.CanSend ? "включён" : "выключен"));
+            if (ss.CanSend) StartUploader();
+        }
 
         /// <summary>Npcap не установлен — один раз за запуск объяснить и предложить открыть официальный сайт.</summary>
         private bool EnsureNpcap()
@@ -44,6 +71,7 @@ namespace FisherLogger
         {
             if (_updateCheckStarted) return; _updateCheckStarted = true;
             try { if (Shortcuts.EnsureOnce(Application.ExecutablePath) is string sc) Log("[INSTALL] " + sc); } catch { }   // RELEASE-03
+            try { if (!_suppressPersistence) StartUploader(); } catch { }   // SERVER-01: сам ничего не шлёт без согласия
             var us = UpdateSettings.Load();
             if (!us.DueForCheck(DateTime.UtcNow)) return;
             _ = Task.Run(async () =>

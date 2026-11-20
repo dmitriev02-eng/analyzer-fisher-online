@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -119,6 +119,9 @@ namespace FisherLogger
         }
 
         /// <summary>Строки для показа (и для тестов): (текст, уровень: -1 нет, 0 норм, 1 скоро, 2 смените, 3 клюёт; null — подсказка).</summary>
+        /// <summary>FEAT-06: уровень строки пустой поклёвки = EmptyLevel + класс (9 — класс неизвестен).</summary>
+        public const int EmptyLevel = 10;
+
         public static List<(string text, int? level)> Lines(CoachSnapshot? s)
         {
             var list = new List<(string, int?)>();
@@ -128,7 +131,11 @@ namespace FisherLogger
                 return list;
             }
             foreach (var r in s.Rods)
+            {
                 list.Add(($"Удочка {r.Slot + 1} · {SoakCurve.RodName(r.RodCode)}" + (r.Setup.Bait.Length > 0 ? " · «" + r.Setup.Bait + "»" : "") + " — " + r.Status, r.Level));
+                foreach (var e in r.RecentEmpty)   // FEAT-06: пустые поклёвки — вид, вес, класс (цвет класса)
+                    list.Add(("пустая: " + SessionCoach.EmptyText(e) + (e.At > DateTime.MinValue ? " · " + e.At.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture) : ""), EmptyLevel + (e.Windex ?? 9)));
+            }
             foreach (var h in s.Hints)
                 if (!h.StartsWith("В игре ", StringComparison.Ordinal)) list.Add((h, null));   // часы показаны отдельной строкой сверху
             return list;
@@ -150,7 +157,13 @@ namespace FisherLogger
             if (Clock.Length > 0) Line(Clock, Theme.Text, Big, 0);
             foreach (var (text, level) in Lines(Snap))
             {
-                if (level is int lv)
+                if (level is int el && el >= EmptyLevel)
+                {
+                    int? gw = el - EmptyLevel is int k && k <= 3 ? k : null;
+                    using (var b = new SolidBrush(GradeBadge.ColorOf(gw) ?? Theme.TextMuted)) g.FillRectangle(b, x0 + 24, y + 6, 8, 8);
+                    Line(text, gw is int ww ? OverlayForm.GradeNameColor(ww) : Theme.TextMuted, Small, 38);
+                }
+                else if (level is int lv)
                 {
                     var col = lv switch { 0 => Ok, 1 => Soon, 2 => Recast, 3 => Bite, _ => Idle };
                     using (var b = new SolidBrush(col)) g.FillEllipse(b, x0, y + 5, 11, 11);

@@ -81,7 +81,13 @@ namespace FisherLogger
     public sealed class ServerSettings
     {
         public bool Enabled { get; set; } = false;
-        public string Url { get; set; } = "";
+        public string Url { get; set; } = ServerUploader.DefaultUrl;
+        /// <summary>SERVER-01: номер установки на сервере (= отпечаток ключа), последнее отправленное событие текущей базы, итог.</summary>
+        public string? RemoteId { get; set; }
+        public long LastEventId { get; set; }
+        public string? LastDb { get; set; }
+        public string? LastResult { get; set; }
+        public string? LastUtc { get; set; }
         public bool Consent { get; set; } = false;
         public string? ConsentUtc { get; set; }
         public static string? PathOverride { get; set; }

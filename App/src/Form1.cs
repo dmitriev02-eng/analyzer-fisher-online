@@ -408,6 +408,7 @@ namespace FisherLogger
             tools.Items.Add(new ToolStripSeparator());
             tools.Items.Add("О программе и обновления…", null, (s, e) => ShowAboutAndUpdates());   // RELEASE-02
             tools.Items.Add("Язык / Language…", null, (s, e) => ChooseLanguage());   // RELEASE-03
+            tools.Items.Add("Обмен данными с сервером…", null, (s, e) => ShowServerConsent());   // SERVER-01
             toolsBtn.Click += (s, e) => tools.Show(toolsBtn, new Point(0, toolsBtn.Height));
             actionPanel.Controls.Add(endSessionBtn);
             nowLayout.Controls.Add(actionPanel, 0, 3);

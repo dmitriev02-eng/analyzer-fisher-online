@@ -91,6 +91,7 @@ namespace FisherLogger
         internal readonly ComboBox ShowMode = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 300 };
         internal readonly ComboBox NotifyClass = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 300 };
         internal readonly NumericUpDown MaxRows = Num(50, 2000);
+        internal readonly NumericUpDown EmptyList = Num(1, 10);   // FEAT-06
         private static NumericUpDown Num(int min, int max) => new() { Minimum = min, Maximum = max, Width = 100 };
         private static Label H(string t) => new() { Text = t, AutoSize = true, Font = Theme.Title, ForeColor = Theme.Text, Margin = new Padding(0, 0, 0, 6) };
         private static Label Muted(string t) => new() { Text = t, AutoSize = true, MaximumSize = new Size(600, 0), ForeColor = Theme.TextMuted, Margin = new Padding(0, 2, 0, 10) };
@@ -130,6 +131,7 @@ namespace FisherLogger
             var d = Table();
             RowTo(d, "История поимок: показывать", ShowMode);
             RowTo(d, "История поимок: не больше строк", MaxRows);
+            RowTo(d, "Пустые поклёвки: показывать последних по каждой удочке", EmptyList);
             p.Controls.Add(d);
             p.Controls.Add(H("Формула клёва"));
             p.Controls.Add(Muted("Формула подбирается на ваших забросах и принимается, только если на проверке предсказывает лучше простого среднего. Затем она проверяется на новых забросах и отключается, если перестала работать."));
@@ -422,6 +424,7 @@ namespace FisherLogger
             var ds = _work.Display ??= new DisplaySettings(); ds.Normalize();
             if (ShowMode.Items.Count > 0) { ShowMode.SelectedIndex = ds.Mode + 1; NotifyClass.SelectedIndex = ds.NotifyMinClass; }
             MaxRows.Value = ds.MaxRows;
+            EmptyList.Value = Math.Clamp(ds.EmptyListSize, 1, 10);
             LoadNotify(); LoadWindow();   // NOTIFY-02
             var g = _work.Agent; g.Normalize();
             AgentEnabled.Checked = g.Enabled; Provider.SelectedIndex = g.Provider == AgentProvider.Anthropic ? 1 : 0;
@@ -443,6 +446,7 @@ namespace FisherLogger
             var ds = _work.Display ??= new DisplaySettings();
             if (ShowMode.SelectedIndex >= 0) ds.Mode = ShowMode.SelectedIndex - 1;
             if (NotifyClass.SelectedIndex >= 0) ds.NotifyMinClass = NotifyClass.SelectedIndex;
+            ds.EmptyListSize = (int)EmptyList.Value;
             ds.MaxRows = (int)MaxRows.Value; ds.Normalize();
             CollectNotify(); CollectWindow();   // NOTIFY-02
             var g = _work.Agent;

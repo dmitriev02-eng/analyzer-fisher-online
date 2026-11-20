@@ -603,6 +603,12 @@ namespace FisherLogger
                     // коротко: «Уд.1 фидер · 13 мин — перезабросьте · пок 0 · пуст 3»; полные данные — во вкладке ИИ и в Советнике
                     string line = "Удочка " + (r.Slot + 1) + ", " + SoakCurve.RodName(r.RodCode) + ": " + r.Status + "; поклёвок " + r.Bites + ", пустых " + r.Empty;
                     Line(line, r.Level == 2 ? CoachRecast : Theme.Text, FLog, 14);
+                    foreach (var e in r.RecentEmpty)   // FEAT-06
+                    {
+                        if (y >= bottom) break;
+                        using (var eb = new SolidBrush(GradeBadge.ColorOf(e.Windex) ?? Theme.TextMuted)) g.FillRectangle(eb, x0 + 16, y + 5, 6, 6);
+                        Line("пустая: " + SessionCoach.EmptyText(e), e.Windex is int ew ? GradeNameColor(ew) : Theme.TextMuted, FSmall, 26);
+                    }
                 }
                 foreach (var h in c.Hints) Line("• " + h, CoachSoon, FSmall);
                 Line(c.CurveNote, Theme.TextMuted, FSmall);

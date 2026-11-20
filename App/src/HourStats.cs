@@ -90,7 +90,7 @@ namespace FisherLogger
 
         public static readonly string[] Periods = { "day", "3days", "all" };
         public static string PeriodName(string p) => p switch { "day" => "последние сутки", "3days" => "последние 3 суток", _ => "всё время" };
-        public static string SeriesName(string s) => s == "pub" ? "объявления других игроков" : "мои уловы";
+        public static string SeriesName(string s) => s switch { "pub" => "объявления других игроков", "all" => "мои уловы и уловы других игроков", _ => "мои уловы" };
 
         public static (List<HourRec> recs, List<HourCov> cov) From(AnalyticsDataset ds)
         {
@@ -130,7 +130,7 @@ namespace FisherLogger
         private static DateTime? Since(string p, DateTime now) => p switch { "day" => now.AddHours(-24), "3days" => now.AddHours(-72), _ => null };
 
         private static List<HourRec> Pick(List<HourRec> recs, HourQuery q, string series, DateTime? since) =>
-            recs.Where(r => r.Mine == (series == "mine") && !(series == "pub" && r.MatchedOwn))
+            recs.Where(r => series == "all" ? (r.Mine || !r.MatchedOwn) : r.Mine == (series == "mine") && !(series == "pub" && r.MatchedOwn))   // FEAT-06
                 .Where(r => q.LocationId == null || r.LocationId == q.LocationId)
                 .Where(r => q.SpeciesKey == null || r.Key == q.SpeciesKey)
                 .Where(r => since == null || r.Real >= since.Value).ToList();
@@ -177,8 +177,8 @@ namespace FisherLogger
         public static HourReport Build(List<HourRec> recs, List<HourCov> cov, List<HourCast> casts, HourQuery q)
         {
             bool one = q.SpeciesKey != null;
-            string series = q.Series is "mine" or "pub" ? q.Series
-                : Periods.Any(p => Enough(p, Pick(recs, q, "mine", Since(p, q.Now)), one)) ? "mine" : "pub";
+            // FEAT-06: «Авто» — свои уловы вместе с уловами других игроков (свои объявления не считаются дважды)
+            string series = q.Series is "mine" or "pub" or "all" ? q.Series : "all";
             string period = q.Period, autoNote = "";
             if (period == "auto")
             {
@@ -191,7 +191,7 @@ namespace FisherLogger
                     autoNote = $"За последние сутки мало записей ({d.Count}, хорошо покрыто часов: {With3(d)}) — показано за {PeriodName(period)}.";
                 }
             }
-            if (q.Series == "auto" && series == "pub") autoNote = "Своих уловов мало — показаны объявления других игроков. " + autoNote;
+            if (series == "all") autoNote = "Учтены и ваши уловы, и уловы других игроков. " + autoNote;
             var since = Since(period, q.Now);
             var rs = Pick(recs, q, series, since);
             var c = new double[24];
@@ -244,7 +244,7 @@ namespace FisherLogger
             rep.Top = Rank(rs).Take(10).ToList();
             if (enough)
                 rep.BestHours = rep.Hours.Where(b => b.Rate.HasValue && b.N >= IconMinN).OrderByDescending(b => b.Rate).ThenBy(b => b.H).Take(3).Select(b => b.H).ToList();
-            rep.Note = "Частота записанных " + (mine ? "уловов" : "объявлений") + " по игровым часам (оценка времени ±3 игр. мин), не вероятность клёва. " +
+            rep.Note = "Частота записанных " + (mine ? "уловов" : series == "all" ? "уловов (ваших и других игроков)" : "объявлений") + " по игровым часам (оценка времени ±3 игр. мин), не вероятность клёва. " +
                        (useCasts ? "«Лучшие часы» — по уловам на 10 ваших забросов: просто «больше уловов» обычно значит «больше забрасывали». "
                                  : mine ? "Забросы за этот период не записаны — нормировка по наблюдению. " : "Водоём объявления — где были вы при приёме (места в объявлении нет). ") +
                        "«" + rep.LowText + "» — не «не ловится».";

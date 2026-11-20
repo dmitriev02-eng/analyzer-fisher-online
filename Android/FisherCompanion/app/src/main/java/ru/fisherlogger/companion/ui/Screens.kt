@@ -79,6 +79,8 @@ fun ConnectionScreen(vm: AppViewModel) {
         Spacer(Modifier.height(8.dp))
         AboutCard(androidx.compose.ui.platform.LocalContext.current)   // RELEASE-03: язык и обновление
         Spacer(Modifier.height(8.dp))
+        NotifyCard(vm)   // FEAT-06
+        Spacer(Modifier.height(8.dp))
         AppCard {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(14.dp).background(connColor(vm.conn), CircleShape))
@@ -206,6 +208,8 @@ fun DashboardScreen(vm: AppViewModel, wide: Boolean) {
                 }
             }
         }
+        // FEAT-06: мини-карта — вы и забросы, как на ПК
+        if (vm.live != null && !stale) item { LiveMapCard(vm) }
         // удочки
         item { SectionTitle("Ваши удочки") }
         if (coach == null) item {
@@ -224,6 +228,7 @@ fun DashboardScreen(vm: AppViewModel, wide: Boolean) {
                     r.str("bait")?.takeIf { it.isNotEmpty() }?.let { Muted("«$it»", 14) }
                     Spacer(Modifier.height(4.dp))
                     Text(r.optString("status"), fontSize = 15.sp)
+                    EmptyBitesList(r)   // FEAT-06
                 }
             }
             val hints = coach.optJSONArray("hints")

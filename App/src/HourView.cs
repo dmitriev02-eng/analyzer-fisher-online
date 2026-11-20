@@ -43,7 +43,7 @@ namespace FisherLogger
             bar.Controls.AddRange(new Control[] { L("Водоём:"), WaterCombo, L("Рыба:"), FishCombo, L("Период:"), PeriodCombo, L("Чьи:"), SeriesCombo });
             foreach (var (t, v) in new[] { ("Авто (сутки → 3 суток → всё)", "auto"), ("Последние сутки", "day"), ("Последние 3 суток", "3days"), ("Всё время", "all") })
                 PeriodCombo.Items.Add(new Item { Text = t, Val = v });
-            foreach (var (t, v) in new[] { ("Авто", "auto"), ("Мои уловы", "mine"), ("Объявления других", "pub") })
+            foreach (var (t, v) in new[] { ("Все: мои и других игроков", "auto"), ("Только мои уловы", "mine"), ("Только других игроков", "pub") })
                 SeriesCombo.Items.Add(new Item { Text = t, Val = v });
             PeriodCombo.SelectedIndex = 0; SeriesCombo.SelectedIndex = 0;
             foreach (var c in new[] { WaterCombo, FishCombo, PeriodCombo, SeriesCombo }) c.SelectedIndexChanged += (s, e) => { if (!_filling) Recalc(); };

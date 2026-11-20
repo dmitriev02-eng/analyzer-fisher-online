@@ -697,7 +697,8 @@ namespace FisherLogger
                     clock = DayParts.Clock(now),
                     fishing = snap.HasData,
                     location = snap.LocationName,
-                    rods = snap.Rods.Select(r => new { slot = r.Slot + 1, rod = SoakCurve.RodName(r.RodCode), bait = r.Setup.Bait, status = r.Status, level = r.Level, active = r.Active }).ToList(),
+                    rods = snap.Rods.Select(r => new { slot = r.Slot + 1, rod = SoakCurve.RodName(r.RodCode), bait = r.Setup.Bait, status = r.Status, level = r.Level, active = r.Active,
+                        empties = r.RecentEmpty.Select(e => new { fishId = e.Fish, fish = e.Name, weight = e.Weight, windex = e.Windex, time = e.At > DateTime.MinValue ? e.At.ToString("HH:mm", CultureInfo.InvariantCulture) : null }).ToList() }).ToList(),   // FEAT-06
                     hints = snap.Hints.Where(h => !h.StartsWith("В игре ", StringComparison.Ordinal)).ToList()
                 };
                 lock (_coachLock) { _coachAt = now; _coachVal = val; }
@@ -1091,7 +1092,7 @@ namespace FisherLogger
             var (casts, hab) = HourExtra();
             HourStats.AssignLocations(cov, recs, casts);
             var q = new HourQuery { Habitat = HourStats.HabitatMap(hab, recs) };
-            if (r.Query.TryGetValue("series", out var se) && se is "mine" or "pub" or "auto") q.Series = se;
+            if (r.Query.TryGetValue("series", out var se) && se is "mine" or "pub" or "auto" or "all") q.Series = se;
             if (r.Query.TryGetValue("period", out var pe) && pe is "auto" or "day" or "3days" or "all") q.Period = pe;
             if (r.Query.TryGetValue("loc", out var lo) && uint.TryParse(lo, out var lid)) q.LocationId = lid;
             if (r.Query.TryGetValue("species", out var sp) && !string.IsNullOrEmpty(sp)) q.SpeciesKey = sp;
