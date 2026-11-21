@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -451,6 +451,7 @@ namespace FisherLogger
                         if (fb != null)
                         {
                             if (TryParseFullCatch(frame, timestamp) is not { } fc) return fb;   // как раньше: дальше по цепочке её нашёл бы TryParseCmd1120Bite
+                            fb.SourceIdentity = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(frame));   // FEAT-09: своя метка кадра (окно поклёвки дедуплицируется по ней)
                             BiteInFullCatchDetected?.Invoke(fb);
                             return fc;
                         }

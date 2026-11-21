@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -285,6 +285,21 @@ namespace FisherLogger
                     (at - a.DetectedAt).TotalSeconds >= -5 &&
                     (at - a.DetectedAt).TotalSeconds <= maxAgeSeconds &&
                     (isFree == null || isFree(a.Data)))?.Data;
+            }
+        }
+
+        /// <summary>FEAT-09: долгое вываживание — то же, но только если подходящая запись ОДНА (две рыбы одного веса не путаем).</summary>
+        public CatchData? FindSingleActiveByWeight(uint weight, int tolerance, DateTime at, int maxAgeSeconds, Func<CatchData, bool>? isFree = null)
+        {
+            lock (_sync)
+            {
+                var m = _active.Where(a =>
+                    a.Data.status != "skipped" &&
+                    Math.Abs((long)a.Weight - weight) <= tolerance &&
+                    (at - a.DetectedAt).TotalSeconds >= -5 &&
+                    (at - a.DetectedAt).TotalSeconds <= maxAgeSeconds &&
+                    (isFree == null || isFree(a.Data))).Take(2).ToList();
+                return m.Count == 1 ? m[0].Data : null;
             }
         }
 

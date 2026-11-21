@@ -1,5 +1,20 @@
 # Что нового / Changelog
 
+## 1.2.2 — 21.11.2026 — важное обновление
+**Русский**
+- **Окно о поклёвке снова показывается для всех рыб.** Раньше у части видов (например, у сома) окно не появлялось: программа принимала поклёвку за поимку.
+- Крупную рыбу, которую вываживали больше 3 минут, программа больше не записывает дважды. Две рыбы одного веса при этом не путаются.
+- ✕ главного окна сворачивает программу к часам, запись продолжается. Закрыть совсем можно кнопкой ⏻ вверху или пунктом «Выход» в меню значка.
+- Окно в игре: если растянуть его вниз, вся добавленная высота уходит на список удочек и уловов, пустых полей вокруг карты нет.
+- Телефон 1.2.2: изменений нет, обновился только номер версии.
+
+**English**
+- **The bite popup shows for every fish again.** For some species (e.g. catfish) it did not appear: the bite was taken for a catch.
+- A big fish fought for more than 3 minutes is no longer recorded twice. Two fish of the same weight are not mixed up.
+- ✕ on the main window minimizes to the tray and recording continues. To quit, use the ⏻ button or "Выход" in the tray menu.
+- In-game window: stretching it down gives the extra height to the rod/catch list, with no empty bands around the map.
+- Phone 1.2.2: same app, version number only.
+
 ## 1.2.1 — 21.11.2026
 **Русский**
 - Программа одинаково работает на Windows с любым языком и форматом даты: раньше на финской, тайской, арабской и персидской Windows время в базе записывалось неверно, и ломались история, «По часам» и советы.

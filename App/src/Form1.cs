@@ -236,6 +236,8 @@ namespace FisherLogger
             }
             // справа налево: В трей · Настройки · Телефон · Окно в игре · Карта (советник теперь вкладка «Куда идти»)
             // NOTIFY-02: свернуть в трей (крайняя справа) — с подсказкой, как вернуть окно
+            var exitNav = NavButton("⏻", Theme.ButtonNeutral, 40, (s, e) => ExitApp());   // FEAT-09: закрыть программу совсем
+            new ToolTip().SetToolTipT(exitNav, "Закрыть программу (запись остановится)");
             var trayNav = NavButton("В трей", Theme.ButtonNeutral, 86, (s, e) => { if (_tray != null) _tray.HideToTray(returnFocus: true); else WindowState = FormWindowState.Minimized; });
             new ToolTip().SetToolTipT(trayNav, "Свернуть в область уведомлений (у часов). Запись продолжается. Открыть снова — F12 (меняется в настройках) или щелчок по значку рыбки.");
             var settingsButton = NavButton("Настройки", Theme.ButtonNeutral, 112, (s, e) => OpenSettings(null));
@@ -480,6 +482,7 @@ namespace FisherLogger
             _deepParser.HookDetected += OnHook;
             _deepParser.EmptyBiteDetected += OnEmptyBite;
             _deepParser.BiteInFullCatchDetected += OnBitePersist;   // LOGFIX-03 (A): поклёвка, пришедшая кадром 209/218 байт
+            _deepParser.BiteInFullCatchDetected += OnEarlyBite;     // FEAT-09: и окно поклёвки (раньше для 209/218 оно не показывалось — напр. сом)
             _deepParser.ResearchMessageDetected += (t, cl, cmd, data) => { try { _db?.EnqueueResearch(t, cl, cmd, data); } catch { } };   // DATA-01
             _deepParser.WaitDetected += OnWait;
             _deepParser.ServerCheckDetected += OnServerCheck; // NEXT-BITE-IMPLEMENT-01
@@ -1978,11 +1981,15 @@ namespace FisherLogger
             catch (InvalidOperationException) { }
         }
 
+        /// <summary>FEAT-09: окно сопоставления одной рыбы между поклёвкой и посадкой (сом 7401 г вываживали 232 с — был дубль).</summary>
+        internal const int LongFightSeconds = 900;
+
         private void HandleLocalCatchWeight(LocalCatchEvent ev)
         {
             int weight = ev.Weight;
             DateTime when = ev.When;
-            var active = _deepSession.FindActiveByWeight((uint)weight, 2, when, 180, r => r.PlayerLogBlockId == null);
+            var active = _deepSession.FindActiveByWeight((uint)weight, 2, when, 180, r => r.PlayerLogBlockId == null)
+                         ?? _deepSession.FindSingleActiveByWeight((uint)weight, 2, when, LongFightSeconds, r => r.PlayerLogBlockId == null);   // FEAT-09: крупную рыбу вываживают > 3 мин
             if (active != null)
             {
                 RememberPlayerLogBlock(ev.BlockId, active);
@@ -2281,7 +2288,8 @@ namespace FisherLogger
                 if (!ev.Weight.HasValue) return;
 
                 // Player.log мог создать запись раньше FULL_CATCH (или наоборот).
-                var playerLogCatch = _deepSession.FindActiveByWeight(ev.Weight.Value, 2, ev.Timestamp, 180, r => r.PlayerLogBlockId.HasValue && !r.SummaryUid.HasValue);
+                var playerLogCatch = _deepSession.FindActiveByWeight(ev.Weight.Value, 2, ev.Timestamp, 180, r => r.PlayerLogBlockId.HasValue && !r.SummaryUid.HasValue)
+                                      ?? _deepSession.FindSingleActiveByWeight(ev.Weight.Value, 2, ev.Timestamp, LongFightSeconds, r => r.PlayerLogBlockId.HasValue && !r.SummaryUid.HasValue);
                 if (playerLogCatch != null &&
                     playerLogCatch.source.StartsWith("playerlog", StringComparison.OrdinalIgnoreCase))
                 {
@@ -4301,6 +4309,7 @@ namespace FisherLogger
                 SoundBank.EnsureDefaults();
                 GameLaunch.Ensure();
                 _tray = new TrayController(this, () => _appSettings.Window ??= new WindowSettings(), Log, () => _overlay?.Toggle(), () => { try { _appSettings.Save(); } catch { } });
+                _tray.Exit = ExitApp;               // FEAT-09: «Выход» в меню значка закрывает программу
                 _tray.ToggleMap = ToggleGameMap;   // GAMEMAP-01: F12 — карта на весь экран
                 _tray.Start(StartInTray);
             }
@@ -4324,8 +4333,30 @@ namespace FisherLogger
             StartTray();   // NOTIFY-02: трей и клавиша работают и без окна в игре
         }
 
+        /// <summary>FEAT-09: ✕ окна сворачивает к часам (запись идёт); выход — кнопка ⏻ или «Выход» у значка.</summary>
+        private bool _exitRequested;
+        private bool _trayHintShown;
+
+        public void ExitApp()
+        {
+            _exitRequested = true;
+            if (!Visible) Show();
+            Close();
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing && !_exitRequested && _tray != null)
+            {
+                e.Cancel = true;
+                _tray.HideToTray(returnFocus: true);
+                if (!_trayHintShown)
+                {
+                    _trayHintShown = true;
+                    try { _tray.Icon.ShowBalloonTip(4000, "FisherLogger работает", "Окно свёрнуто к часам, запись продолжается. Закрыть совсем — кнопка ⏻ или «Выход» в меню значка.", ToolTipIcon.Info); } catch { }
+                }
+                return;
+            }
             try { _companion?.Dispose(); } catch { } // NEXT-ANDROID-01
             _companion = null;
             try { _overlay?.Dispose(); } catch { } // OVERLAY

@@ -362,6 +362,8 @@ namespace FisherLogger
         public bool HotkeyRegistered { get; private set; }
         public string HotkeyStatus { get; private set; } = "";
         public static TrayController? Current;
+        /// <summary>FEAT-09: полный выход (✕ окна теперь сворачивает к часам).</summary>
+        public Action? Exit;
         private IntPtr _prev;
         // Клавиши, которые Windows не даёт занять (F12 зарезервирована системой), — отслеживаются опросом состояния:
         // клавиша не перехватывается (доходит и до игры), никаких хуков; так же окно в игре следит за Ctrl.
@@ -385,7 +387,7 @@ namespace FisherLogger
             menu.Items.Add("Открыть FisherLogger", null, (s, e) => ShowMain());
             menu.Items.Add("Окно в игре (радар)", null, (s, e) => _toggleOverlay?.Invoke());
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add("Выход", null, (s, e) => { _form.Show(); _form.Close(); });
+            menu.Items.Add("Выход", null, (s, e) => { if (Exit != null) Exit(); else { _form.Show(); _form.Close(); } });
             Icon.ContextMenuStrip = menu;
             Icon.MouseClick += (s, e) => { if (e.Button == MouseButtons.Left) Toggle(); };
             Icon.BalloonTipClicked += (s, e) => ShowMain();

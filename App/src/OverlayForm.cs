@@ -242,6 +242,9 @@ namespace FisherLogger
                 int fixedH = HeaderH + InfoH + 4 + NeckMin + CatchH + 3 + LegendH + TabH;
                 int want = Math.Min(w - 14, 190);
                 if (h - fixedH - logH < want) logH = Math.Max(RowH * 2 + 4, h - fixedH - want);
+                // FEAT-09: круг не шире окна — лишняя высота уходит списку (удочки/уловы), а не пустым полям вокруг круга
+                int spare = h - fixedH - logH - (w - 14);
+                if (spare > 0) logH += spare;
             }
             HeaderRect = new Rectangle(0, 0, w, HeaderH);
             LogRect = new Rectangle(0, h - logH, w, logH);
@@ -646,7 +649,7 @@ namespace FisherLogger
             _logHits.Clear();
             using (var b = new SolidBrush(Color.FromArgb(14, 20, 28))) g.FillRectangle(b, LogRect);
             var list = VisibleFeed();
-            int rows = Settings.FeedRows;
+            int rows = Math.Max(1, (LogRect.Height - 4) / RowH);   // FEAT-09: сколько влезает
             if (list.Count == 0)
             {
                 UiText.DrawText(g, "Ленты пока нет: объявления об уловах и чат появятся при игре с включённым захватом",
@@ -695,11 +698,12 @@ namespace FisherLogger
                     FLog, new Point(LogRect.Left + 8, LogRect.Top + 4), Theme.TextMuted);
                 return;
             }
-            _logOffset = Math.Clamp(_logOffset, 0, Math.Max(0, list.Count - LogRows));
+            int logRows = Math.Max(1, (LogRect.Height - 4) / RowH);   // FEAT-09: сколько влезает
+            _logOffset = Math.Clamp(_logOffset, 0, Math.Max(0, list.Count - logRows));
             int y = LogRect.Top + 2;
             var ru = CultureInfo.GetCultureInfo("ru-RU");
             const TextFormatFlags L = TextFormatFlags.NoPadding | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine;
-            foreach (var c in list.Skip(_logOffset).Take(LogRows))
+            foreach (var c in list.Skip(_logOffset).Take(logRows))
             {
                 var row = new Rectangle(LogRect.Left, y, LogRect.Width, RowH);
                 _logHits.Add((row, c));

@@ -14,8 +14,8 @@ android {
         applicationId = "ru.fisherlogger.companion"
         minSdk = 26
         targetSdk = 34
-        versionCode = 22
-        versionName = "1.2.1"
+        versionCode = 23
+        versionName = "1.2.2"
     }
 
     // RELEASE-03: подпись выпуска — ключ и пароли в keystore.properties вне репозитория (D:\TheFisherProject\Android\keystore)
