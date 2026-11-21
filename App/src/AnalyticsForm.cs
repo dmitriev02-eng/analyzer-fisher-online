@@ -656,7 +656,7 @@ namespace FisherLogger
 
             Text = "Аналитика по игровым часам — FisherLogger";
             Size = new Size(1320, 860);
-            MinimumSize = new Size(1000, 640);
+            MinimumSize = new Size(1000, 640);   UiKit.FitToScreen(this);   // FEAT-08b
             StartPosition = FormStartPosition.CenterParent;
             BackColor = Theme.Background;
             ForeColor = Theme.Text;

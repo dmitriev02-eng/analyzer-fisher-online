@@ -424,7 +424,7 @@ namespace FisherLogger
                         var an = analytics();
                         return JsonSerializer.Serialize(an.Attempts.OrderByDescending(x => x.Ts).Take(20).Select(x => new
                         {
-                            время = x.Ts.ToString("yyyy-MM-dd HH:mm"), водоём = an.LocName(x.Location), наживка = x.Bait, исход = x.Outcome, вид = x.Fish, вес_г = x.Weight, класс = x.Windex,
+                            время = x.Ts.ToString("yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture), водоём = an.LocName(x.Location), наживка = x.Bait, исход = x.Outcome, вид = x.Fish, вес_г = x.Weight, класс = x.Windex,
                             // COACH-01: где лежала наживка, глубина дна, время в воде, пустые поклёвки, крючок
                             удочка = x.Rod + 1, тип = SoakCurve.RodName(x.RodCode), клетка_5м = x.Cell5, глубина_дна_м = x.BottomDepthM is double bd ? Math.Round(bd, 1) : (double?)null,
                             в_воде_мин = x.SoakMin is double sm ? Math.Round(sm, 1) : (double?)null, пустых = x.EmptyBites, крючок = x.Hook

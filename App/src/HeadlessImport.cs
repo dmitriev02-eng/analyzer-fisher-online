@@ -53,7 +53,7 @@ namespace FisherLogger
             {
                 AppPaths.EnsureLogsDirectory();
                 string path = Path.Combine(AppPaths.LogsDirectory, "import_error.txt");
-                File.WriteAllText(path, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine + text,
+                File.WriteAllText(path, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture) + Environment.NewLine + text,
                     new UTF8Encoding(false));
                 Console.WriteLine(text);
             }

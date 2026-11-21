@@ -49,7 +49,7 @@ namespace FisherLogger
             _overlaySummary = overlaySummary; _openOverlay = openOverlay; _phoneSummary = phoneSummary; _openPhone = openPhone;
             Text = "Настройки — FisherLogger";
             StartPosition = FormStartPosition.CenterParent;
-            Size = new Size(900, 640); MinimumSize = new Size(760, 520);
+            Size = new Size(900, 640); MinimumSize = new Size(760, 520);   UiKit.FitToScreen(this);   // FEAT-08b
             Shown += (s0, e0) => Theme.ApplyInputs(this);   // DESIGN-01: тёмные поля ввода
             BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui;
             if (Theme.AppIcon != null) Icon = Theme.AppIcon;

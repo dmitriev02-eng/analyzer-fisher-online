@@ -1037,7 +1037,7 @@ namespace FisherLogger
             Text = "Карта водоёма — FisherLogger";
             Shown += (s0, e0) => Theme.ApplyInputs(this);   // DESIGN-01: тёмные поля ввода
             Size = new Size(1320, 820);
-            MinimumSize = new Size(1000, 620);
+            MinimumSize = new Size(1000, 620);   UiKit.FitToScreen(this);   // FEAT-08b
             StartPosition = FormStartPosition.CenterParent;
             BackColor = Theme.Background;
             ForeColor = Theme.Text;

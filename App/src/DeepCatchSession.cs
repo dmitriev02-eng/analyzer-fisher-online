@@ -708,7 +708,7 @@ namespace FisherLogger
 
             var data = new CatchData
             {
-                timestamp = ts.ToString("yyyy-MM-dd HH:mm:ss"),
+                timestamp = ts.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture),
                 detected_at = ts,
                 weight = weight,
                 exp = ev.Experience?.CatchExperience ?? 0,

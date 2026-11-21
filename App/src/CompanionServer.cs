@@ -885,8 +885,8 @@ namespace FisherLogger
                              .Select(g => new { key = g.Key, name = g.First().Fish, mine = g.Count(a => a.IsMine), pub = g.Count(a => !a.IsMine) }),
                 waterbodies = all.GroupBy(a => a.LocationId).OrderByDescending(g => g.Count())
                                  .Select(g => new { id = g.Key, name = g.Key.HasValue ? LocName(g.Key) : "водоём не записан", mine = g.Count(a => a.IsMine), pub = g.Count(a => !a.IsMine) }),
-                dateMin = dates.Count > 0 ? dates.Min().ToString("yyyy-MM-dd") : null,
-                dateMax = dates.Count > 0 ? dates.Max().ToString("yyyy-MM-dd") : null
+                dateMin = dates.Count > 0 ? dates.Min().ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) : null,
+                dateMax = dates.Count > 0 ? dates.Max().ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) : null
             });
         }
 
@@ -921,7 +921,7 @@ namespace FisherLogger
             return Resp.Json(new
             {
                 filter = new { species = f.SpeciesKey, speciesName = f.SpeciesName, loc = f.AnyLocation ? null : (object?)(f.LocationId?.ToString() ?? "none"), locationName = f.LocationName,
-                               from = f.From?.ToString("yyyy-MM-dd"), to = f.To?.ToString("yyyy-MM-dd"), showMine = f.ShowMine, showPublic = f.ShowPublic, excludeOwn = f.ExcludeOwnFromPublic },
+                               from = f.From?.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture), to = f.To?.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture), showMine = f.ShowMine, showPublic = f.ShowPublic, excludeOwn = f.ExcludeOwnFromPublic },
                 mine = f.ShowMine ? S(res.Mine) : null,
                 pub = f.ShowPublic ? S(res.Public) : null,
                 coverageMinutes = res.CoverageMinutes,
@@ -1227,7 +1227,7 @@ namespace FisherLogger
             _srv = srv;
             Text = "Android-компаньон — FisherLogger";
             Size = new Size(540, 720);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedDialog;   UiKit.FitToScreen(this);   // FEAT-08b
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterParent;
             BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui;

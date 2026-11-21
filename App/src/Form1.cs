@@ -179,6 +179,9 @@ namespace FisherLogger
             // AUDIT-04 (G2): программа уступает процессор игре (ниже обычного); поток приёма пакетов — наивысший внутри процесса,
             // то есть на уровне обычных программ, чтобы пакеты не терялись
             try { System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.BelowNormal; } catch { }
+            // FEAT-08: интерфейс размечен в пикселях — при масштабе Windows 125–200 % пусть Windows увеличивает всё окно целиком
+            // (текст остаётся чётким), а не только шрифты: иначе надписи обрезаются. При 100 % ничего не меняется.
+            try { Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled); } catch { }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             WheelGuard.Install();   // UIFIX-02: колесо мыши — прокрутка страницы, а не смена значений списков
@@ -196,8 +199,11 @@ namespace FisherLogger
             AdvisorResources.Warn = Log; // ADVISOR-02: предупреждения о недоступных/битых справочных ресурсах — в лог приложения.
 
             this.Text = "FisherLogger — запись рыбалки и советы";
-            this.Size = new Size(1240, 900);
-            this.MinimumSize = new Size(1100, 800);
+            // FEAT-08: окно не больше рабочей области экрана (1366×768, масштаб 125–150 % — иначе низ окна недоступен)
+            var wa = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1240, 900);
+            this.MinimumSize = new Size(Math.Min(1100, wa.Width), Math.Min(800, wa.Height));
+            this.Size = new Size(Math.Min(1240, wa.Width), Math.Min(900, wa.Height));
+            if (wa.Width < 1240 || wa.Height < 900) this.WindowState = FormWindowState.Maximized;
             this.BackColor = Theme.Background;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ForeColor = Theme.Text;
@@ -1249,7 +1255,7 @@ namespace FisherLogger
                 string grade = DetermineGrade(weight);
 
                 var catchData = new CatchData();
-                catchData.timestamp = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
+                catchData.timestamp = timestamp.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 catchData.detected_at = timestamp;
                 catchData.weight = weight;
                 catchData.offset_32 = fishId;
@@ -2037,7 +2043,7 @@ namespace FisherLogger
 
             var catchData = new CatchData
             {
-                timestamp = when.ToString("yyyy-MM-dd HH:mm:ss"),
+                timestamp = when.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture),
                 detected_at = when,
                 weight = weight,
                 grade = DetermineGrade(weight),
@@ -2246,7 +2252,7 @@ namespace FisherLogger
                         status = "bite",
                         // FIX-02: class of THIS fish from the bite packet (s2c 1120 flag=1, CONFIRMED) — shown in the popup
                         windex = ev.Bite != null ? ev.Bite.Windex : ev.Windex.HasValue ? (int)ev.Windex.Value : null,
-                        timestamp = ev.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"),
+                        timestamp = ev.Timestamp.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture),
                         detected_at = ev.Timestamp
                     };
                     EnrichCatchStatic(biteData);
@@ -3055,7 +3061,7 @@ namespace FisherLogger
             var dialog = new Form();
             dialog.Text = "Анализ ID";
             dialog.Size = new Size(1100, 700);
-            dialog.MinimumSize = new Size(900, 520);
+            dialog.MinimumSize = new Size(900, 520);   UiKit.FitToScreen(dialog);   // FEAT-08b
             dialog.StartPosition = FormStartPosition.CenterParent;
             dialog.BackColor = Theme.Background;
 

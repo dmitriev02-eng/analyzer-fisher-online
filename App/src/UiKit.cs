@@ -151,6 +151,21 @@ namespace FisherLogger
 
     public static class UiKit
     {
+        /// <summary>FEAT-08b: окно не больше рабочей области своего экрана и целиком на нём (с учётом панели задач).
+        /// Вызывать в конструкторе после Size/MinimumSize: размеры ужимаются сразу, положение — при показе.</summary>
+        public static void FitToScreen(Form f)
+        {
+            void Clamp()
+            {
+                var wa = (f.IsHandleCreated ? Screen.FromControl(f) : Screen.FromPoint(Cursor.Position)).WorkingArea;
+                f.MinimumSize = new Size(Math.Min(f.MinimumSize.Width, wa.Width), Math.Min(f.MinimumSize.Height, wa.Height));
+                if (f.Width > wa.Width || f.Height > wa.Height) f.Size = new Size(Math.Min(f.Width, wa.Width), Math.Min(f.Height, wa.Height));
+                if (f.IsHandleCreated && f.WindowState == FormWindowState.Normal)
+                    f.Location = new Point(Math.Max(wa.Left, Math.Min(f.Left, wa.Right - f.Width)), Math.Max(wa.Top, Math.Min(f.Top, wa.Bottom - f.Height)));
+            }
+            try { Clamp(); f.Load += (_, _) => { try { Clamp(); } catch { } }; } catch { }
+        }
+
         public static readonly Font Small = new("Segoe UI", 8.75f);
         public static readonly Font Tiny = new("Segoe UI", 8.5f);
         public static readonly Font SectionFont = Theme.Heading;   // DESIGN-01: заголовки блоков — Bahnschrift, цвет текста (акцент — только для действий)

@@ -75,6 +75,10 @@ FisherLogger — программа, которая **только читает*
 - **Захват не запускается с VPN** — попробуйте выключить VPN или запустить программу ещё раз.
 - **Антивирус ругается** — программа читает сетевой трафик; добавьте папку программы в исключения антивируса.
 - **SmartScreen: «неизвестный издатель»** — нажмите «Подробнее» → «Выполнить в любом случае» (программа не подписана).
+- **Куда распаковать** — в обычную папку, например C:\Games\AnalyzerFO. Не в «Program Files» (там не будут работать обновления) и лучше не в OneDrive.
+- **Захват: «нет доступа к адаптеру»** — Npcap установлен с галочкой «Restrict Npcap driver's access to Administrators only». Переустановите Npcap без неё или запускайте программу от имени администратора.
+- **Телефон не подключается** — ПК и телефон должны быть в одной Wi-Fi сети, а сеть в Windows — «Частная» (Параметры → Сеть и Интернет → свойства сети). При первом включении сервиса телефона Windows спросит про брандмауэр — разрешите доступ в частных сетях.
+- **Мелкий или размытый текст на экране с масштабом 125–200 %** — это нормально: Windows увеличивает окно программы целиком, чтобы надписи не обрезались.
 
 ## Сборка из исходников
 
@@ -165,6 +169,10 @@ You can turn sharing off at any time: menu **"Developer ▾" → "Server data sh
 - **Capture does not start with a VPN** — try turning the VPN off or running the program again.
 - **Antivirus complains** — the program reads network traffic; add the program folder to the antivirus exclusions.
 - **SmartScreen: "unknown publisher"** — click "More info" → "Run anyway" (the program is not signed).
+- **Where to unpack** — a normal folder such as C:\Games\AnalyzerFO. Not "Program Files" (updates will not work there), and preferably not OneDrive.
+- **Capture: "no access to the adapter"** — Npcap was installed with "Restrict Npcap driver's access to Administrators only". Reinstall Npcap without it or run the program as administrator.
+- **The phone does not connect** — the PC and the phone must be on the same Wi-Fi, and the Windows network must be "Private" (Settings → Network & Internet → network properties). When you first turn on the phone service, Windows asks about the firewall — allow access on private networks.
+- **Text looks slightly soft at 125–200 % display scaling** — this is expected: Windows scales the whole program window so that labels are not cut off.
 
 ## Building from source
 

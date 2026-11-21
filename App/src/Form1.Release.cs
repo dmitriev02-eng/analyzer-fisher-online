@@ -114,6 +114,13 @@ namespace FisherLogger
                 "Обновление", auto ? MessageBoxButtons.YesNoCancel : MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (r == DialogResult.Cancel) { var us = UpdateSettings.Load(); us.SkipVersion = rel.Version; try { us.Save(); } catch { } return; }
             if (r != DialogResult.Yes) return;
+            if (!CanWriteDir(AppContext.BaseDirectory))   // FEAT-08: Program Files и другие закрытые папки
+            {
+                UiText.Box(this, "Программа лежит в папке, куда нельзя записывать без прав администратора (например, Program Files):\n" +
+                    AppContext.BaseDirectory + "\n\nПеренесите папку программы, например в C:\\Games\\AnalyzerFO, и запустите её оттуда — " +
+                    "или скачайте новую версию вручную со страницы выпуска.", "Обновление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             _ = Task.Run(async () =>
             {
                 Log("[UPDATE] загрузка " + rel.ZipName);
@@ -131,6 +138,12 @@ namespace FisherLogger
                 }
                 catch { }
             });
+        }
+
+        private static bool CanWriteDir(string dir)
+        {
+            try { string t = System.IO.Path.Combine(dir, ".write_test_" + Guid.NewGuid().ToString("N")); System.IO.File.WriteAllText(t, ""); System.IO.File.Delete(t); return true; }
+            catch { return false; }
         }
 
         private void ChooseLanguage()

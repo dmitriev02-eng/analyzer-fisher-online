@@ -1,5 +1,18 @@
 # Что нового / Changelog
 
+## 1.2.1 — 21.11.2026
+**Русский**
+- Программа одинаково работает на Windows с любым языком и форматом даты: раньше на финской, тайской, арабской и персидской Windows время в базе записывалось неверно, и ломались история, «По часам» и советы.
+- Экраны 1366×768 и масштаб 125–200 %: окна не выходят за экран и не прячутся под панель задач, надписи не обрезаются, окно в игре возвращается на экран.
+- Если программа лежит в Program Files, обновление не ломается, а подсказывает, куда перенести папку.
+- README: что делать, если не работает захват, телефон или обновление.
+
+**English**
+- Works the same on Windows in any language and date format: on Finnish, Thai, Arabic and Persian Windows, times were stored incorrectly before, which broke history, "By hour" and tips.
+- 1366×768 screens and 125–200 % scaling: windows stay on screen and above the taskbar, labels are not cut off, the in-game window returns to the screen.
+- If the program is in Program Files, the update does not fail but tells you where to move the folder.
+- README: what to do if capture, the phone or the update does not work.
+
 ## 1.2.0 — 21.11.2026
 **Русский**
 - Исправлено: в 1.1.0 мини-карта и уведомления о поклёвках на телефоне не получали данных с ПК.

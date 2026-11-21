@@ -4022,5 +4022,7 @@
 "поклёвок": "bites",
 "пустых": "empty",
 "Остановить": "Stop",
-"Пока идёт слежение, в шторке висит тихое уведомление «Слежу за поклёвками» с кнопкой «Остановить». Если ПК не отвечает 5 минут, слежение остановится само и включится снова, когда вы откроете приложение.": "While watching, a silent \"Watching for bites\" notification with a \"Stop\" button stays in the shade. If the PC does not answer for 5 minutes, watching stops by itself and starts again when you open the app."
+"Пока идёт слежение, в шторке висит тихое уведомление «Слежу за поклёвками» с кнопкой «Остановить». Если ПК не отвечает 5 минут, слежение остановится само и включится снова, когда вы откроете приложение.": "While watching, a silent \"Watching for bites\" notification with a \"Stop\" button stays in the shade. If the PC does not answer for 5 minutes, watching stops by itself and starts again when you open the app.",
+"Программа лежит в папке, куда нельзя записывать без прав администратора (например, Program Files):": "The program is in a folder that cannot be written without administrator rights (for example, Program Files):",
+"Перенесите папку программы, например в C:\\Games\\AnalyzerFO, и запустите её оттуда — или скачайте новую версию вручную со страницы выпуска.": "Move the program folder, for example to C:\\Games\\AnalyzerFO, and run it from there — or download the new version manually from the release page."
 }

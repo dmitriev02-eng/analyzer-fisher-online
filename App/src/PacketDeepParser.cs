@@ -315,7 +315,7 @@ namespace FisherLogger
             const string projectData = @"D:\TheFisherProject\Data"; // NEXT-101: isolated dictionary dir
             if (File.Exists(Path.Combine(projectData, "baits_map.json"))) return projectData;
 
-            return projectData; // NEXT-95: no fallback outside NEXT95 (was D:\fishing_research)
+            return appData;   // FEAT-08: на чужом ПК — только рядом с программой (раньше путь вёл на D:\TheFisherProject\Data)
         }
 
         // ------------------------------------------------------------------
@@ -1249,7 +1249,7 @@ namespace FisherLogger
         }
 
         private static string EventKey(int cmd, byte[] data, DateTime ts)
-            => cmd + ":" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(data)).Substring(0, 32) + ":" + ts.ToString("yyyyMMddHHmmss");
+            => cmd + ":" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(data)).Substring(0, 32) + ":" + ts.ToString("yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
 
         private DeepCatchData? TryParsePublicEvent(byte[] frame, DateTime timestamp)
         {
@@ -1322,7 +1322,7 @@ namespace FisherLogger
             var server = new DateTime(y, mo, dd, h, mi, s);
             ServerTimeDetected?.Invoke(server, timestamp);
             return new DeepCatchData { Timestamp = timestamp, PacketLength = frame.Length, MessageType = "SERVER_TIME", IsClientPacket = false,
-                                       RawText = "cmd" + r.Value.cmd + " server=" + server.ToString("yyyy-MM-dd HH:mm:ss") };
+                                       RawText = "cmd" + r.Value.cmd + " server=" + server.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture) };
         }
 
         // c2s 1110: заброс (rod int32, xyz 3×double, bait_uid int64) — 36B payload

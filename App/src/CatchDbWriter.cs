@@ -546,7 +546,7 @@ INSERT INTO cast_events (cast_id, timestamp, event_type, is_client, raw_text, ma
 VALUES (@id, @ts, 'cast_end_unresolved', 0, 'previous application run ended while the cast was open', 'MATCHED', @sk)
 ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
                     ev.Parameters.AddWithValue("@id", id);
-                    ev.Parameters.AddWithValue("@ts", at.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                    ev.Parameters.AddWithValue("@ts", at.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
                     ev.Parameters.AddWithValue("@sk", "restart|cast" + id);
                     ev.ExecuteNonQuery();
                     using var up = new SqliteCommand("UPDATE casts SET outcome='unknown' WHERE id=@id AND outcome='pending';", _connection);
@@ -1262,8 +1262,8 @@ INSERT INTO public_catches (received_at, server_time, game_time_est, game_time_u
 VALUES (@received_at, @server_time, @gt, @gtu, @gtm, @session_id, @loc, @cmd, @channel, @player_id, @player_name, @fish_lang_id, @fish_name,
     @windex, @weight, @level, @title, @club_id, @club_tag, @source_key)
 ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
-                cmd.Parameters.AddWithValue("@received_at", r.ReceivedAt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                cmd.Parameters.AddWithValue("@server_time", Db(r.ServerTime?.ToString("yyyy-MM-dd HH:mm:ss")));
+                cmd.Parameters.AddWithValue("@received_at", r.ReceivedAt.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
+                cmd.Parameters.AddWithValue("@server_time", Db(r.ServerTime?.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
                 cmd.Parameters.AddWithValue("@gt", Db(r.GameTimeEst));
                 cmd.Parameters.AddWithValue("@gtu", Db(r.GameTimeUncMin));
                 cmd.Parameters.AddWithValue("@gtm", Db(r.GameTimeModel));
@@ -1299,8 +1299,8 @@ INSERT INTO chat_messages (received_at, server_time, game_time_est, game_time_un
 VALUES (@received_at, @server_time, @gt, @gtu, @gtm, @session_id, @room_id, @channel, @message_type, @action_name, @action_value,
     @from_id, @from_name, @text, @from_level, @from_title, @from_club_id, @from_club_tag, @source_key)
 ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
-                cmd.Parameters.AddWithValue("@received_at", r.ReceivedAt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                cmd.Parameters.AddWithValue("@server_time", Db(r.ServerTime?.ToString("yyyy-MM-dd HH:mm:ss")));
+                cmd.Parameters.AddWithValue("@received_at", r.ReceivedAt.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
+                cmd.Parameters.AddWithValue("@server_time", Db(r.ServerTime?.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
                 cmd.Parameters.AddWithValue("@gt", Db(r.GameTimeEst));
                 cmd.Parameters.AddWithValue("@gtu", Db(r.GameTimeUncMin));
                 cmd.Parameters.AddWithValue("@gtm", Db(r.GameTimeModel));
@@ -1438,7 +1438,7 @@ ON CONFLICT(record_id) DO UPDATE SET
                 using var cmd = new SqliteCommand(sql, _connection);
                 Add(cmd, "@record_id", catchData.record_id);
                 Add(cmd, "@timestamp", string.IsNullOrEmpty(catchData.timestamp)
-                    ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                    ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
                     : catchData.timestamp);
                 Add(cmd, "@fish_name", catchData.fish_name);
                 Add(cmd, "@fish_lang_id", catchData.fish_lang_id);
@@ -1628,7 +1628,7 @@ WHERE record_id=@record_id;"; // NEXT-ANALYTICS-04/09: never drop a proven link/
         {
             cmd.Parameters.AddWithValue("@record_id", catchData.record_id);
             cmd.Parameters.AddWithValue("@timestamp", string.IsNullOrEmpty(catchData.timestamp)
-                ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
                 : catchData.timestamp);
             cmd.Parameters.AddWithValue("@fish_name", catchData.fish_name);
             cmd.Parameters.AddWithValue("@fish_lang_id", (object?)catchData.fish_lang_id ?? DBNull.Value);
@@ -1884,7 +1884,7 @@ VALUES (
                 cmd.Parameters.AddWithValue("@rod_uid", (object?)action.RodUid ?? DBNull.Value);   // NEXT-DATA-01
                 cmd.Parameters.AddWithValue("@prop_name", (object?)action.PropName ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@timestamp",
-                    action.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"));
+                    action.Timestamp.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture));
                 cmd.Parameters.AddWithValue("@bait_uid", action.BaitUid);
                 cmd.Parameters.AddWithValue("@bait_item_id",
                     (object?)action.BaitItemId ?? DBNull.Value);
@@ -1906,7 +1906,7 @@ INSERT INTO casts (timestamp, session_id, rod_index, cast_x, cast_y, cast_z, bai
 VALUES (@timestamp, @session_id, @rod, @x, @y, @z, @bait_uid, @bait_tid, @bait_name, @outcome, @source_key)
 ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;
 SELECT id FROM casts WHERE source_key=@source_key AND source_key IS NOT NULL;", _connection);
-                cmd.Parameters.AddWithValue("@timestamp", cast.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                cmd.Parameters.AddWithValue("@timestamp", cast.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
                 cmd.Parameters.AddWithValue("@session_id", (object?)cast.SessionId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@rod", cast.RodIndex);
                 cmd.Parameters.AddWithValue("@x", (object?)cast.CastX ?? DBNull.Value);
@@ -1954,7 +1954,7 @@ ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
                 cmd.Parameters.AddWithValue("@hook", b != null ? b.HookUid : DBNull.Value);
                 cmd.Parameters.AddWithValue("@bms", b != null ? BiteMetadata.Source : DBNull.Value);
                 cmd.Parameters.AddWithValue("@cast_id", ev.CastId);
-                cmd.Parameters.AddWithValue("@timestamp", ev.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                cmd.Parameters.AddWithValue("@timestamp", ev.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
                 cmd.Parameters.AddWithValue("@event_type", ev.EventType);
                 cmd.Parameters.AddWithValue("@is_client", ev.IsClient ? 1 : 0);
                 cmd.Parameters.AddWithValue("@fid", (object?)ev.FishLangId ?? DBNull.Value);
@@ -1991,7 +1991,7 @@ ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
 INSERT INTO weather (timestamp, session_id, baseid, location_id, cloudly, fog, rain, tempr, grom, units_status, source_key)
 VALUES (@timestamp, @session_id, @baseid, @location_id, @cloudly, @fog, @rain, @tempr, @grom, @units_status, @source_key)
 ON CONFLICT(source_key) WHERE source_key IS NOT NULL DO NOTHING;", _connection);
-                cmd.Parameters.AddWithValue("@timestamp", w.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                cmd.Parameters.AddWithValue("@timestamp", w.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
                 cmd.Parameters.AddWithValue("@session_id", (object?)w.SessionId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@baseid", (object?)w.BaseId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@location_id", (object?)w.LocationId ?? DBNull.Value);
@@ -2022,7 +2022,7 @@ VALUES (
     @aroma_wpn_item_id, @add_wpn_uid, @add_wpn_item_id,
     @bait_uid, @bait_item_id, @session_id);", _connection);
                 cmd.Parameters.AddWithValue("@timestamp",
-                    action.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"));
+                    action.Timestamp.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture));
                 cmd.Parameters.AddWithValue("@main_wpn_uid", action.MainWpnUid);
                 cmd.Parameters.AddWithValue("@main_wpn_item_id",
                     (object?)action.MainWpnItemId ?? DBNull.Value);
@@ -2062,7 +2062,7 @@ VALUES (
 
                 using var cmd = new SqliteCommand(sql, _connection);
                 DateTime ts = catchData.Timestamp == default ? DateTime.Now : catchData.Timestamp;
-                Add(cmd, "@timestamp", ts.ToString("yyyy-MM-dd HH:mm:ss"));
+                Add(cmd, "@timestamp", ts.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture));
                 Add(cmd, "@player_name", catchData.PlayerName.Trim());
                 Add(cmd, "@clan", string.IsNullOrWhiteSpace(catchData.Clan) ? null : catchData.Clan.Trim());
                 Add(cmd, "@fish_name", catchData.FishName.Trim());

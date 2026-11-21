@@ -42,7 +42,7 @@ namespace FisherLogger
         }
 
         public static string SessionLog(DateTime time)
-            => Path.Combine(LogsDirectory, "session_" + time.ToString("yyyy-MM-dd") + ".log");
+            => Path.Combine(LogsDirectory, "session_" + time.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) + ".log");
 
         public static void EnsureLogsDirectory()
         {

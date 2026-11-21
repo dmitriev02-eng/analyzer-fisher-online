@@ -82,7 +82,7 @@ namespace FisherLogger
             _registryPath = registryPath ?? ModelRegistry.DefaultPath;
             Text = "Советник — что, где и на что клюёт (FisherLogger)";
             StartPosition = FormStartPosition.CenterParent;
-            Size = new Size(1100, 720); MinimumSize = new Size(820, 520);
+            Size = new Size(1100, 720); MinimumSize = new Size(820, 520);   UiKit.FitToScreen(this);   // FEAT-08b
             Shown += (s0, e0) => Theme.ApplyInputs(this);   // DESIGN-01: тёмные поля ввода
             BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui;
             if (Theme.AppIcon != null) Icon = Theme.AppIcon;

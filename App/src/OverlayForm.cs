@@ -188,6 +188,10 @@ namespace FisherLogger
                 Location = Screen.PrimaryScreen!.WorkingArea.Location;
                 ApplyPreset(Settings.Preset == OverlayPreset.Custom ? OverlayPreset.TopRight : Settings.Preset);
             }
+            // FEAT-08b: сохранённое место могло остаться от другого масштаба/разрешения — вернуть окно целиком на экран
+            var wa2 = Screen.FromRectangle(Bounds).WorkingArea;
+            if (Width > wa2.Width || Height > wa2.Height) Size = new Size(Math.Min(Width, wa2.Width), Math.Min(Height, wa2.Height));
+            Location = new Point(Math.Max(wa2.Left, Math.Min(Left, wa2.Right - Width)), Math.Max(wa2.Top, Math.Min(Top, wa2.Bottom - Height)));
         }
 
         public void SetData(OverlaySnapshot s)
