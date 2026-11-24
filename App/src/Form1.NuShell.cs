@@ -269,6 +269,7 @@ namespace FisherLogger
                 if (shell != null && !shell.IsDisposed)
                 {
                     shell.MapView.Data = t.Result;
+                    shell.MapView.ShowPose = !mapMode;   // UI-02-6: на чужой карте не рисуем свою позу/забросы/маркер
                     var ws = _appSettings.Window;
                     if (ws != null && shell.MapView.PlacesOn != ws.NuPlacesOn) shell.MapView.PlacesOn = ws.NuPlacesOn;   // the minimap menu can switch the layer on
                     shell.RodsStrip.Invalidate(); shell.Catches.Invalidate(); shell.TipsPanel.Invalidate();

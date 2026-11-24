@@ -226,9 +226,15 @@ namespace FisherLogger
         private readonly Panel _map = new() { Dock = DockStyle.Fill };
         private readonly Panel _ai = new() { Visible = false, Size = new Size(400, 300) };
         // UI-02-6: «Карта любого водоёма» — выбор водоёма + карта с уловами (все сессии).
-        private readonly Panel _waterStrip = new() { Dock = DockStyle.Top, Height = 40, Padding = new Padding(8, 6, 8, 6), Visible = false };
-        private readonly ComboBox _waterPick = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 280, FlatStyle = FlatStyle.Flat };
-        private readonly Label _waterLabel = new() { Text = "Водоём:", AutoSize = true, Margin = new Padding(0, 6, 8, 0) };
+        private readonly FlowLayoutPanel _waterStrip = new() { Dock = DockStyle.Top, Height = 40, Padding = new Padding(8, 6, 8, 6), Visible = false, FlowDirection = FlowDirection.LeftToRight, WrapContents = false };
+        private readonly ComboBox _waterPick = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 280, FlatStyle = FlatStyle.Flat, Margin = new Padding(6, 2, 6, 2) };
+        private readonly Label _waterLabel = new() { Text = "Водоём:", AutoSize = true, Margin = new Padding(0, 7, 0, 0) };
+        /// <summary>UI-02-6: пункт списка водоёмов — в ComboBox показывается только название.</summary>
+        public sealed class WaterItem
+        {
+            public uint Id; public string Name = "";
+            public override string ToString() => Name;
+        }
         /// <summary>UI-02-6: выбран водоём в режиме «карта любого водоёма» (событие = переписать карту).</summary>
         public event Action? MapPickChanged;
         public uint? MapPickLoc;
@@ -285,7 +291,7 @@ namespace FisherLogger
             // UI-02-6: полоска выбора водоёма над картой (появляется только в режиме «карта любого водоёма»).
             _waterLabel.ForeColor = NuTheme.Text; _waterPick.BackColor = NuTheme.Raised; _waterPick.ForeColor = NuTheme.Text;
             _waterStrip.Controls.Add(_waterLabel); _waterStrip.Controls.Add(_waterPick);
-            _waterPick.SelectedIndexChanged += (s, e) => { if (_waterPick.SelectedItem is KeyValuePair<uint, string> kv) { MapPickLoc = kv.Key; MapPickChanged?.Invoke(); } };
+            _waterPick.SelectedIndexChanged += (s, e) => { if (_waterPick.SelectedItem is WaterItem wi) { MapPickLoc = wi.Id; MapPickChanged?.Invoke(); } };
             _work.Controls.Add(_waterStrip);   // UI-02-6: полоска над картой (не поверх неё)
 
             void Btn(string id, string label, Action<Graphics, Rectangle, Color> icon)
@@ -342,7 +348,7 @@ namespace FisherLogger
         {
             _waterPick.BeginUpdate();
             _waterPick.Items.Clear();
-            foreach (var it in items) _waterPick.Items.Add(new KeyValuePair<uint, string>(it.id, it.name));
+            foreach (var it in items) _waterPick.Items.Add(new WaterItem { Id = it.id, Name = it.name });
             _waterPick.EndUpdate();
             if (_waterPick.Items.Count > 0 && _waterPick.SelectedIndex < 0) _waterPick.SelectedIndex = 0;
         }

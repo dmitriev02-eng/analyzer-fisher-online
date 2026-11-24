@@ -114,6 +114,8 @@ namespace FisherLogger
     {
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public NuMapData? Data { get => _data; set { bool newWater = value?.LocationId != _data?.LocationId; _data = value; if (newWater) { _fitted = false; _bgKey = ""; } EnsureRod(); Invalidate(); } }
+        /// <summary>UI-02-6: на карте чужого водоёма не показываем свою позу/забросы/маркер игрока (это другая карта).</summary>
+        public bool ShowPose = true;
         public Func<PlayerPose?>? PoseSource;
         public Action? OpenFullMap;
         public Func<string>? FullMapKeyText;
@@ -336,7 +338,7 @@ namespace FisherLogger
         {
             var g = e.Graphics; g.SmoothingMode = SmoothingMode.AntiAlias; g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             if (!_fitted) Fit();
-            if (!_userMoved && Pose is { } pf)
+            if (ShowPose && !_userMoved && Pose is { } pf)
             {   // follow the player softly: re-centre when you leave the middle 60 %
                 var sp = W2S(pf.X, pf.Z);
                 if (sp.X < Width * 0.2 || sp.X > Width * 0.8 || sp.Y < Height * 0.2 || sp.Y > Height * 0.8) { _cx = pf.X; _cz = pf.Z; }
@@ -355,8 +357,8 @@ namespace FisherLogger
             PaintCatches(g, d);
             PaintMergedCatches(g, d);   // SERVER-02: объединённые уловы со всех устройств
             if (ZonesOn) PaintCircles(g, d); else { _placed.Clear(); _hover = null; HiddenCircles = 0; }
-            PaintCasts(g, d);
-            PaintPlayer(g);
+            if (ShowPose) PaintCasts(g, d);
+            if (ShowPose) PaintPlayer(g);
             PaintPin(g);
             PaintTopInfo(g, d);
             PaintZonesPanel(g, d);
@@ -534,11 +536,12 @@ namespace FisherLogger
             var p = Pose;
             // ui01_review3 #10: the position comes only when you move — say how old it is
             double age = p != null ? (DateTime.Now - p.Time).TotalMinutes : 0;
-            parts.Add(p == null ? "Ваше место появится после первого шага в игре"
-                : age >= 2 ? "Последнее место (" + Math.Floor(age) + " мин назад) · " + Grid(d.LocationId, p.X, p.Z) : "Вы здесь · " + Grid(d.LocationId, p.X, p.Z));
+            if (ShowPose)
+                parts.Add(p == null ? "Ваше место появится после первого шага в игре"
+                    : age >= 2 ? "Последнее место (" + Math.Floor(age) + " мин назад) · " + Grid(d.LocationId, p.X, p.Z) : "Вы здесь · " + Grid(d.LocationId, p.X, p.Z));
             var rod = ZoneRodSlot is int rs ? d.Rods.FirstOrDefault(r => r.Slot == rs) : null;
             var cast = rod != null ? d.Casts.FirstOrDefault(k => k.Active && k.Rod == rod.Slot) : d.Casts.FirstOrDefault(k => k.Active);
-            if (cast != null)
+            if (ShowPose && cast != null)
             {
                 string depth = Bathymetry.DepthAt(d.LocationId, cast.X, cast.Z) is double dm ? " · глубина " + dm.ToString("0.0", CultureInfo.GetCultureInfo("ru-RU")) + " м" : "";
                 parts.Add("заброс " + (cast.Rod + 1) + ": " + Grid(d.LocationId, cast.X, cast.Z) + depth);
