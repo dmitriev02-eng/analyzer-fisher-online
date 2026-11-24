@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -253,6 +253,8 @@ namespace FisherLogger
             return o;
         }
         private static string Arg(JsonObject a, string n) { try { return a[n]?.GetValue<string>()?.Trim() ?? ""; } catch { return a[n]?.ToString() ?? ""; } }
+        // UI-02-4-FIX (правка A): сила модификатора прикорма — целое «+2», дробное «+2.5» (0.#, invariant).
+        private static string FormatStrength(double s) => "+" + s.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture);
 
         public static uint? FindSpecies(BiteAnalytics an, string q)
         {
@@ -427,7 +429,10 @@ namespace FisherLogger
                             время = x.Ts.ToString("yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture), водоём = an.LocName(x.Location), наживка = x.Bait, исход = x.Outcome, вид = x.Fish, вес_г = x.Weight, класс = x.Windex,
                             // COACH-01: где лежала наживка, глубина дна, время в воде, пустые поклёвки, крючок
                             удочка = x.Rod + 1, тип = SoakCurve.RodName(x.RodCode), клетка_5м = x.Cell5, глубина_дна_м = x.BottomDepthM is double bd ? Math.Round(bd, 1) : (double?)null,
-                            в_воде_мин = x.SoakMin is double sm ? Math.Round(sm, 1) : (double?)null, пустых = x.EmptyBites, крючок = x.Hook
+                            в_воде_мин = x.SoakMin is double sm ? Math.Round(sm, 1) : (double?)null, пустых = x.EmptyBites, крючок = x.Hook,
+                            // UI-02-4-FIX (правка A): прикормка — целевая рыба (kind 2) и состав.
+                            прикормка = x.Recipe.Length == 0 && x.GroundbaitTargets.Count == 0 ? "состав прикорма не записан"
+                                      : (object)new { привлекает = x.GroundbaitTargets.Select(t => an.FishName(t.Fish) + " " + FormatStrength(t.Strength)).ToList(), состав = x.Recipe }
                         }), Js);
                     }
                 }

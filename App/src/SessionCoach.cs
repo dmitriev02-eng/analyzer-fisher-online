@@ -553,7 +553,7 @@ namespace FisherLogger
         public static string Summary(CoachSnapshot s, SoakCurve? curve, string extra = "")
         {
             var sb = new StringBuilder();
-            sb.Append("Рыбалка: ").Append(s.LocationName.Length > 0 ? s.LocationName : "водоём не известен").Append(", сейчас ").Append(s.At.ToString("HH:mm", CultureInfo.InvariantCulture)).AppendLine(".");
+            sb.Append("Рыбалка: ").Append(s.LocationName.Length > 0 ? s.LocationName : "водоём ещё не определён").Append(", сейчас ").Append(s.At.ToString("HH:mm", CultureInfo.InvariantCulture)).AppendLine(".");
             foreach (var r in s.Rods)
                 sb.Append("Удочка ").Append(r.Slot + 1).Append(" (").Append(SoakCurve.RodName(r.RodCode)).Append("): забросов ").Append(r.Casts)
                   .Append(", поклёвок ").Append(r.Bites).Append(", пустых поклёвок ").Append(r.Empty).Append(", поймано ").Append(r.Caught)

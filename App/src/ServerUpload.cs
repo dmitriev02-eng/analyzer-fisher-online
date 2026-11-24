@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -159,6 +159,42 @@ namespace FisherLogger
         {
             ss.LastResult = text; ss.LastUtc = DateTime.UtcNow.ToString("o"); try { ss.Save(); } catch { }
             _log?.Invoke("[SERVER] " + text);
+        }
+    }
+
+    /// <summary>SERVER-02: объединённый улов (со всех устройств, что шлют данные на сервер).</summary>
+    public sealed class AfoCatch { public int CX, CZ; public uint? Fish; public int? Weight, Windex; public long Ts; public string Kind = "", Status = ""; }
+
+    /// <summary>SERVER-02: чтение объединённых уловов — GET /api/v1/catches?waterbody=...&amp;days=...</summary>
+    public static class AfoCatches
+    {
+        public static System.Collections.Generic.List<AfoCatch> Fetch(uint waterbody, int days = 30)
+        {
+            try
+            {
+                var ss = ServerSettings.Load();
+                string url = (string.IsNullOrWhiteSpace(ss.Url) ? ServerUploader.DefaultUrl : ss.Url).TrimEnd('/');
+                using var http = ServerUploader.Http();
+                var resp = http.GetAsync(url + "/api/v1/catches?waterbody=" + waterbody.ToString(System.Globalization.CultureInfo.InvariantCulture) + "&days=" + days.ToString(System.Globalization.CultureInfo.InvariantCulture)).GetAwaiter().GetResult();
+                if (!resp.IsSuccessStatusCode) return new System.Collections.Generic.List<AfoCatch>();
+                using var doc = System.Text.Json.JsonDocument.Parse(resp.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                var list = new System.Collections.Generic.List<AfoCatch>();
+                if (doc.RootElement.TryGetProperty("catches", out var arr) && arr.ValueKind == System.Text.Json.JsonValueKind.Array)
+                    foreach (var s in arr.EnumerateArray())
+                    {
+                        if (!s.TryGetProperty("cell", out var cell) || cell.ValueKind != System.Text.Json.JsonValueKind.Array || cell.GetArrayLength() < 2) continue;
+                        var sp = new AfoCatch { CX = cell[0].GetInt32(), CZ = cell[1].GetInt32() };
+                        if (s.TryGetProperty("fish", out var f) && f.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Fish = (uint)f.GetInt32();
+                        if (s.TryGetProperty("weight", out var w) && w.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Weight = w.GetInt32();
+                        if (s.TryGetProperty("windex", out var wi) && wi.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Windex = wi.GetInt32();
+                        if (s.TryGetProperty("ts", out var t) && t.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Ts = t.GetInt64();
+                        if (s.TryGetProperty("kind", out var k) && k.ValueKind == System.Text.Json.JsonValueKind.String) sp.Kind = k.GetString() ?? "";
+                        if (s.TryGetProperty("status", out var st) && st.ValueKind == System.Text.Json.JsonValueKind.String) sp.Status = st.GetString() ?? "";
+                        list.Add(sp);
+                    }
+                return list;
+            }
+            catch { return new System.Collections.Generic.List<AfoCatch>(); }
         }
     }
 }

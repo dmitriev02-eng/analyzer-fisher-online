@@ -127,16 +127,18 @@ namespace FisherLogger
     }
 
     /// <summary>
-    /// NEXT-BITE-IMPLEMENT-01: logs every outgoing server check and attaches a server response ONLY where the research
-    /// established it: float (rodcode 0) — the s2c 1120 (flag 0 or 1) of the SAME rod arriving 0…1.5 s after the latest
-    /// unanswered check of that rod in this run. Feeder/spinning/other rod codes: never matched (fields stay NULL).
-    /// A missing response stays NULL (never "no bite"); a recast of the rod drops its pending check, so a delayed
-    /// response cannot be attached across casts. Thread-safe.
+    /// NEXT-BITE-IMPLEMENT-01: logs every outgoing server check and attaches the s2c 1120 response (flag 0 or 1) of the
+    /// SAME rod arriving 0…1.5 s after the latest unanswered check of that rod in this run. UI-02-4-FIX (правка B): the
+    /// matcher now covers ALL rod codes (float/feeder/spinning/fly), verified on captures (98–100% same-rod, dt ≤ 1.5 s);
+    /// rod 0 keeps the legacy match method, other rods use MatchMethodAllRods. A missing response stays NULL (never
+    /// "no bite"); a recast of the rod drops its pending check, so a delayed response cannot be attached across casts.
+    /// Thread-safe.
     /// </summary>
     public sealed class ServerCheckLogger
     {
         public const double FloatResponseWindowSeconds = 1.5;
         public const string MatchMethod = "float_rodcode0_same_rod_dt<=1.5s";
+        public const string MatchMethodAllRods = "same_rod_dt<=1.5s";
 
         private sealed class Pending { public long Id; public DateTime At; public int RodCode; public bool Answered; }
 
@@ -192,10 +194,10 @@ namespace FisherLogger
             lock (_sync)
             {
                 if (!_last.TryGetValue(rod.Value, out var p) || p.Answered) return 0;
-                if (p.RodCode != 0) return 0;                                   // only float has evidence
                 double dt = (ts - p.At).TotalSeconds;
                 if (dt < 0 || dt > FloatResponseWindowSeconds) return 0;
-                if (!_db.SetServerCheckResponse(p.Id, type, ts, type == "wait" ? shance : null, MatchMethod)) return 0;
+                string method = p.RodCode == 0 ? MatchMethod : MatchMethodAllRods;
+                if (!_db.SetServerCheckResponse(p.Id, type, ts, type == "wait" ? shance : null, method)) return 0;
                 p.Answered = true;
                 return p.Id;
             }

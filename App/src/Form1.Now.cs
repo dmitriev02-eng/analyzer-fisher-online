@@ -35,7 +35,7 @@ namespace FisherLogger
         {
             if (_pages == null) return;
             if (_pages.SelectedIndex == 0) RefreshNow(force: true);
-            if (_pages.SelectedIndex == 1 && (_advisorForm == null || _advisorForm.IsDisposed)) OpenAdvisor();
+            if (_pages.SelectedIndex == 1 && (_goAdvisor == null || _goAdvisor.IsDisposed)) OpenAdvisor();
         }
 
         /// <summary>Советник как часть вкладки «Куда идти» (без своей рамки).</summary>

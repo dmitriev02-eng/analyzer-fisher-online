@@ -82,16 +82,31 @@ namespace FisherLogger
         {
             Form.RestorePlacement();
             ApplyHotkey();
-            if (Settings.Enabled && Settings.VisibleOnStart) Show();
+            if ((Settings.Enabled || UseReplacement) && Settings.VisibleOnStart) Show();
         }
 
-        public bool IsVisible => Form.Visible;
+        /// <summary>FEAT-14: новая мини-карта вместо окна в игре (когда новое окно основное).</summary>
+        public Func<bool>? ReplacementActive;
+        public Func<bool>? ReplacementVisible;
+        public Action<bool>? ReplacementShow;
+        private bool UseReplacement => ReplacementActive?.Invoke() == true && ReplacementShow != null;
 
-        public void Toggle() { if (Form.Visible) Hide(); else Show(); }
+        public bool IsVisible => UseReplacement ? ReplacementVisible?.Invoke() == true : Form.Visible;
+
+        public void Toggle() { if (IsVisible) Hide(); else Show(); }
 
         public void Show()
         {
-            if (!Settings.Enabled || _disposed) return;
+            if (_disposed) return;
+            if (UseReplacement)
+            {
+                if (Form.Visible) Form.Hide();
+                _dataTimer.Stop(); _fastTimer.Stop();
+                ReplacementShow!(true);
+                Settings.VisibleOnStart = true; Settings.Save(_log);
+                return;
+            }
+            if (!Settings.Enabled) return;   // FEAT-15: «включён» относится только к прежнему окну в игре
             if (!Form.Visible)
             {
                 Form.Show();                // ShowWithoutActivation = true -> SW_SHOWNOACTIVATE
@@ -104,6 +119,7 @@ namespace FisherLogger
 
         public void Hide()
         {
+            if (UseReplacement) { ReplacementShow!(false); if (Form.Visible) Form.Hide(); _dataTimer.Stop(); _fastTimer.Stop(); Settings.VisibleOnStart = false; Settings.Save(_log); return; }
             if (Form.Visible) Form.Hide();
             _dataTimer.Stop(); _fastTimer.Stop();
             Form.SetClickThroughActive(false);
@@ -221,7 +237,7 @@ namespace FisherLogger
         {
             UnregisterHotKey(_hk.Handle, HotkeyId);
             HotkeyRegistered = false;
-            if (!Settings.Enabled || !Settings.HotkeyEnabled || Settings.HotkeyKey == 0)
+            if ((!Settings.Enabled && !UseReplacement) || !Settings.HotkeyEnabled || Settings.HotkeyKey == 0)
             {
                 HotkeyStatus = "горячая клавиша выключена";
                 return;
@@ -245,7 +261,7 @@ namespace FisherLogger
             Form.Size = new Size(Settings.Width, Settings.Height);
             if (Settings.Preset != OverlayPreset.Custom) Form.ApplyPreset(Settings.Preset);
             ApplyHotkey();
-            if (!Settings.Enabled) Hide();
+            if (!Settings.Enabled && !UseReplacement) Hide();
             Form.Invalidate();
             Settings.Save(_log);
         }
@@ -275,6 +291,7 @@ namespace FisherLogger
                 Settings.Save(_log);
             }
             catch { }
+            try { if (UseReplacement) ReplacementShow?.Invoke(false); } catch { }
             _dataTimer.Stop(); _fastTimer.Stop(); _dataTimer.Dispose(); _fastTimer.Dispose();
             UnregisterHotKey(_hk.Handle, HotkeyId);
             _hk.DestroyHandle();

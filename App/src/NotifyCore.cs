@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -61,6 +61,37 @@ namespace FisherLogger
         public int HotkeyKey { get; set; } = (int)Keys.F11;    // GAMEMAP-01: окно программы — F11 (F12 теперь карта на весь экран)
         public int HotkeyModifiers { get; set; } = 0;          // Keys.Control | Keys.Shift | Keys.Alt
         public int TrayHintsShown { get; set; } = 0;
+        /// <summary>UI-01 / FEAT-11: новый интерфейс (бета). По умолчанию выкл — прежнее окно.</summary>
+        public bool NewUiBeta { get; set; } = true;
+        /// <summary>FEAT-14: новое окно стало основным; 1 — переход выполнен (дальше выбор пользователя сохраняется).</summary>
+        public int UiVersion { get; set; } = 0;
+        /// <summary>FEAT-14: новая мини-карта поверх игры (части: верх, карта, удочки). -99999 — место по умолчанию.</summary>
+        public int MiniX { get; set; } = -99999;
+        public int MiniY { get; set; } = -99999;
+        public int MiniSize { get; set; } = 260;
+        public double MiniRadius { get; set; } = 50;
+        public int MiniOpacity { get; set; } = 92;
+        public string MiniDock { get; set; } = "bottom";
+        public int PanelX { get; set; } = -99999;
+        public int PanelY { get; set; } = -99999;
+        public int HdrX { get; set; } = -99999;
+        public int HdrY { get; set; } = -99999;
+        public bool MiniHdr { get; set; } = true;
+        public bool MiniPanel { get; set; } = true;
+        public bool MiniPinned { get; set; } = true;
+        /// <summary>FEAT-12: круги клёва на карте нового окна: показывать и с какого уровня (0 все, 1 обычно и выше, 2 выше обычного).</summary>
+        public bool NuZonesOn { get; set; } = true;
+        public int NuZoneMinLevel { get; set; } = 0;
+        /// <summary>UI-02/5: слой «Места по уловам» и его фильтры (рыба, класс, глубина дна, наживка, часть суток игры, период).</summary>
+        public bool NuPlacesOn { get; set; } = true;
+        public bool NuPlacesMini { get; set; } = true;
+        public bool NuPlacesFolded { get; set; } = false;
+        public string NuPlaceFish { get; set; } = "";
+        public int NuPlaceMinClass { get; set; } = -1;
+        public int NuPlaceDepth { get; set; } = -1;
+        public string NuPlaceBait { get; set; } = "";
+        public string NuPlacePart { get; set; } = "";
+        public int NuPlacePeriod { get; set; } = 3;
         /// <summary>GAMEMAP-01: карта водоёма на весь экран поверх игры.</summary>
         public bool MapHotkeyEnabled { get; set; } = true;
         public int MapHotkeyKey { get; set; } = (int)Keys.F12;
@@ -69,6 +100,15 @@ namespace FisherLogger
         public int KeysVersion { get; set; } = 0;
         public void Normalize()
         {
+            NewUiBeta = true; if (UiVersion < 1) UiVersion = 1;   // FEAT-15: старого интерфейса больше нет   // FEAT-14: новое окно — основное у всех
+            MiniSize = Math.Clamp(MiniSize, 160, 520); MiniOpacity = Math.Clamp(MiniOpacity, 40, 100);
+            if (MiniRadius is not (25 or 50 or 100 or 200)) MiniRadius = 50;
+            if (MiniDock is not ("bottom" or "top" or "left" or "right" or "free")) MiniDock = "bottom";
+            NuPlaceFish ??= ""; NuPlaceBait ??= ""; NuPlacePart ??= "";
+            if (NuPlaceMinClass is not (-1 or 1 or 2 or 3)) NuPlaceMinClass = -1;
+            if (NuPlaceDepth < -1 || NuPlaceDepth > NuPlaces.DepthEdges.Length - 2) NuPlaceDepth = -1;
+            if (NuPlacePart.Length > 0 && Array.IndexOf(NuPlaces.Parts, NuPlacePart) < 0) NuPlacePart = "";
+            NuPlacePeriod = Math.Clamp(NuPlacePeriod, 0, 3);
             if (KeysVersion < 2) { if (HotkeyKey == (int)Keys.F12 && HotkeyModifiers == 0) HotkeyKey = (int)Keys.F11; KeysVersion = 2; }
             if (HotkeyKey <= 0 || HotkeyKey > 254) HotkeyKey = (int)Keys.F11; HotkeyModifiers &= (int)(Keys.Control | Keys.Shift | Keys.Alt);
             if (MapHotkeyKey <= 0 || MapHotkeyKey > 254) MapHotkeyKey = (int)Keys.F12; MapHotkeyModifiers &= (int)(Keys.Control | Keys.Shift | Keys.Alt);
@@ -364,6 +404,12 @@ namespace FisherLogger
         public static TrayController? Current;
         /// <summary>FEAT-09: полный выход (✕ окна теперь сворачивает к часам).</summary>
         public Action? Exit;
+        /// <summary>FEAT-11: открыть новое окно (бета).</summary>
+        public Action? OpenNewUi;
+        /// <summary>ui01_review3 #31: packets from the game really arrive (the tray text must not claim recording otherwise).</summary>
+        public Func<bool>? Recording;
+        /// <summary>FEAT-14: клавиша окна (F11) открывает/прячет новое окно, когда оно основное.</summary>
+        public Action? ToggleNewUi;
         private IntPtr _prev;
         // Клавиши, которые Windows не даёт занять (F12 зарезервирована системой), — отслеживаются опросом состояния:
         // клавиша не перехватывается (доходит и до игры), никаких хуков; так же окно в игре следит за Ctrl.
@@ -385,11 +431,13 @@ namespace FisherLogger
             Icon = new NotifyIcon { Icon = Theme.AppIcon ?? SystemIcons.Application, Visible = true };
             var menu = new ContextMenuStrip();
             menu.Items.Add("Открыть FisherLogger", null, (s, e) => ShowMain());
-            menu.Items.Add("Окно в игре (радар)", null, (s, e) => _toggleOverlay?.Invoke());
+            menu.Items.Add("Служебное окно (журнал программы, импорт)", null, (s, e) => ShowLegacyMain());
+            menu.Items.Add("Мини-карта в игре", null, (s, e) => _toggleOverlay?.Invoke());
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("Выход", null, (s, e) => { if (Exit != null) Exit(); else { _form.Show(); _form.Close(); } });
             Icon.ContextMenuStrip = menu;
-            Icon.MouseClick += (s, e) => { if (e.Button == MouseButtons.Left) Toggle(); };
+            Icon.MouseMove += (s, e) => { try { UpdateText(); } catch { } };
+            Icon.MouseClick += (s, e) => { if (e.Button == MouseButtons.Left) { if (OpenNewUi != null && _settings().NewUiBeta) OpenNewUi(); else Toggle(); } };
             Icon.BalloonTipClicked += (s, e) => ShowMain();
             _hk.Pressed += Toggle;
             _hk.MapPressed += () => ToggleMap?.Invoke();
@@ -400,7 +448,12 @@ namespace FisherLogger
             UpdateText();
         }
 
-        public void Start(bool startHidden) { _startHidden = startHidden; ApplyHotkey(); }
+        public void Start(bool startHidden)
+        {
+            _startHidden = startHidden; ApplyHotkey();
+            // the tray is created inside Form1.Shown: the Shown subscription above comes too late — hide here (start with the game, --tray)
+            if (startHidden && _form.IsHandleCreated && _form.Visible) _form.BeginInvoke(new Action(() => { _startHidden = false; HideToTray(returnFocus: true); Hint(true); }));
+        }
 
         public string KeyText { get { var w = _settings(); return w.HotkeyEnabled ? HotkeyText(w.HotkeyKey, w.HotkeyModifiers) : ""; } }
 
@@ -417,7 +470,8 @@ namespace FisherLogger
         private void UpdateText()
         {
             string k = KeyText;
-            string t = "FisherLogger — запись идёт" + (k.Length > 0 ? ". " + k + " — открыть" : "");
+            bool rec = Recording?.Invoke() ?? true;
+            string t = "FisherLogger — " + (rec ? "запись идёт" : "нет данных от игры") + (k.Length > 0 ? ". " + k + " — открыть" : "");
             Icon.Text = t.Length > 63 ? t[..63] : t;
         }
 
@@ -489,9 +543,22 @@ namespace FisherLogger
         public bool MainActive => _form.Visible && _form.WindowState != FormWindowState.Minimized && Foreground() == _form.Handle;
 
         /// <summary>Клавиша: окно программы активно → в трей и вернуть игру; иначе — показать по центру и сделать активным.</summary>
-        public void Toggle() { if (MainActive) HideToTray(returnFocus: true); else ShowMain(); }
+        public void Toggle() { if (ToggleNewUi != null && _settings().NewUiBeta) { ToggleNewUi(); return; } if (MainActive) HideToTray(returnFocus: true); else ShowMain(); }
 
-        public void ShowMain()
+        /// <summary>FEAT-14: окно активно → спрятать и вернуть игру; иначе запомнить активное окно (игру) и показать.</summary>
+        public void ToggleForm(Form f, Action show)
+        {
+            var fg = Foreground();
+            if (f.Visible && f.WindowState != FormWindowState.Minimized && fg == f.Handle) { f.Hide(); if (_prev != IntPtr.Zero) ForceForeground(_prev); return; }
+            if (fg != IntPtr.Zero && fg != f.Handle && fg != _form.Handle) _prev = fg;
+            show();
+            try { ForceForeground(f.Handle); } catch { }
+        }
+
+        /// <summary>FEAT-15: the new window is the main one; the old window is only the service window.</summary>
+        public void ShowMain() { if (OpenNewUi != null) { OpenNewUi(); return; } ShowLegacyMain(); }
+
+        public void ShowLegacyMain()
         {
             var fg = Foreground();
             if (fg != IntPtr.Zero && fg != _form.Handle) _prev = fg;
@@ -505,6 +572,19 @@ namespace FisherLogger
             _form.TopMost = true; _form.TopMost = false;          // поверх полноэкранной игры без ошибки фокуса
             _form.Activate();
             ForceForeground(_form.Handle);
+        }
+
+        /// <summary>ui01_review3 #16: the new window hides the same way as the old one did — the game gets the focus back, a hint once.</summary>
+        public void HideForm(Form f, bool returnFocus)
+        {
+            f.Hide();
+            if (f.WindowState == FormWindowState.Minimized) f.WindowState = FormWindowState.Normal;
+            if (returnFocus && _prev != IntPtr.Zero && IsWindow(_prev))
+            {
+                if (IsIconic(_prev)) ShowWindow(_prev, 9);
+                ForceForeground(_prev);
+            }
+            Hint(false);
         }
 
         public void HideToTray(bool returnFocus)

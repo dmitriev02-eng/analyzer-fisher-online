@@ -304,8 +304,10 @@ namespace FisherLogger
             else { ShowAdvice(); ShowCard(null); }
 
             WaterBox.Items.Clear();
-            WaterBox.Items.Add(new WaterItem { All = true, Text = "Все водоёмы" });
-            foreach (var w in _an.Presence().GroupBy(p => p.LocationId).Select(g => new WaterItem { Id = g.Key, Text = $"{g.First().Waterbody} — видов {g.Count()}" }).OrderBy(w => w.Text))
+            // UI-02/3: records without a water are not a water to choose — they stay only in «Все водоёмы», with a note
+            var (nwOwn, nwPub) = _an.NoWaterCount; int nw = nwOwn + nwPub;
+            WaterBox.Items.Add(new WaterItem { All = true, Text = "Все водоёмы" + (nw > 0 ? $"  (и ещё {nw} {(nw % 100 is >= 11 and <= 14 ? "старых записей" : (nw % 10) switch { 1 => "старая запись", 2 or 3 or 4 => "старые записи", _ => "старых записей" })} без водоёма)" : "") });
+            foreach (var w in _an.Presence().Where(p => p.LocationId.HasValue).GroupBy(p => p.LocationId).Select(g => new WaterItem { Id = g.Key, Text = $"{g.First().Waterbody} — видов {g.Count()}" }).OrderBy(w => w.Text))
                 WaterBox.Items.Add(w);
             WaterBox.SelectedIndex = 0;
             try { Hours.Reload(_dbPath, _an.Attempts, _an.Habitat); Hours.SetFish((SpeciesBox.SelectedItem as SpeciesItem)?.Id); } catch (Exception ex) { _log?.Invoke("[ADVISOR] по часам: " + ex.Message); }
@@ -573,7 +575,7 @@ namespace FisherLogger
         {
             PresenceGrid.Rows.Clear();
             var w = WaterBox.SelectedItem as WaterItem;
-            foreach (var p in _an.Presence().Where(p => w == null || w.All || p.LocationId == w.Id))
+            foreach (var p in _an.Presence().Where(p => w == null || w.All || p.LocationId == w.Id).OrderBy(p => p.LocationId.HasValue ? 0 : 1))   // records without a water at the end
             {
                 // AUDIT-02: объявления места поимки не доказывают — показываем, подтверждён ли вид на этом водоёме
                 string hab = p.LocationId.HasValue && _an.Habitat.Lives(p.FishId, p.LocationId) ? HabitatIndex.SourceText(_an.Habitat.Sources(p.FishId, p.LocationId.Value))

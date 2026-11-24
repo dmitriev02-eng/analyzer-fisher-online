@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -71,6 +71,8 @@ namespace FisherLogger
         public string Recipe = "";
         public List<long> RecipeItems = new();
         public long? GroundbaitItem;
+        /// <summary>UI-02-4-FIX (правка A): целевая рыба прикорма (kind 2) — fish_lang_id → сила модификатора. Пусто — без прикорма/не записано.</summary>
+        public List<(uint Fish, double Strength)> GroundbaitTargets = new();
         /// <summary>MASTER-01: место заброса — группа точек в радиусе нескольких метров (не клетка сетки), см. Goal.EnsurePlaces.</summary>
         public string? PlaceKey;
         // COACH-01 / FORMULA-01: признаки заброса из проверок сервера (c2s 1120), известны до исхода
@@ -250,11 +252,18 @@ namespace FisherLogger
         {
             S = s;
             _fishName = fishName ?? (id => "вид " + id);
-            _locName = locName ?? (id => id.HasValue ? "водоём " + id.Value : "водоём не известен");
+            _locName = locName ?? (id => id.HasValue ? "водоём " + id.Value : NoWater);
         }
 
+        /// <summary>UI-02/3: records without a water. Announcements of other players before 07.11.2026 did not store where you were,
+        /// old imports have none either; there is nothing to restore them from (no own catches near in time, Player.log keeps only
+        /// the last sessions). Never offered as a water to choose.</summary>
+        public const string NoWater = "водоём не записан (старые записи)";
+        /// <summary>How many records have no water: own catches and announcements of other players.</summary>
+        public (int own, int pub) NoWaterCount => (OwnCatches.Count(x => !x.loc.HasValue), Public.Count(p => !p.loc.HasValue));
+
         public string FishName(uint id) { try { var n = _fishName(id); return string.IsNullOrWhiteSpace(n) ? "вид " + id : n; } catch { return "вид " + id; } }
-        public string LocName(uint? id) { try { var n = _locName(id); return string.IsNullOrWhiteSpace(n) ? (id.HasValue ? "водоём " + id : "водоём не известен") : n; } catch { return "водоём " + id; } }
+        public string LocName(uint? id) { if (!id.HasValue) return NoWater; try { var n = _locName(id); return string.IsNullOrWhiteSpace(n) ? "водоём " + id : n; } catch { return "водоём " + id; } }
 
         public static BiteAnalytics FromData(AnalyticsSettings s, List<Attempt> attempts,
             List<(uint, uint?, int?, DateTime, double?, double?)>? own = null, List<(uint, uint?, DateTime)>? pub = null)
@@ -358,7 +367,7 @@ namespace FisherLogger
 
             // MASTER-01: снасть и прикорм заброса
             var tackle = new Dictionary<long, object?[]>();
-            foreach (var r in Q(c, "SELECT cast_id, status, line_name, leader_name, hook_name, feeder_name, leader_base_par, groundbait_item_id, gb_osnova, gb_aroma, gb_addextend, gb_addbaits, hook_base_par, line_base_par, feeder_base_par FROM cast_tackle"))
+            foreach (var r in Q(c, "SELECT cast_id, status, line_name, leader_name, hook_name, feeder_name, leader_base_par, groundbait_item_id, gb_osnova, gb_aroma, gb_addextend, gb_addbaits, hook_base_par, line_base_par, feeder_base_par, gb_klevprop FROM cast_tackle"))
                 if (L(r[0]) is long cid) tackle[cid] = r;
             var gbOnCast = new Dictionary<long, long>();
             foreach (var r in Q(c, "SELECT cast_id, groundbait_item_id FROM groundbait_actions WHERE cast_id IS NOT NULL AND groundbait_item_id IS NOT NULL"))
@@ -427,6 +436,8 @@ namespace FisherLogger
                     foreach (var part in new[] { tk[8], tk[9], tk[10], tk[11] })
                         foreach (var piece in (part as string ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
                             if (long.TryParse(piece.Split('/')[0].Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out long iid) && iid > 0 && !at.RecipeItems.Contains(iid)) at.RecipeItems.Add(iid);
+                    // UI-02-4-FIX (правка A): целевая рыба прикорма (только kind 2) из gb_klevprop.
+                    at.GroundbaitTargets = GroundbaitCalc.ParseKind2(tk[15] as string).Select(kv => (Fish: kv.Key, Strength: kv.Value)).ToList();
                 }
                 if (at.GroundbaitItem == null && gbOnCast.TryGetValue(id, out var gbi)) at.GroundbaitItem = gbi;
                 if (at.RecipeItems.Count > 0)

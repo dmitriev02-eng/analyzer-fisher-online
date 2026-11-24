@@ -1,5 +1,24 @@
 # Что нового / Changelog
 
+## 1.2.3 — 25.11.2026 — новый интерфейс и общие уловы
+**Русский**
+- **Новый интерфейс главного окна**: карта, журнал, статистика, удочки и уловы — в одном окне, без отдельных форм.
+- **Карта любого водоёма**: кнопка на правой панели + выбор водоёма из списка; показывает **все уловы выбранного водоёма за всё время**.
+- **Объединённые уловы**: на карте теперь видны уловы **всех устройств**, которые отправляют данные на сервер (голубые точки). Кто-то поймал — видят все: люди знают, где клюёт.
+- Матчер поклёвок **фидера и спиннинга**: ответы сервера сопоставляются и с этими снастями (раньше — только поплавок).
+- Советник: **рецепт прикормки** — какие рыбы её привлекают и из чего она состоит.
+- Исправлено: полоса выбора водоёма больше не накладывается на карту; у кнопки «Карта любого водоёма» своя иконка.
+- Надёжность: убраны мёртвые поля и старые артефакты.
+
+**English**
+- **New main window interface**: map, journal, statistics, rods and catches in one window.
+- **Any waterbody map**: a button on the right panel + a waterbody picker; shows **all catches of the chosen waterbody for all time**.
+- **Merged catches**: the map now shows catches from **all devices** that send data to the server (blue dots). Someone catches a fish and everyone sees it — people know where the fish bite.
+- Bite matcher for **feeder and spinning** rods: server responses are matched for those rods too (previously float only).
+- Advisor: **groundbait recipe** — which fish it attracts and what it is made of.
+- Fixed: the waterbody picker no longer overlaps the map; the "Any waterbody map" button has its own icon.
+- Reliability: dead fields and old artifacts removed.
+
 ## 1.2.2 — 21.11.2026 — важное обновление
 **Русский**
 - **Окно о поклёвке снова показывается для всех рыб.** Раньше у части видов (например, у сома) окно не появлялось: программа принимала поклёвку за поимку.

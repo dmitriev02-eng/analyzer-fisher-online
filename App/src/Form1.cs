@@ -185,9 +185,48 @@ namespace FisherLogger
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             WheelGuard.Install();   // UIFIX-02: колесо мыши — прокрутка страницы, а не смена значений списков
+            if (!SingleInstance()) return;          // ui01_review3 #1: the second start only brings the running window forward
             LanguageForm.EnsureChosen(ask: true);   // RELEASE-03: первый запуск — выбор языка
             UiTranslator.Start();
             Application.Run(new Form1(startServices: true, enableCapture: enableCapture));
+            // FEAT-15 (EXIT-01): всё сохранено в OnFormClosing; оставшиеся потоки (захват, сторонние библиотеки) не должны держать процесс
+            try { LogFile.Flush(); } catch { }
+            Environment.Exit(0);
+        }
+
+        private static System.Threading.Mutex? _single;
+        private static System.Threading.EventWaitHandle? _showSignal;
+        /// <summary>One FisherLogger per data folder. A second start signals the first one to show its window and exits.
+        /// After an update the old copy may still be closing: wait for it a few seconds first.</summary>
+        private static bool SingleInstance()
+        {
+            try
+            {
+                string key = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(AppPaths.BaseDirectory.ToUpperInvariant())))[..16];
+                _single = new System.Threading.Mutex(true, @"Local\FisherLogger95." + key, out bool created);
+                _showSignal = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.AutoReset, @"Local\FisherLogger95.Show." + key);
+                if (created) return true;
+                try { _showSignal.Set(); } catch { }
+                try { if (_single.WaitOne(4000)) return true; }               // the other copy closed (update / restart)
+                catch (System.Threading.AbandonedMutexException) { return true; }
+                return false;
+            }
+            catch { return true; }   // no named objects (very unusual): do not block the start
+        }
+
+        /// <summary>Waits for «show yourself» from a second start (background thread).</summary>
+        private void ListenSecondStart()
+        {
+            var ev = _showSignal; if (ev == null) return;
+            var t = new Thread(() =>
+            {
+                while (!IsDisposed)
+                {
+                    try { if (!ev.WaitOne(1000)) continue; } catch { return; }
+                    try { if (!IsDisposed && IsHandleCreated) BeginInvoke(new Action(() => { Log("[START] второй запуск — показываю окно"); ShowNuShell(); })); } catch { }
+                }
+            }) { IsBackground = true, Name = "second-start" };
+            t.Start();
         }
 
         public Form1(bool startServices = true, bool enableCapture = false)
@@ -812,6 +851,7 @@ namespace FisherLogger
 
         private void StartSniffer()
         {
+            if (sniffThread is { IsAlive: true }) { Log("[CAPTURE] запись уже идёт — повторный запуск пропущен"); return; }   // ui02_review5 #2
             if (!EnsureNpcap()) return;   // RELEASE-02
             var devices = CaptureDeviceList.Instance;
             if (devices.Count < 1)
@@ -2202,7 +2242,23 @@ namespace FisherLogger
 
         // NEXT-SESSION-23H: дедуп ранних поклёвок — по SourceIdentity (SHA-256 кадра),
         // фолбэк на вес+вид+сек, если идентичность не передана.
-        private readonly HashSet<string> _earlyBiteSeen = new(StringComparer.Ordinal);
+        // FEAT-10: кадр поклёвки не содержит времени — та же рыба (вес/вид/класс), клюнувшая снова, даёт побайтно тот же кадр
+        // (бас 862 г: 13:17:59 сошёл, 13:27:25 клюнул снова → окно не показалось). Повтором считаем только кадр в пределах окна.
+        private readonly Dictionary<string, DateTime> _earlyBiteSeen = new(StringComparer.Ordinal);
+        internal const double EarlyBiteRepeatSeconds = 3.0;
+
+        /// <summary>FEAT-10: true — это повтор того же кадра (ретрансляция/второй путь разбора), окно не нужно.</summary>
+        internal static bool IsRepeatBite(Dictionary<string, DateTime> seen, string key, DateTime at)
+        {
+            lock (seen)
+            {
+                if (seen.Count > 2000)
+                    foreach (var k in seen.Where(p => Math.Abs((at - p.Value).TotalMinutes) > 10).Select(p => p.Key).ToList()) seen.Remove(k);
+                bool repeat = seen.TryGetValue(key, out var prev) && Math.Abs((at - prev).TotalSeconds) <= EarlyBiteRepeatSeconds;
+                seen[key] = at;
+                return repeat;
+            }
+        }
 
         // NEXT-SESSION-51: последние ранние поклёвки (вес → время) — только чтобы
         // не показывать второе «Неизвестно (синт. …)» уведомление для того же события.
@@ -2235,10 +2291,7 @@ namespace FisherLogger
                 string key = !string.IsNullOrEmpty(ev.SourceIdentity)
                     ? "src|" + ev.SourceIdentity
                     : $"fb|{ev.Weight}|{ev.FishLangId}|{ev.Timestamp:yyyyMMddHHmmss}";
-                lock (_earlyBiteSeen)
-                {
-                    if (!_earlyBiteSeen.Add(key)) return;
-                }
+                if (IsRepeatBite(_earlyBiteSeen, key, ev.Timestamp)) return;   // FEAT-10: по времени, а не навсегда
 
                 // NEXT-SESSION-51: запомнить раннюю поклёвку (вес+время пакета) для подавления
                 // дублирующего realtime-уведомления. Записи БД это НЕ сливает.
@@ -3779,7 +3832,8 @@ namespace FisherLogger
 
         private WaterbodyMapForm? _mapForm;
         private AnalyticsForm? _analyticsForm; // NEXT-ANALYTICS-01
-        private AdvisorForm? _advisorForm;     // ADVISOR-01
+        private AdvisorForm? _advisorForm;     // ADVISOR-01 (the assistant of the new window)
+        private AdvisorForm? _goAdvisor;       // ui01_review3 #3: the old «Куда идти» tab of the service window has its own
         private SettingsForm? _settingsForm;   // ADVISOR-01
         private AppSettings _appSettings = AppSettings.Load();
         private DateTime _lastAdvisorLearn = DateTime.MinValue;
@@ -3865,8 +3919,8 @@ namespace FisherLogger
             {
                 // DESIGN-02: советник живёт во вкладке «Куда идти»
                 if (_pages != null && _pages.SelectedIndex != 1) { _pages.SelectedIndex = 1; return; }   // создаст советника при первом показе
-                if (_advisorForm != null && !_advisorForm.IsDisposed) { _advisorForm.ReloadData(learn: true); return; }
-                _advisorForm = new AdvisorForm(AppPaths.CatchDb, () => _appSettings, AdvisorFishName, AdvisorLocName,
+                if (_goAdvisor != null && !_goAdvisor.IsDisposed) { _goAdvisor.ReloadData(learn: true); return; }
+                _goAdvisor = new AdvisorForm(AppPaths.CatchDb, () => _appSettings, AdvisorFishName, AdvisorLocName,
                     loc => { OpenWaterbodyMap(); if (loc is uint l) _mapForm?.SelectWaterbody(l); }, () => OpenSettings("ИИ-агент"), Log)
                 {
                     BaitName = AdvisorBaitName,
@@ -3877,8 +3931,9 @@ namespace FisherLogger
                         if (_mapForm != null && !_mapForm.ShowReferencePoints(loc, fish, pts)) Log("[MAP] водоём " + loc + " не найден в списке карты");
                     }
                 };
-                _advisorForm.FormClosed += (s, e) => _advisorForm = null;
-                EmbedAdvisor(_advisorForm);
+                var ga = _goAdvisor;
+                ga.FormClosed += (s, e) => { if (ReferenceEquals(_goAdvisor, ga)) _goAdvisor = null; };
+                EmbedAdvisor(ga);
                 Log("[ADVISOR] Окно советника открыто");
             }
             catch (Exception ex) { Log("[ADVISOR] Ошибка открытия советника: " + ex.Message); }
@@ -3886,6 +3941,8 @@ namespace FisherLogger
 
         private void OpenSettings(string? section)
         {
+            // ui01_review3 #18: one settings window — the one inside the new window (the old dialog would overwrite its changes)
+            if (_nuShell != null && !_nuShell.IsDisposed) { ShowNuShell(); if (_nuShell.Mode != "settings") _nuShell.Press("settings"); return; }
             try
             {
                 if (_settingsForm != null && !_settingsForm.IsDisposed) { _settingsForm.Activate(); return; }
@@ -3894,6 +3951,7 @@ namespace FisherLogger
                         _appSettings = s.Clone();
                         Log("[SETTINGS] Настройки сохранены: " + AppSettings.FilePath + (s.Agent.Enabled ? " · ИИ-агент включён (" + s.Agent.Model + ")" : ""));
                         try { if (_advisorForm != null && !_advisorForm.IsDisposed) _advisorForm.ReloadData(learn: false); } catch { }
+                        try { if (_goAdvisor != null && !_goAdvisor.IsDisposed) _goAdvisor.ReloadData(learn: false); } catch { }
                         // PRERELEASE-01: правило показа истории
                         try { _tray?.ApplyHotkey(); } catch { }   // NOTIFY-02
                         try { if (_showBox != null) _showBox.SelectedIndex = Math.Clamp(_appSettings.Display.Mode + 1, 0, 3); RebuildHistoryGrid(); } catch { }
@@ -4312,6 +4370,7 @@ namespace FisherLogger
                 _tray.Exit = ExitApp;               // FEAT-09: «Выход» в меню значка закрывает программу
                 _tray.ToggleMap = ToggleGameMap;   // GAMEMAP-01: F12 — карта на весь экран
                 _tray.Start(StartInTray);
+                NuStartup();                       // FEAT-11: новый интерфейс (бета)
             }
             catch (Exception ex) { Log("[TRAY] не запущен: " + ex.Message); }
         }
@@ -4323,6 +4382,7 @@ namespace FisherLogger
                 _overlay = new OverlayManager(_deepParser, () => AppPaths.CatchDb, () => AppPaths.BaseDirectory,
                                               () => (_currentBaseId, _currentBaseSince), Log,
                                               () => _appSettings.Agent, () => _appSettings.Analytics, AdvisorLocName);   // COACH-01: вкладка «Советы»
+                NuMiniHook();                      // FEAT-14: новая мини-карта
                 _overlay.RefreshSync = false;   // OVERLAY-04: чтение БД окна в игре — в фоне
                 _overlay.Start();
             }
@@ -4340,8 +4400,20 @@ namespace FisherLogger
         public void ExitApp()
         {
             _exitRequested = true;
-            if (!Visible) Show();
+            Log("[EXIT] выход по кнопке");
+            try { _nuShell?.Hide(); } catch { }
+            try { _nuMini?.Hide(); } catch { }
+            ExitWatchdog();
             Close();
+        }
+
+        /// <summary>FEAT-15 (EXIT-01): если выход завис (захват, драйвер), через 20 с процесс завершается сам — не висит в диспетчере.</summary>
+        private static int _watchdog;
+        internal void ExitWatchdog()
+        {
+            if (Interlocked.Exchange(ref _watchdog, 1) == 1) return;
+            var t = new Thread(() => { Thread.Sleep(20000); try { Log("[EXIT] выход не закончился за 20 с — процесс завершён принудительно"); LogFile.Flush(); } catch { } Environment.Exit(1); }) { IsBackground = true, Name = "exit-watchdog" };
+            t.Start();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -4357,6 +4429,7 @@ namespace FisherLogger
                 }
                 return;
             }
+            ExitWatchdog();   // FEAT-15 (EXIT-01)
             try { _companion?.Dispose(); } catch { } // NEXT-ANDROID-01
             _companion = null;
             try { _overlay?.Dispose(); } catch { } // OVERLAY
@@ -4371,8 +4444,10 @@ namespace FisherLogger
             baitTimeoutTimer?.Stop();
             baitTimeoutTimer?.Dispose();
 
-            try { device?.StopCapture(); } catch { }
-            try { device?.Close(); } catch { }
+            Log("[EXIT] остановка захвата");
+            var dev = device;
+            var stop = System.Threading.Tasks.Task.Run(() => { try { dev?.StopCapture(); } catch { } try { dev?.Close(); } catch { } });
+            if (!stop.Wait(3000)) Log("[EXIT] захват не остановился за 3 с — выход продолжается");
             try { _pcapNgWriter?.Dispose(); } catch { }
 
             try
@@ -4422,6 +4497,8 @@ namespace FisherLogger
                     Log("Ошибка закрытия SQLite: " + ex.Message);
                 }
             }
+
+            Log("[EXIT] данные сохранены");
 
             try { LogFile.Flush(); } catch { }   // AUDIT-04 (C3)
             base.OnFormClosing(e);

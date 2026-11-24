@@ -67,10 +67,13 @@ namespace FisherLogger
             _npcapWarned = true;
             void Ask()
             {
-                if (UiText.Box(this, "Для работы программе нужен бесплатный драйвер Npcap — через него она читает данные игры.\n\n" +
-                        "Открыть официальный сайт npcap.com? Установите Npcap с настройками по умолчанию и перезапустите программу.",
-                        "Нужен Npcap", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    try { Process.Start(new ProcessStartInfo(NpcapCheck.DownloadUrl) { UseShellExecute = true }); } catch { }
+                // NPCAP-02: offer to download the official installer and start it; after a successful install start recording right away
+                using var f = new NpcapForm();
+                f.ShowDialog();
+                if (!f.Installed) { Log("[NPCAP] не установлен — окно закрыто"); return; }
+                Log("[NPCAP] установлен — запускаю запись");
+                _npcapWarned = false;
+                try { StartSniffer(); } catch (Exception ex) { Log("[NPCAP] запись не запущена: " + ex.Message + " — перезапустите программу"); }
             }
             try { if (IsHandleCreated) BeginInvoke((Action)Ask); else Ask(); } catch { }
             return false;

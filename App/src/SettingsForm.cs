@@ -221,7 +221,7 @@ namespace FisherLogger
                 load.Click += (s, e) =>
                 {
                     using var dlg = new OpenFileDialog { Title = "Звук для класса «" + SoundBank.ClassNames[cls] + "»", Filter = "Звуки (*.wav;*.mp3;*.wma;*.m4a)|*.wav;*.mp3;*.wma;*.m4a" };
-                    if (dlg.ShowDialog(this) != DialogResult.OK) return;
+                    if (dlg.ShowDialog((IWin32Window?)TopLevelControl ?? this) != DialogResult.OK) return;   // ui01_review3 #23: modal to the whole window
                     try
                     {
                         string name = SoundBank.Import(dlg.FileName);
@@ -275,7 +275,7 @@ namespace FisherLogger
         {
             var p = Page();
             p.Controls.Add(H("Окно программы и трей"));
-            p.Controls.Add(Muted("Клавиша показывает окно программы по центру экрана и делает его активным. Нажмите ещё раз — окно уйдёт в трей, а активной снова станет игра (игра не сворачивается). Клавиша окна в игре (радар) — отдельная, в её настройках."));
+            p.Controls.Add(Muted("Клавиша показывает окно программы и делает его активным. Нажмите ещё раз — окно уйдёт в трей, а активной снова станет игра (игра не сворачивается). Клавиша окна в игре (радар) — отдельная, в её настройках."));
             p.Controls.Add(WTray);
             p.Controls.Add(WHotkeyOn);
             if (WKey.Items.Count == 0) foreach (var k in KeyChoices) WKey.Items.Add(TrayController.HotkeyText((int)k, 0));

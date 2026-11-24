@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -130,10 +130,20 @@ namespace FisherLogger
                 if (!File.Exists(db)) return "none";
                 using var con = new SqliteConnection("Data Source=" + db + ";Mode=ReadOnly;Pooling=False");
                 con.Open();
-                using var cmd = new SqliteCommand("SELECT count(*), ifnull(max(id),0), total(ifnull(weight,0) + length(ifnull(fish_name,'')) + length(ifnull(status,'')) + " +
-                                                  "ifnull(bait_id,0) + ifnull(cast_x,0) + ifnull(location_id,0) + length(ifnull(timestamp,''))) FROM catches", con);
-                using var r = cmd.ExecuteReader();
-                return r.Read() ? r.GetInt64(0) + ":" + r.GetInt64(1) + ":" + r.GetDouble(2).ToString("R", CultureInfo.InvariantCulture) : "?";
+                // ui01_review3 #6: the class of a catch can be fixed later (windex) — part of the signature; old bases have no such column
+                string Q(string extra) => "SELECT count(*), ifnull(max(id),0), total(ifnull(weight,0) + length(ifnull(fish_name,'')) + length(ifnull(status,'')) + " +
+                                          "ifnull(bait_id,0) + ifnull(cast_x,0) + ifnull(location_id,0) + length(ifnull(timestamp,''))" + extra + ") FROM catches";
+                foreach (var q in new[] { Q(" + ifnull(windex,-1) * 13"), Q("") })
+                {
+                    try
+                    {
+                        using var cmd = new SqliteCommand(q, con);
+                        using var r = cmd.ExecuteReader();
+                        return r.Read() ? r.GetInt64(0) + ":" + r.GetInt64(1) + ":" + r.GetDouble(2).ToString("R", CultureInfo.InvariantCulture) : "?";
+                    }
+                    catch (SqliteException) { }
+                }
+                return "?";
             }
             catch (Exception ex) { return "err:" + ex.Message; }
         }
