@@ -203,11 +203,11 @@ namespace FisherLogger
             {
                 using var stream = new FileStream(logPath, FileMode.Open, FileAccess.Read,
                     FileShare.ReadWrite | FileShare.Delete);
-                long start = Math.Max(0, stream.Length - 200_000);
-                stream.Seek(start, SeekOrigin.Begin);
+                // MAPS-FIX-01: читаем ВЕСЬ лог только для строк локации/спавна.
+                // Раньше смотрели последние 200 КБ — если сцена загружена давно (лог успел вырасти), «Start load Level» терялся.
                 using var reader = new StreamReader(stream, Encoding.UTF8, true, 4096, leaveOpen: true);
-                string? text = reader.ReadToEnd();
-                foreach (string line in text.Split('\n'))
+                string? line;
+                while ((line = reader.ReadLine()) != null)
                     ProcessLocationLine(line);
             }
             catch

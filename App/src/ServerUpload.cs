@@ -163,7 +163,7 @@ namespace FisherLogger
     }
 
     /// <summary>SERVER-02: объединённый улов (со всех устройств, что шлют данные на сервер).</summary>
-    public sealed class AfoCatch { public int CX, CZ; public uint? Fish; public int? Weight, Windex; public long Ts; public string Kind = "", Status = ""; }
+    public sealed class AfoCatch { public int CX, CZ; public uint? Fish; public int? Weight, Windex; public long Ts; public long ServerTs; public string Kind = "", Status = ""; }
 
     /// <summary>SERVER-02: чтение объединённых уловов — GET /api/v1/catches?waterbody=...&amp;days=...</summary>
     public static class AfoCatches
@@ -188,6 +188,7 @@ namespace FisherLogger
                         if (s.TryGetProperty("weight", out var w) && w.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Weight = w.GetInt32();
                         if (s.TryGetProperty("windex", out var wi) && wi.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Windex = wi.GetInt32();
                         if (s.TryGetProperty("ts", out var t) && t.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Ts = t.GetInt64();
+                        if (s.TryGetProperty("server_ts", out var sts) && sts.ValueKind == System.Text.Json.JsonValueKind.Number) sp.ServerTs = sts.GetInt64();   // MAPS-FIX-01: время сервера
                         if (s.TryGetProperty("kind", out var k) && k.ValueKind == System.Text.Json.JsonValueKind.String) sp.Kind = k.GetString() ?? "";
                         if (s.TryGetProperty("status", out var st) && st.ValueKind == System.Text.Json.JsonValueKind.String) sp.Status = st.GetString() ?? "";
                         list.Add(sp);

@@ -189,14 +189,14 @@ class H(BaseHTTPRequestHandler):
             try: days = max(1, min(365, int(q.get("days", ["30"])[0] or "30")))
             except ValueError: days = 30
             c = db()
-            sql = ("SELECT e.cx, e.cz, e.fish, e.weight, e.kind, e.ts, i.status, e.windex FROM events e JOIN installs i ON i.install_id=e.install_id "
+            sql = ("SELECT e.cx, e.cz, e.fish, e.weight, e.kind, e.ts, i.status, e.windex, e.received FROM events e JOIN installs i ON i.install_id=e.install_id "
                    "WHERE e.waterbody=? AND e.cx IS NOT NULL AND e.kind IN ('bite','catch') AND e.ts>?")
             args = [wb, now_ms() - days * 24 * 3600 * 1000]
             if fish:
                 sql += " AND e.fish=?"; args.append(int(fish))
             sql += " ORDER BY e.ts DESC LIMIT 5000"
             rows = c.execute(sql, args).fetchall(); c.close()
-            return self.send(200, {"waterbody": wb, "days": days, "catches": [{"cell": [r[0], r[1]], "fish": r[2], "weight": r[3], "kind": r[4], "ts": r[5], "status": r[6], "windex": r[7]} for r in rows]})
+            return self.send(200, {"waterbody": wb, "days": days, "catches": [{"cell": [r[0], r[1]], "fish": r[2], "weight": r[3], "kind": r[4], "ts": r[5], "status": r[6], "windex": r[7], "server_ts": r[8]} for r in rows]})
         self.send(404, {"error": "not_found"})
 
     def do_POST(self):
