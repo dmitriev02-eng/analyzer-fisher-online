@@ -3950,10 +3950,186 @@
    "bundle": "b25",
    "n_terrains": 3,
    "water_level_world_y": 6.0,
-   "status": "NOT_IMPLEMENTED_MULTI_TERRAIN",
-   "underwater_relief": "есть (3 террейна)",
-   "absolute_depth_m": "не определено",
-   "note": "несколько террейнов: активный террейн и рамка карты не определены (как в NEXT-135) — батиметрия не строится"
+   "multi_terrain_active": "Terrain",
+   "source": {
+    "terrain_data": "Meadow Terrain Demo",
+    "td_pid": -6226697873230426686,
+    "heights_file": "heights_-6226697873230426686.npy",
+    "heights_sha256": "f5abd46cfb2b21d87c9a8195b3ab3d416075bce2f1688781ac5a56f6d8ed7f04",
+    "terrain_position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "terrain_size": [
+     512.0,
+     250.0,
+     512.0
+    ],
+    "resolution": 1025,
+    "height_formula": "Y = position.y + raw / 32766 * size.y"
+   },
+   "frame_matches_terrain": true,
+   "frame": {
+    "min_x": 0.0,
+    "max_x": 512.0,
+    "min_z": 0.0,
+    "max_z": 512.0
+   },
+   "map_file": "tfbase_025_2048.png",
+   "map_sha256": "3f86bb2f3d2d2dc432bc2138177530d29c6bbe413e64e1f2b3f0e1993bfbca63",
+   "map_confidence": "PROBABLE",
+   "masked_water_fraction": 0.0008,
+   "status": "IMPLEMENTED",
+   "underwater_relief": "есть",
+   "absolute_depth_m": "да (м)",
+   "depth_unit": "m",
+   "depth_formula": "depth = water_level_world_y − terrain_world_y",
+   "max_depth_m": 6.0,
+   "mean_depth_m": 2.67,
+   "water_fraction": 0.1417,
+   "coverage": "100% рамки карты (рамка = террейн), кроме областей, закрытых слоем карты игры (carto-меши); объекты сцены (камни, коряги, сваи) в рельеф не входят",
+   "contour_interval_m": 1.0,
+   "bands": [
+    {
+     "from_m": 0.0,
+     "to_m": 1.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.12
+    },
+    {
+     "from_m": 1.0,
+     "to_m": 2.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.23
+    },
+    {
+     "from_m": 2.0,
+     "to_m": 3.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.34
+    },
+    {
+     "from_m": 3.0,
+     "to_m": 4.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.45
+    },
+    {
+     "from_m": 4.0,
+     "to_m": 5.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.56
+    },
+    {
+     "from_m": 5.0,
+     "to_m": 6.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.67
+    },
+    {
+     "from_m": 6.0,
+     "to_m": 7.0,
+     "rgb": [
+      14,
+      52,
+      96
+     ],
+     "alpha": 0.7
+    }
+   ],
+   "grid": {
+    "file": "depth_025_1024.u16.gz",
+    "width": 1024,
+    "height": 1024,
+    "dtype": "uint16 LE, centimetres, row 0 = north (max_z)",
+    "nodata": 65535,
+    "sha256": "23b382ebb89ec84ed2acc021bcf9ef2efa7b7da158fef7597c4d6175c83f797d",
+    "cell_center": "x = min_x + (i+0.5)/W*(max_x-min_x), z = max_z - (j+0.5)/H*(max_z-min_z)"
+   },
+   "overlay": {
+    "file": "bathy_025_2048.png",
+    "width": 2048,
+    "height": 2048,
+    "sha256": "9f9d6be10eb84143000e08bf037b72ac0f43f819bb5fc29a1799e4783503a122",
+    "transform": "same as map registry: px = (X-min_x)/(max_x-min_x)*W, py = (max_z-Z)/(max_z-min_z)*H"
+   },
+   "labels": [
+    {
+     "x": 412.38,
+     "z": 400.12,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 271.62,
+     "z": 288.88,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 250.62,
+     "z": 176.88,
+     "depth_m": 1.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 301.38,
+     "z": 371.12,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 126.88,
+     "z": 75.12,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 501.62,
+     "z": 388.12,
+     "depth_m": 2.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 286.12,
+     "z": 94.38,
+     "depth_m": 3.0,
+     "kind": "isobath"
+    },
+    {
+     "x": 241.12,
+     "z": 376.38,
+     "depth_m": 6.0,
+     "kind": "max"
+    }
+   ],
+   "depth_confidence": "CONFIRMED (формула высоты: NEXT-135, |dY| точек сцены; масштаб: depth_cm записанных забросов = уровень воды − Y наживки)",
+   "alignment_confidence": "PROBABLE"
   },
   {
    "location_id": 26,

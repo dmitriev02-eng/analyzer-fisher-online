@@ -602,6 +602,27 @@
    "hd_note": "NEXT-MAP-RESOLUTION-01: same frame and algorithm as the 2048 map (render_hd.py), rendered at 4096x4096 for the Windows map window only"
   },
   {
+   "location_id": 25,
+   "name": "Болгария: Луда Камчия",
+   "bundle": "b25",
+   "prefab": "assets/_sceneprefabs/tfbase_25.prefab",
+   "file": "tfbase_025_2048.png",
+   "width": 2048,
+   "height": 2048,
+   "min_x": 0.0,
+   "max_x": 512.0,
+   "min_z": 0.0,
+   "max_z": 512.0,
+   "sha256": "3f86bb2f3d2d2dc432bc2138177530d29c6bbe413e64e1f2b3f0e1993bfbca63",
+   "map_version": "MAPS-FIX-01.1",
+   "confidence": "PROBABLE",
+   "validation": "scene",
+   "validation_text": "Реконструкция по АКТИВНОМУ террейну (из 3; active=Terrain, 512x512). 8/8 спавн-точек на рельефе (медиана |dY| 0.10 м, все <=0.5), рыб. точка в 6.9 м от воды. Со скриншотом игры НЕ сверялась.",
+   "water_level": 6.0,
+   "background": "submap.png (UI background) baked in",
+   "source": "TerrainData + Cartografer.renderMap reconstruction (MAPS-FIX-01, active terrain)"
+  },
+  {
    "location_id": 27,
    "name": "Бавария: р.Лех",
    "bundle": "b27",
