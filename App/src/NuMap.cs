@@ -137,6 +137,8 @@ namespace FisherLogger
         public bool PlacesOn { get; set; } = true;
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public NuPlaceFilter PlaceFilter { get; set; } = new();
+        /// <summary>MAPS-FIX-01: имя рыбы по id — для фильтра объединённых уловов.</summary>
+        public Func<uint, string>? FishName;
         public event Action? PlaceSettingsChanged;
         /// <summary>Click on a place: the journal filtered to this place.</summary>
         public Action<NuPlace, NuPlaceFilter>? OpenPlaceJournal;
@@ -474,24 +476,55 @@ namespace FisherLogger
             }
         }
 
-        /// <summary>SERVER-02: объединённые уловы со всех устройств (голубые точки).</summary>
+        /// <summary>SERVER-02: объединённые уловы со всех устройств (голубые точки). MAPS-FIX-01: подчиняются фильтрам «Места по уловам».</summary>
         private void PaintMergedCatches(Graphics g, NuMapData d)
         {
             if (d.MergedCatches.Count == 0) return;
             var t = MapGridCoordinates.For(d.LocationId);
             if (t == null || !t.HasTransform) return;
+            var pf = PlaceFilter; var now = DateTime.Now;
             using var fill = new SolidBrush(Color.FromArgb(150, 0x35, 0xE0, 0xFF));
             using var pen = new Pen(Color.FromArgb(0x8F, 0xE8, 0xFF), 1.4f);
             foreach (var c in d.MergedCatches)
             {
                 double wx = t.OriginX!.Value + (c.CX - 0.5) * t.Cell;
                 double wz = t.OriginZ!.Value + (c.CZ - 0.5) * t.Cell;
+                if (!OkAfo(c, pf, d.LocationId, wx, wz, now)) continue;
                 var p = W2S(wx, wz);
                 if (p.X < -10 || p.X > Width + 10 || p.Y < -10 || p.Y > Height + 10) continue;
                 float r = c.Windex >= 2 ? 5 : 4;
                 g.FillEllipse(fill, p.X - r, p.Y - r, 2 * r, 2 * r);
                 g.DrawEllipse(pen, p.X - r, p.Y - r, 2 * r, 2 * r);
             }
+        }
+
+        /// <summary>MAPS-FIX-01: проверка объединённого улова теми же фильтрами (рыба/класс/глубина/часть суток/период).</summary>
+        private bool OkAfo(AfoCatch c, NuPlaceFilter f, uint? loc, double wx, double wz, DateTime now)
+        {
+            if (f.Fish.Length > 0)
+            {
+                string nm = FishName != null && c.Fish is uint fid ? (FishName(fid) ?? "").Trim() : "";
+                if (!string.Equals(nm, f.Fish, StringComparison.CurrentCulture)) return false;
+            }
+            if (f.MinClass >= 0 && (c.Windex ?? -1) < f.MinClass) return false;
+            if (f.Period != 3 && c.ServerTs > 0)
+            {
+                var t = DateTimeOffset.FromUnixTimeMilliseconds(c.ServerTs).LocalDateTime;
+                if (f.From(now) is DateTime from && t < from) return false;
+            }
+            if (f.DepthBand >= 0)
+            {
+                var (lo, hi) = NuPlaces.Band(f.DepthBand);
+                if (NuPlaces.DepthAt(loc, wx, wz) is not double dd || dd < lo || dd >= hi) return false;
+            }
+            if (f.Part.Length > 0)
+            {
+                long ms = c.ServerTs > 0 ? c.ServerTs : c.Ts;
+                if (ms <= 0) return false;
+                var t = DateTimeOffset.FromUnixTimeMilliseconds(ms).LocalDateTime;
+                if (DayParts.Part(DayParts.GameHour(t)) != f.Part) return false;
+            }
+            return true;
         }
 
         private void PaintCasts(Graphics g, NuMapData d)
@@ -761,8 +794,8 @@ namespace FisherLogger
             int x = Width - 16 - w, y = 60;
             if (x < _panel.Right + 12) { x = 16; y = _panel.Bottom + 10; }   // narrow window: under the circles panel
             var all = PlacesOn ? NuPlaces.Peek(d, PlaceFilter, PlacesReady) : new List<NuPlace>();
-            bool folded = PlacesFolded || y + 236 > Height - 56;            // ui02_review5 #6: no room below — show one line (the setting is not changed)
-            int h = PlacesOn && !folded ? 236 : 46;
+            bool folded = PlacesFolded || y + 258 > Height - 56;            // ui02_review5 #6: no room below — show one line (the setting is not changed)
+            int h = PlacesOn && !folded ? 258 : 46;
             _placesPanel = new Rectangle(x, y, w, h);
             Glass(g, _placesPanel, 12, 225);
             using var fb = NuTheme.F(10f, FontStyle.Bold); using var f = NuTheme.F(9f); using var fs = NuTheme.F(8.5f);
@@ -822,6 +855,10 @@ namespace FisherLogger
                 lx += 20 + TextRenderer.MeasureText(g, name, fs, Size.Empty, TextFormatFlags.NoPadding).Width;
             }
             cy += 20;
+            // MAPS-FIX-01: легенда объединённых уловов (голубые точки) — что они значат.
+            using (var b = new SolidBrush(Color.FromArgb(150, 0x35, 0xE0, 0xFF))) g.FillEllipse(b, x + 12, cy + 2, 11, 11);
+            TextRenderer.DrawText(g, "объединённые — уловы всех устройств с сервера", fs, new Point(x + 12 + 14, cy), NuTheme.Soft, TextFormatFlags.NoPadding);
+            cy += 19;
             string note = all.Count == 0
                 ? (pf.IsDefault ? "Уловов с местом на этом водоёме пока нет." : "Под эти фильтры уловов нет — ослабьте фильтр.")
                 : "Цвет — лучший класс, размер — сколько рыб. Щелчок — уловы этого места из журнала (текущая база).";

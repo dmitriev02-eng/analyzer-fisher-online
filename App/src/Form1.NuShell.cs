@@ -48,6 +48,8 @@ namespace FisherLogger
                     // UI-02-6: «Карта любого водоёма» — заполнить список водоёмов + переписывать карту при выборе.
                     shell.MapPickChanged += () => NuMapTick(null, EventArgs.Empty);
                     try { shell.SetWaterList(NuWaterList()); } catch (Exception ex) { Log("[NEWUI] список водоёмов: " + ex.Message); }
+                    // MAPS-FIX-01: имя рыбы для фильтра объединённых уловов.
+                    shell.MapView.FishName = id => { try { return _deepParser.GetFish(id)?.Name ?? ""; } catch { return ""; } };
                     _nuShell = shell;
                 }
                 if (!_nuShell.Visible) _nuShell.Show();
