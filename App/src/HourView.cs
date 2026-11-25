@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -12,12 +12,12 @@ namespace FisherLogger
     /// <summary>HOURS-01: вкладка Советника «По часам» — водоём, рыба, период; 24 игровых часа; частая рыба над часами; список рыбы по часу.</summary>
     public sealed class HourView : UserControl
     {
-        internal readonly ComboBox WaterCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 230 };
-        internal readonly ComboBox FishCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 230 };
-        internal readonly ComboBox PeriodCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 240 };
-        internal readonly ComboBox SeriesCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 170 };
+        internal readonly ComboBox WaterCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 150 };
+        internal readonly ComboBox FishCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 150 };
+        internal readonly ComboBox PeriodCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 170 };
+        internal readonly ComboBox SeriesCombo = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 130 };
         internal readonly Label Status = UiKit.Pill("", Theme.ButtonNeutral);
-        internal readonly HourBars Chart = new() { Dock = DockStyle.Top, Height = 330 };
+        internal readonly HourBars Chart = new() { Dock = DockStyle.Top, Height = 240 };
         internal readonly Label ListTitle = new() { Dock = DockStyle.Top, Height = 30, Font = UiKit.SectionFont, ForeColor = Theme.Text, Padding = new Padding(2, 6, 0, 0) };
         internal readonly StatList List = new() { Dock = DockStyle.Fill, EmptyText = "Нет записей" };
         private readonly Label _note = new() { Dock = DockStyle.Bottom, Height = 40, ForeColor = Theme.TextMuted, Font = UiKit.Small, Padding = new Padding(4) };
@@ -38,7 +38,7 @@ namespace FisherLogger
         {
             _fishName = fishName; _locName = locName;
             BackColor = Theme.Background; ForeColor = Theme.Text; Font = Theme.Ui; Dock = DockStyle.Fill;
-            var bar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 44, Padding = new Padding(8, 6, 8, 2), BackColor = Theme.Surface, WrapContents = false };
+            var bar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 88, Padding = new Padding(8, 6, 8, 2), BackColor = Theme.Surface, WrapContents = true };
             Label L(string t) => new() { Text = t, AutoSize = true, Margin = new Padding(8, 8, 4, 0), ForeColor = Theme.TextMuted };
             bar.Controls.AddRange(new Control[] { L("Водоём:"), WaterCombo, L("Рыба:"), FishCombo, L("Период:"), PeriodCombo, L("Чьи:"), SeriesCombo });
             foreach (var (t, v) in new[] { ("Авто (сутки → 3 суток → всё)", "auto"), ("Последние сутки", "day"), ("Последние 3 суток", "3days"), ("Всё время", "all") })

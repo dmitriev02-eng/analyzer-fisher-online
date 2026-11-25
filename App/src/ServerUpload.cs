@@ -78,14 +78,16 @@ namespace FisherLogger
 
         /// <summary>Событие для сервера или null, если обязательного нет (водоём). Ничего не выдумывается.</summary>
         public static Dictionary<string, object?>? EventJson(string uid, string kind, DateTime local, uint? fish, int? weight, int? windex, int? rod,
-                                                           double? x, double? z, long? bait, long? hook, double? chance, uint? loc, TimeSpan? off)
+                                                           double? x, double? z, long? bait, long? hook, double? chance, uint? loc, TimeSpan? off,
+                                                           long? leader = null, long? groundbait = null, int? depthCm = null)
         {
             if (loc == null) return null;
             var e = new Dictionary<string, object?>
             {
                 ["uid"] = uid, ["kind"] = kind, ["ts"] = new DateTimeOffset(local.ToUniversalTime()).ToUnixTimeMilliseconds(), ["waterbody"] = (int)loc.Value,
                 ["fish"] = fish.HasValue ? (int)fish.Value : null, ["weight"] = weight, ["windex"] = windex, ["rod"] = rod,
-                ["bait"] = bait, ["hook"] = hook, ["chance"] = chance.HasValue ? Math.Round(chance.Value, 3) : null
+                ["bait"] = bait, ["hook"] = hook, ["chance"] = chance.HasValue ? Math.Round(chance.Value, 3) : null,
+                ["leader"] = leader, ["groundbait"] = groundbait, ["depth_cm"] = depthCm   // UX-MERGE: сервер хранит всё
             };
             if (x.HasValue && z.HasValue && MapGridCoordinates.ToGrid(loc, x.Value, z.Value) is { } g && g.X >= 0 && g.Y >= 0) e["cell"] = new[] { g.X, g.Y };
             var gt = GameClock.Estimate(local, off).text;
@@ -122,7 +124,10 @@ namespace FisherLogger
                 var events = new List<Dictionary<string, object?>>(); long top = ss.LastEventId;
                 string salt = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(db))).Substring(0, 8);
                 using (var q = new SqliteCommand("SELECT e.id, e.timestamp, e.event_type, e.fish_lang_id, e.weight, e.windex, c.rod_index, c.cast_x, c.cast_z, t.bait_item_id, t.hook_item_id, " +
-                    "(SELECT w.chance FROM cast_events w WHERE w.cast_id = e.cast_id AND w.event_type = 'wait' AND w.chance IS NOT NULL AND w.id < e.id ORDER BY w.id DESC LIMIT 1) " +
+                    "(SELECT w.chance FROM cast_events w WHERE w.cast_id = e.cast_id AND w.event_type = 'wait' AND w.chance IS NOT NULL AND w.id < e.id ORDER BY w.id DESC LIMIT 1), " +
+                    "t.leader_item_id, t.groundbait_item_id, " +
+                    "(SELECT ct.windex FROM catches ct WHERE ct.cast_id = e.cast_id AND ct.windex IS NOT NULL ORDER BY ct.id DESC LIMIT 1), " +
+                    "(SELECT ct.depth_cm FROM catches ct WHERE ct.cast_id = e.cast_id AND ct.depth_cm IS NOT NULL ORDER BY ct.id DESC LIMIT 1) " +
                     "FROM cast_events e LEFT JOIN casts c ON c.id = e.cast_id LEFT JOIN cast_tackle t ON t.cast_id = e.cast_id " +
                     "WHERE e.id > $s AND e.event_type IN ('bite','empty_bite','catch') ORDER BY e.id LIMIT 500", con))
                 {
@@ -134,8 +139,8 @@ namespace FisherLogger
                         if (!DateTime.TryParse(r.IsDBNull(1) ? "" : r.GetString(1), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out var t)) continue;
                         long? L(int i) => r.IsDBNull(i) ? null : r.GetInt64(i);
                         double? D(int i) => r.IsDBNull(i) ? null : r.GetDouble(i);
-                        var e = EventJson(salt + "-" + id.ToString(CultureInfo.InvariantCulture), r.GetString(2), t, L(3) is long f ? (uint)f : null, (int?)L(4), (int?)L(5),
-                                          L(6) is long rod ? (int)rod : null, D(7), D(8), L(9), L(10), D(11), loc, off);
+                        var e = EventJson(salt + "-" + id.ToString(CultureInfo.InvariantCulture), r.GetString(2), t, L(3) is long f ? (uint)f : null, (int?)L(4), (int?)(L(5) ?? L(14)),
+                                          L(6) is long rod ? (int)rod : null, D(7), D(8), L(9), L(10), D(11), loc, off, L(12), L(13), (int?)L(15));
                         if (e != null) events.Add(e);
                     }
                 }
@@ -163,19 +168,22 @@ namespace FisherLogger
     }
 
     /// <summary>SERVER-02: объединённый улов (со всех устройств, что шлют данные на сервер).</summary>
-    public sealed class AfoCatch { public int CX, CZ; public uint? Fish; public int? Weight, Windex; public long Ts; public long ServerTs; public string Kind = "", Status = ""; }
+    public sealed class AfoCatch { public int CX, CZ; public uint? Fish; public int? Weight, Windex; public long Ts; public long ServerTs; public double? Chance; public long? Bait, Hook, Leader, Groundbait; public int? DepthCm; public string Kind = "", Status = ""; }
 
     /// <summary>SERVER-02: чтение объединённых уловов — GET /api/v1/catches?waterbody=...&amp;days=...</summary>
     public static class AfoCatches
     {
-        public static System.Collections.Generic.List<AfoCatch> Fetch(uint waterbody, int days = 30)
+        public static System.Collections.Generic.List<AfoCatch> Fetch(uint waterbody, int days = 30, string? excludeInstall = null)
         {
             try
             {
                 var ss = ServerSettings.Load();
                 string url = (string.IsNullOrWhiteSpace(ss.Url) ? ServerUploader.DefaultUrl : ss.Url).TrimEnd('/');
                 using var http = ServerUploader.Http();
-                var resp = http.GetAsync(url + "/api/v1/catches?waterbody=" + waterbody.ToString(System.Globalization.CultureInfo.InvariantCulture) + "&days=" + days.ToString(System.Globalization.CultureInfo.InvariantCulture)).GetAwaiter().GetResult();
+                string q = "?waterbody=" + waterbody.ToString(System.Globalization.CultureInfo.InvariantCulture) + "&days=" + days.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string? ex = excludeInstall ?? ss.RemoteId;   // UX-MERGE: своё устройство не дублируем, остальные — в общий слой
+                if (!string.IsNullOrWhiteSpace(ex)) q += "&exclude_install=" + System.Uri.EscapeDataString(ex);
+                var resp = http.GetAsync(url + "/api/v1/catches" + q).GetAwaiter().GetResult();
                 if (!resp.IsSuccessStatusCode) return new System.Collections.Generic.List<AfoCatch>();
                 using var doc = System.Text.Json.JsonDocument.Parse(resp.Content.ReadAsStringAsync().GetAwaiter().GetResult());
                 var list = new System.Collections.Generic.List<AfoCatch>();
@@ -189,6 +197,12 @@ namespace FisherLogger
                         if (s.TryGetProperty("windex", out var wi) && wi.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Windex = wi.GetInt32();
                         if (s.TryGetProperty("ts", out var t) && t.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Ts = t.GetInt64();
                         if (s.TryGetProperty("server_ts", out var sts) && sts.ValueKind == System.Text.Json.JsonValueKind.Number) sp.ServerTs = sts.GetInt64();   // MAPS-FIX-01: время сервера
+                        if (s.TryGetProperty("chance", out var ch) && ch.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Chance = ch.GetDouble();   // UX-MERGE (A4): шанс для общих кругов
+                        if (s.TryGetProperty("bait", out var ba) && ba.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Bait = ba.GetInt64();   // UX-MERGE: наживка
+                        if (s.TryGetProperty("hook", out var ho) && ho.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Hook = ho.GetInt64();   // UX-MERGE: крючок
+                        if (s.TryGetProperty("leader", out var le) && le.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Leader = le.GetInt64();   // UX-MERGE: поводок
+                        if (s.TryGetProperty("groundbait", out var gbEl) && gbEl.ValueKind == System.Text.Json.JsonValueKind.Number) sp.Groundbait = gbEl.GetInt64();   // UX-MERGE: прикормка
+                        if (s.TryGetProperty("depth_cm", out var de) && de.ValueKind == System.Text.Json.JsonValueKind.Number) sp.DepthCm = de.GetInt32();   // UX-MERGE: глубина
                         if (s.TryGetProperty("kind", out var k) && k.ValueKind == System.Text.Json.JsonValueKind.String) sp.Kind = k.GetString() ?? "";
                         if (s.TryGetProperty("status", out var st) && st.ValueKind == System.Text.Json.JsonValueKind.String) sp.Status = st.GetString() ?? "";
                         list.Add(sp);

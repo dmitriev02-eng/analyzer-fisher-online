@@ -80,6 +80,51 @@ namespace FisherLogger
             return d;
         }
 
+        /// <summary>UX-MERGE (A1/A2): уловы всех устройств вливаются в общий слой «как свои» (только поимки, дедуп клетка+рыба+вес).</summary>
+        public static void MergeMerged(NuMapData d, Func<uint, string>? fishName)
+        {
+            if (d.MergedCatches.Count == 0) return;
+            var t = MapGridCoordinates.For(d.LocationId);
+            if (t == null || !t.HasTransform) return;
+            var seen = new HashSet<string>();
+            foreach (var c in d.Catches)
+            {
+                if (!c.X.HasValue || !c.Z.HasValue) continue;
+                if (MapGridCoordinates.ToGrid(d.LocationId, c.X.Value, c.Z.Value) is { } g) seen.Add(g.X + ":" + g.Y + "|" + (c.Fish ?? "") + "|" + c.Weight);
+            }
+            foreach (var m in d.MergedCatches)
+            {
+                if (m.Kind != "catch") continue;   // «поимки», как свои
+                string nm = (fishName != null && m.Fish is uint fid) ? (fishName(fid) ?? "") : "";
+                if (nm.Length == 0) nm = "рыба";
+                string key = m.CX + ":" + m.CZ + "|" + nm + "|" + (m.Weight ?? 0);
+                if (seen.Contains(key)) continue;
+                double wx = t.OriginX!.Value + (m.CX - 0.5) * t.Cell;
+                double wz = t.OriginZ!.Value + (m.CZ - 0.5) * t.Cell;
+                long ms = m.ServerTs > 0 ? m.ServerTs : m.Ts;
+                DateTime? tm = ms > 0 ? DateTimeOffset.FromUnixTimeMilliseconds(ms).LocalDateTime : null;
+                d.Catches.Add(new MapCatch
+                {
+                    X = wx, Z = wz, Fish = nm, FishId = m.Fish, Windex = m.Windex, Weight = m.Weight ?? 0,
+                    LocationId = d.LocationId, TimeText = tm?.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) ?? "",
+                    Verified = true, Session = "server", RecordId = "afo:" + key
+                });
+            }
+            // UX-MERGE (A4): общие круги клёва из серверного шанса (для точек, где сервер вернул chance)
+            var extra = new List<ChanceSpots.Spot>();
+            foreach (var m in d.MergedCatches)
+            {
+                if (m.Chance is not double ch || ch <= 0 || ch > 500) continue;
+                extra.Add(new ChanceSpots.Spot
+                {
+                    X = t.OriginX!.Value + (m.CX - 0.5) * t.Cell,
+                    Z = t.OriginZ!.Value + (m.CZ - 0.5) * t.Cell,
+                    Median = ch, Ticks = 1, Casts = 1, Bait = ""
+                });
+            }
+            if (extra.Count > 0) d.Spots.AddRange(extra);
+        }
+
         /// <summary>Same rating as the F12 map (FEAT-07 / SPOTS-05): % of the usual chance of this tackle on this water, and strong spots.</summary>
         public static void Enrich(List<ChanceSpots.Spot> spots, uint? loc, string db, List<MapCatch> catches, DateTime now)
         {
@@ -135,6 +180,9 @@ namespace FisherLogger
         // UI-02/5: «Места по уловам» — old catches grouped into places, with filters (kept by the window in the settings)
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public bool PlacesOn { get; set; } = true;
+        /// <summary>UX-MERGE (B2): тепловая карта плотности уловов (по умолчанию выкл.).</summary>
+        [System.ComponentModel.Browsable(false), System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public bool HeatmapOn { get; set; } = false;
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public NuPlaceFilter PlaceFilter { get; set; } = new();
         /// <summary>MAPS-FIX-01: имя рыбы по id — для фильтра объединённых уловов.</summary>
@@ -359,8 +407,8 @@ namespace FisherLogger
             }
             if (d.Map == null) Center(g, "Для этого водоёма нет карты", "Уловы и круги клёва показаны на сетке");
             if (PlacesOn) PaintPlaces(g, d); else { _placesShown.Clear(); _placeHover = null; }
-            PaintCatches(g, d);
-            PaintMergedCatches(g, d);   // SERVER-02: объединённые уловы со всех устройств
+            PaintHeatmap(g, d);   // UX-MERGE (B2): тепловая карта плотности
+            PaintCatches(g, d);   // UX-MERGE: свои + всех устройств — единый слой
             if (ZonesOn) PaintCircles(g, d); else { _placed.Clear(); _hover = null; HiddenCircles = 0; }
             if (ShowPose) PaintCasts(g, d);
             if (ShowPose) PaintPlayer(g);
@@ -368,6 +416,7 @@ namespace FisherLogger
             PaintTopInfo(g, d);
             PaintZonesPanel(g, d);
             PaintPlacesPanel(g, d);
+            PaintClutterHint(g, d);   // UX-MERGE (C3): плашка «Упростить» на плотной карте
             PaintDepthLegend(g, d);
             PaintButtons(g);
             if (_hover != null) PaintTip(g, _hover, d);
@@ -466,8 +515,13 @@ namespace FisherLogger
         private void PaintCatches(Graphics g, NuMapData d)
         {
             var since = DateTime.Now.AddHours(-6);
+            int n = d.Catches.Count(c => c.X.HasValue && c.Z.HasValue && (OverlayDataSource.PlausibleTime(c.TimeText) ?? DateTime.MinValue) >= since);
+            // UX-MERGE (B4): при большой плотности и дальнем зуме — только крупные/трофеи (LOD), иначе карта тонет
+            bool dense = n > 300 && _scale < 2.0;
             foreach (var c in d.Catches.Where(c => c.X.HasValue && c.Z.HasValue && (OverlayDataSource.PlausibleTime(c.TimeText) ?? DateTime.MinValue) >= since))
             {
+                if (dense && (c.Windex ?? 0) < 2) continue;   // UX-MERGE (B4)
+                if (PlaceFilter.MinClass >= 0 && (c.Windex ?? -1) < PlaceFilter.MinClass) continue;   // UX-MERGE (C3): фильтр класса действует и на точки
                 var p = W2S(c.X!.Value, c.Z!.Value); if (p.X < -10 || p.Y < -10 || p.X > Width + 10 || p.Y > Height + 10) continue;
                 var col = c.Windex switch { 3 => Color.FromArgb(0xF5, 0xC4, 0x51), 2 => Color.FromArgb(0x5D, 0xB3, 0xFF), 1 => NuTheme.Ok, _ => Color.FromArgb(0xC9, 0xD4, 0xD1) };
                 float r = c.Windex >= 2 ? 5 : 4;
@@ -582,7 +636,7 @@ namespace FisherLogger
                 string depth = Bathymetry.DepthAt(d.LocationId, cast.X, cast.Z) is double dm ? " · глубина " + dm.ToString("0.0", CultureInfo.GetCultureInfo("ru-RU")) + " м" : "";
                 parts.Add("заброс " + (cast.Rod + 1) + ": " + Grid(d.LocationId, cast.X, cast.Z) + depth);
             }
-            if (d.MergedCatches.Count > 0) parts.Add("объединённые (все устройства): " + d.MergedCatches.Count + " уловов");
+            if (d.MergedCatches.Count > 0) parts.Add("в т.ч. других устройств: " + d.MergedCatches.Count);
             string t = string.Join("   ·   ", parts);
             using var f = NuTheme.F(10f);
             var sz = TextRenderer.MeasureText(g, t, f, Size.Empty, TextFormatFlags.NoPadding);
@@ -711,6 +765,7 @@ namespace FisherLogger
                 _hits.Add((r, a)); x = r.X - 8;
             }
             if (OpenFullMap != null) { string k = FullMapKeyText?.Invoke() ?? ""; Btn("На весь экран" + (k.Length > 0 ? " · " + k : ""), () => OpenFullMap()); }   // ui01_review3 #27
+            Btn(HeatmapOn ? "Тепло ✓" : "Тепло", () => { HeatmapOn = !HeatmapOn; Invalidate(); });   // UX-MERGE (B2)
             Btn(Pose != null ? "Ко мне" : "Весь водоём", () => { if (Pose != null) CenterOnMe(); else Fit(); });
         }
 
@@ -857,7 +912,7 @@ namespace FisherLogger
             cy += 20;
             // MAPS-FIX-01: легенда объединённых уловов (голубые точки) — что они значат.
             using (var b = new SolidBrush(Color.FromArgb(150, 0x35, 0xE0, 0xFF))) g.FillEllipse(b, x + 12, cy + 2, 11, 11);
-            TextRenderer.DrawText(g, "объединённые — уловы всех устройств с сервера", fs, new Point(x + 12 + 14, cy), NuTheme.Soft, TextFormatFlags.NoPadding);
+            TextRenderer.DrawText(g, "включая уловы других устройств (сервер)", fs, new Point(x + 12 + 14, cy), NuTheme.Soft, TextFormatFlags.NoPadding);
             cy += 19;
             string note = all.Count == 0
                 ? (pf.IsDefault ? "Уловов с местом на этом водоёме пока нет." : "Под эти фильтры уловов нет — ослабьте фильтр.")
@@ -875,6 +930,57 @@ namespace FisherLogger
         }
 
         private static string Plural(int n, string one, string few, string many) { int m = n % 100, k = n % 10; return m is >= 11 and <= 14 ? many : k == 1 ? one : k is >= 2 and <= 4 ? few : many; }
+
+        /// <summary>UX-MERGE (C3): на плотной карте с дефолтными фильтрами — плашка «Упростить» (иначе «непонятно что»).</summary>
+        private void PaintClutterHint(Graphics g, NuMapData d)
+        {
+            var since = DateTime.Now.AddHours(-6);
+            int n = d.Catches.Count(c => c.X.HasValue && c.Z.HasValue && (OverlayDataSource.PlausibleTime(c.TimeText) ?? DateTime.MinValue) >= since);
+            if (n < 300 || !PlaceFilter.IsDefault) return;
+            int w = Math.Min(Width - 32, 640); var r = new Rectangle(16, Height - 78, w, 62);
+            Glass(g, r, 10, 218);
+            using var f = NuTheme.F(9.5f); using var f2 = NuTheme.F(9f, FontStyle.Bold);
+            TextRenderer.DrawText(g, "На карте " + n + " уловов — может быть плотно. Упростить:", f, new Point(r.X + 12, r.Y + 8), NuTheme.Text, TextFormatFlags.NoPadding);
+            int bx = r.X + 12, by = r.Y + 30;
+            void Btn(string t, Action act)
+            {
+                var sz = TextRenderer.MeasureText(g, t, f2, Size.Empty, TextFormatFlags.NoPadding);
+                var rr = new Rectangle(bx, by, sz.Width + 20, 24);
+                using (var path = NuTheme.Round(rr, 7)) { using var b = new SolidBrush(NuTheme.AccentDeep); g.FillPath(b, path); }
+                TextRenderer.DrawText(g, t, f2, rr, NuTheme.AccentText, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+                _hits.Add((rr, act)); bx = rr.Right + 8;
+            }
+            Btn("Только места", () => { PlacesOn = true; PlaceSettingsChanged?.Invoke(); Invalidate(); });
+            Btn("Крупные и выше", () => { PlaceFilter.MinClass = 2; PlaceSettingsChanged?.Invoke(); Invalidate(); });
+            Btn("Показать всё", () => { PlaceFilter = new NuPlaceFilter(); PlaceSettingsChanged?.Invoke(); Invalidate(); });
+        }
+
+        /// <summary>UX-MERGE (B2): плотность уловов — полупрозрачные пятна по клеткам (радиус ~клетка, насыщенность ~количество).</summary>
+        private void PaintHeatmap(Graphics g, NuMapData d)
+        {
+            if (!HeatmapOn) return;
+            var t = MapGridCoordinates.For(d.LocationId);
+            if (t == null || !t.HasTransform) return;
+            var cells = new Dictionary<(int X, int Z), int>();
+            foreach (var c in d.Catches)
+            {
+                if (!c.X.HasValue || !c.Z.HasValue) continue;
+                if (MapGridCoordinates.ToGrid(d.LocationId, c.X.Value, c.Z.Value) is not { } gg) continue;
+                cells[(gg.X, gg.Y)] = cells.GetValueOrDefault((gg.X, gg.Y)) + 1;
+            }
+            if (cells.Count == 0) return;
+            int max = cells.Values.Max();
+            float cellPx = (float)(t.Cell * _scale);
+            foreach (var kv in cells)
+            {
+                var p = W2S(t.OriginX!.Value + (kv.Key.X - 0.5) * t.Cell, t.OriginZ!.Value + (kv.Key.Z - 0.5) * t.Cell);
+                if (p.X < -20 || p.Y < -20 || p.X > Width + 20 || p.Y > Height + 20) continue;
+                float rad = Math.Max(5f, cellPx * 0.7f + 3f);
+                int a = (int)Math.Clamp(18.0 + 92.0 * kv.Value / Math.Max(1, max), 18, 110);
+                using var b = new SolidBrush(Color.FromArgb(a, 0xFF, 0x5A, 0x1A));
+                g.FillEllipse(b, p.X - rad, p.Y - rad, 2 * rad, 2 * rad);
+            }
+        }
 
         private void PaintPlaceTip(Graphics g, NuPlace p, NuMapData d)
         {

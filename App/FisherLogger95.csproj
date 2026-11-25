@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <!-- NEXT-95 isolated integration build of the FisherLogger app. Compiles only ..\src\*.cs (except the replay harness). -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -13,7 +13,7 @@
     <EmbedAllSources>true</EmbedAllSources>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <!-- RELEASE-02: номер версии (обновления через GitHub сравнивают его с тегом выпуска vX.Y.Z) -->
-    <Version>1.2.3</Version>
+    <Version>1.3.0</Version>
     <Product>Анализатор Fisher Online</Product>
     <AssemblyTitle>Анализатор Fisher Online</AssemblyTitle>
   </PropertyGroup>

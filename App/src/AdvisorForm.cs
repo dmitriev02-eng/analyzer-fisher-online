@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace FisherLogger
 
         private readonly Label _overview = new() { Dock = DockStyle.Top, Height = 64, Padding = new Padding(10, 8, 10, 4), ForeColor = Theme.Text, Font = Theme.Ui };
         private readonly TabControl _tabs = new() { Dock = DockStyle.Fill };
-        private readonly FlowLayoutPanel _nav = new() { Dock = DockStyle.Top, Height = 46, Padding = new Padding(12, 4, 12, 6), BackColor = Theme.Background, WrapContents = false };
+        private readonly FlowLayoutPanel _nav = new() { Dock = DockStyle.Top, Height = 84, Padding = new Padding(12, 4, 12, 6), BackColor = Theme.Background, WrapContents = true };
         // вкладка «Где и на что»
         internal readonly ComboBox SpeciesBox = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 300 };
         internal readonly DataGridView AdviceGrid = new() { Dock = DockStyle.Fill };
@@ -122,7 +122,7 @@ namespace FisherLogger
         }
 
         private static Button Btn(string t, int w, Color c) { var b = new Button { Text = t, Width = w, Height = 32, Margin = new Padding(6, 2, 0, 2) }; Theme.StyleButton(b, c); return b; }
-        private static FlowLayoutPanel Bar() => new() { Dock = DockStyle.Top, Height = 42, Padding = new Padding(6, 4, 6, 2), BackColor = Theme.Surface, WrapContents = false };
+        private static FlowLayoutPanel Bar() => new() { Dock = DockStyle.Top, Height = 80, Padding = new Padding(6, 4, 6, 2), BackColor = Theme.Surface, WrapContents = true };
         private static void Grid(DataGridView g)
         {
             g.ReadOnly = true; g.AllowUserToAddRows = false; g.AllowUserToDeleteRows = false; g.RowHeadersVisible = false;
@@ -219,7 +219,7 @@ namespace FisherLogger
             for (int i = 0; i < names.Length; i++)
             {
                 int idx = names[i].Item2;
-                var b = new Button { Text = names[i].Item1, Width = 140, Height = 36, Margin = new Padding(i == 0 ? 0 : 6, 0, 0, 0), Tag = idx };
+                var b = new Button { Text = names[i].Item1, Width = 110, Height = 36, Margin = new Padding(i == 0 ? 0 : 6, 0, 0, 0), Tag = idx };
                 Theme.StyleButton(b, Theme.ButtonNeutral);
                 b.Click += (s, e) => _tabs.SelectedIndex = idx;
                 _nav.Controls.Add(b);
@@ -230,7 +230,15 @@ namespace FisherLogger
             bool simple = true; try { simple = _settings().SimpleMode; } catch { }
             foreach (var b in _expertButtons) b.Visible = !simple;
             more.Visible = simple;
-            more.Click += (s, e) => { foreach (var b in _expertButtons) b.Visible = true; more.Visible = false; };
+            // UX-FIX: «Ещё» — выпадающее меню (раньше раскрывало кнопки за краем панели)
+            var moreMenu = new ContextMenuStrip { ShowImageMargin = false, Font = Theme.Ui };
+            foreach (var (txt, idx) in new[] { ("Водоёмы", 1), ("Подробно", 2) })
+            {
+                var mi = new ToolStripMenuItem(txt);
+                int ii = idx; mi.Click += (s, e) => { _tabs.SelectedIndex = ii; };
+                moreMenu.Items.Add(mi);
+            }
+            more.Click += (s, e) => moreMenu.Show(more, new Point(0, more.Height));
             _nav.Controls.Add(more);
             void Mark() { foreach (Button b in _nav.Controls) Theme.StyleButton(b, (int)b.Tag! == _tabs.SelectedIndex ? Theme.ButtonPrimary : Theme.ButtonNeutral); }
             _tabs.SelectedIndexChanged += (s, e) => Mark();

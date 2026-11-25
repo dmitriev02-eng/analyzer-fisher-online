@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -22,9 +22,9 @@ namespace FisherLogger
         private Func<long, string>? _itemName;
         private bool _filling;
 
-        internal readonly ComboBox FishBox = new() { DropDownStyle = ComboBoxStyle.DropDown, Width = 250, AutoCompleteMode = AutoCompleteMode.SuggestAppend, AutoCompleteSource = AutoCompleteSource.ListItems };
-        internal readonly ComboBox ClassBox = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 210 };
-        internal readonly ComboBox WaterBox = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 250 };
+        internal readonly ComboBox FishBox = new() { DropDownStyle = ComboBoxStyle.DropDown, Width = 160, AutoCompleteMode = AutoCompleteMode.SuggestAppend, AutoCompleteSource = AutoCompleteSource.ListItems };
+        internal readonly ComboBox ClassBox = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 170 };
+        internal readonly ComboBox WaterBox = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 190 };
         private readonly FlowLayoutPanel _body = UiKit.Stack(new Padding(18, 10, 18, 12));
         private readonly PictureBox _icon = new() { Size = new Size(56, 56), SizeMode = PictureBoxSizeMode.Zoom, Location = new Point(0, 2) };
         internal readonly Label Answer = new() { AutoSize = false, Location = new Point(68, 0), Height = 32, Font = Theme.Title, ForeColor = Theme.Text };
@@ -64,7 +64,7 @@ namespace FisherLogger
             _hints = hints; _openMap = openMap; _openRef = openRef;
             Dock = DockStyle.Fill; BackColor = Theme.Surface; ForeColor = Theme.Text; Font = Theme.Ui;
 
-            var bar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 46, Padding = new Padding(14, 8, 6, 2), BackColor = Theme.Surface, WrapContents = false };
+            var bar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 88, Padding = new Padding(14, 8, 6, 2), BackColor = Theme.Surface, WrapContents = true };
             Label Cap(string t) => new() { Text = t, AutoSize = true, Margin = new Padding(0, 6, 6, 0), ForeColor = Theme.TextMuted };
             bar.Controls.Add(Cap("Хочу поймать:")); bar.Controls.Add(FishBox);
             bar.Controls.Add(Cap("   Класс:")); bar.Controls.Add(ClassBox);

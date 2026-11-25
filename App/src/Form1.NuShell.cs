@@ -103,7 +103,21 @@ namespace FisherLogger
             shell.Hours.Water = () => mv.Data?.LocationId;
             shell.Stats.DataChanged += () => { if (shell.Hours.Visible) shell.Hours.Fill(); };
             // journal and statistics
-            shell.Stats.Loader = () => NuStatsData.Load(AppPaths.CatchDb, _deepParser, AdvisorLocName);
+            shell.Stats.Loader = () =>
+            {
+                var d = NuStatsData.Load(AppPaths.CatchDb, _deepParser, AdvisorLocName);
+                try
+                {
+                    // UX-MERGE: серверные уловы — для текущего водоёма, выбранного в журнале и места, откуда пришёл клик
+                    var waters = new System.Collections.Generic.HashSet<uint>();
+                    if (_currentBaseId is int b && b >= 0) waters.Add((uint)b);
+                    if (shell.Stats.Filter.Water is uint fw) waters.Add(fw);
+                    if (shell.Stats.Filter.Area is { } a) waters.Add(a.water);
+                    foreach (var w in waters) NuStatsData.MergeServer(d, w, AdvisorLocName, id => _deepParser.GetFish(id)?.Name ?? "", id => _deepParser.GetItem((uint)id)?.Name ?? "");
+                }
+                catch { }
+                return d;
+            };
             shell.Stats.FishIdByName = n => { try { return _deepParser.GetFishByName(n)?.Id; } catch { return null; } };   // ui01_review3 #7
             shell.Stats.OpenLegacyJournal = () => _tray?.ShowLegacyMain();
             shell.Stats.ShowOnMap = c =>
@@ -261,7 +275,14 @@ namespace FisherLogger
             }
             catch { }
             var list = new System.Collections.Generic.List<(uint id, string name)>();
-            foreach (var kv in set) list.Add((kv.Key, kv.Value.Length > 0 ? kv.Value : "loc " + kv.Key));
+            var mapIds = new System.Collections.Generic.HashSet<uint>();
+            try { foreach (var m in MapRegistry.All) mapIds.Add(m.LocationId); } catch { }
+            foreach (var kv in set)
+            {
+                string nm = kv.Value.Length > 0 ? kv.Value : "loc " + kv.Key;
+                if (mapIds.Count > 0 && !mapIds.Contains(kv.Key)) nm += "  · нет карты";   // UX-FIX: честно помечаем водоёмы без подложки
+                list.Add((kv.Key, nm));
+            }
             return list;
         }
 
@@ -284,11 +305,13 @@ namespace FisherLogger
             DateTime? curSince = _currentBaseSince;
             var pfilter = NuPlaceFilter.FromSettings(_appSettings.Window ??= new WindowSettings());
             var mini = _nuMini;
+            var fishName = new Func<uint, string>(id => { try { return _deepParser.GetFish(id)?.Name ?? ""; } catch { return ""; } });
             System.Threading.Tasks.Task.Run(() =>
             {
                 var md = NuMapFeed.Build(src, db, loc, since, AdvisorLocName, DateTime.Now);
+                // UX-MERGE (A1/A2): уловы всех устройств — в общий слой «как свои» (и в текущем водоёме тоже)
+                if (loc.HasValue) { try { md.MergedCatches = AfoCatches.Fetch(loc.Value); } catch { } NuMapFeed.MergeMerged(md, fishName); }
                 try { NuPlaces.Cached(md, pfilter); } catch { }   // ui02_review5 #8: count the places here, not in OnPaint
-                if (mapMode && loc.HasValue) { try { md.MergedCatches = AfoCatches.Fetch(loc.Value); } catch { } }   // SERVER-02: все уловы всех устройств
                 // MAPS-FIX-02: отдельный снимок для мини-карты — текущий водоём (не выбранный в «карте любого водоёма»).
                 NuMapData? mdMini = null;
                 if (mapMode && miniSrc != null && loc != curLoc)

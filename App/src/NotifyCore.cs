@@ -605,7 +605,8 @@ namespace FisherLogger
             if (!startedWithGame && w.TrayHintsShown >= 3) return;
             string k = KeyText;
             Icon.BalloonTipTitle = startedWithGame ? "FisherLogger запущен вместе с игрой" : "FisherLogger работает в фоне";
-            Icon.BalloonTipText = "Запись рыбалки идёт. Открыть окно — " + (k.Length > 0 ? "клавиша " + k + " или " : "") + "значок рыбки у часов. Окно в игре — его клавиша, как раньше.";
+            bool recNow = Recording?.Invoke() ?? true;
+            Icon.BalloonTipText = (recNow ? "Данные игры приходят — запись идёт. " : "Данных от игры пока нет — запустите игру. ") + "Открыть окно — " + (k.Length > 0 ? "клавиша " + k + " или " : "") + "значок рыбки у часов. Окно в игре — его клавиша, как раньше.";
             Icon.BalloonTipIcon = ToolTipIcon.Info;
             try { Icon.ShowBalloonTip(6000); } catch { }
             if (!startedWithGame) { w.TrayHintsShown++; try { _saveSettings?.Invoke(); } catch { } }

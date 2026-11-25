@@ -1,4 +1,4 @@
-﻿// UI-01 / FEAT-13: new interface step 4 (part) — «Журнал» and «Статистика» inside the new window.
+// UI-01 / FEAT-13: new interface step 4 (part) — «Журнал» and «Статистика» inside the new window.
 // One filter bar (water, fish, period, class) for both. Statistics: summary and records, charts by time,
 // tackle table (bait / hook / leader / groundbait / rod), places and depths. Read-only from catches.db.
 // Bites and catches are counts of recorded events (frequency), not probabilities.
@@ -69,6 +69,46 @@ namespace FisherLogger
         {
             var msk = local.Kind == DateTimeKind.Utc ? local.AddHours(3) : local.ToUniversalTime().AddHours(3);
             return GameClock.GameTimeOfDay(msk).TotalHours;
+        }
+
+        /// <summary>UX-MERGE: уловы других устройств — в журнал/статистику как свои (те же строки, дедуп).</summary>
+        public static void MergeServer(NuStatsData d, uint? loc, Func<uint?, string>? locName, Func<uint, string>? fishName, Func<long, string>? itemName = null)
+        {
+            if (!loc.HasValue) return;
+            System.Collections.Generic.List<AfoCatch> list;
+            try { list = AfoCatches.Fetch(loc.Value); } catch { return; }
+            if (list.Count == 0) return;
+            var t = MapGridCoordinates.For(loc);
+            if (t == null || !t.HasTransform) return;
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var r in d.Catches)
+                if (r.X.HasValue && r.Z.HasValue && MapGridCoordinates.ToGrid(loc, r.X.Value, r.Z.Value) is { } gg)
+                    seen.Add(gg.X + ":" + gg.Y + "|" + r.Fish + "|" + r.Weight);
+            string wn = locName?.Invoke(loc) ?? "";
+            int seq = 0;
+            foreach (var m in list)
+            {
+                if (m.Kind != "catch") continue;
+                string nm = (fishName != null && m.Fish is uint fid) ? (fishName(fid) ?? "") : "";
+                if (nm.Length == 0) nm = "рыба";
+                string key = m.CX + ":" + m.CZ + "|" + nm + "|" + (m.Weight ?? 0);
+                if (!seen.Add(key)) continue;
+                long ms = m.ServerTs > 0 ? m.ServerTs : m.Ts;
+                DateTime? tm = ms > 0 ? DateTimeOffset.FromUnixTimeMilliseconds(ms).LocalDateTime : null;
+                string bn = (itemName != null && m.Bait is long bi) ? (itemName(bi) ?? "") : "";   // UX-MERGE: наживка
+                string hn = (itemName != null && m.Hook is long hi) ? (itemName(hi) ?? "") : "";   // UX-MERGE: крючок
+                string ln = (itemName != null && m.Leader is long li) ? (itemName(li) ?? "") : "";   // UX-MERGE: поводок
+                string gn = (itemName != null && m.Groundbait is long gi) ? (itemName(gi) ?? "") : "";   // UX-MERGE: прикормка
+                double? dep = m.DepthCm is int dc && dc > 0 ? dc / 100.0 : null;   // UX-MERGE: глубина из записи
+                if (dep == null) try { dep = Bathymetry.DepthAt(loc, t.OriginX!.Value + (m.CX - 0.5) * t.Cell, t.OriginZ!.Value + (m.CZ - 0.5) * t.Cell); } catch { }
+                d.Catches.Add(new NuCatchRow
+                {
+                    Id = -1 - (seq++), Time = tm, Fish = nm, FishId = m.Fish, Weight = m.Weight ?? 0, Windex = m.Windex, Bait = bn, Hook = hn, Leader = ln, Groundbait = gn, DepthM = dep,
+                    Water = loc, WaterName = wn,
+                    X = t.OriginX!.Value + (m.CX - 0.5) * t.Cell, Z = t.OriginZ!.Value + (m.CZ - 0.5) * t.Cell,
+                    Cell = m.CX + ":" + m.CZ
+                });
+            }
         }
 
         public static NuStatsData Load(string db, PacketDeepParser? parser, Func<uint?, string>? locName)
@@ -518,7 +558,7 @@ namespace FisherLogger
         private readonly ComboBox _water = Combo(220), _fish = Combo(190), _period = Combo(130), _class = Combo(150);
         private readonly NuSeg _section = new() { Items = new[] { "Сводка и рекорды", "Графики", "Снасти", "Места и глубины" } };
         private readonly NuSeg _group = new() { Items = new[] { "Наживка", "Крючок", "Поводок", "Прикормка", "Удилище" } };
-        private readonly Label _legacy = new() { AutoSize = true, Text = "Прежний журнал (удаление дублей)", ForeColor = NuTheme.Muted, Font = NuTheme.F(9f, FontStyle.Underline), Cursor = Cursors.Hand };
+        private readonly Label _legacy = new() { AutoSize = true, Text = "Открыть старый журнал", ForeColor = NuTheme.Muted, Font = NuTheme.F(9f, FontStyle.Underline), Cursor = Cursors.Hand };
         private readonly Panel _body = new() { Dock = DockStyle.Fill, Padding = new Padding(24, 8, 24, 16) };
         private readonly DataGridView _journal = NuGrid.Make();
         private readonly Label _status = new() { Dock = DockStyle.Bottom, Height = 26, ForeColor = NuTheme.Muted, Font = NuTheme.F(9f), TextAlign = ContentAlignment.MiddleLeft, Padding = new Padding(24, 0, 0, 0) };
@@ -610,7 +650,7 @@ namespace FisherLogger
             else { Filter.FishName = fish; }
             _area.Text = "Место: " + label + "   ✕";
             _area.Visible = true; PlaceTop();
-            Refill();
+            Reload(false);   // UX-MERGE: перечитать данные с серверными уловами этого водоёма (а не только Refill)
         }
 
         public void SetMode(bool journal)
@@ -706,8 +746,20 @@ namespace FisherLogger
                 var head = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 46, BackColor = NuTheme.Ground, WrapContents = false };
                 head.Controls.Add(_section);
                 if (_section.Selected == 2) head.Controls.Add(_group);
-                Control content = _section.Selected switch { 1 => Charts(d, now), 2 => TackleGrid(d, now), 3 => Places(d, catches, now), _ => Summary(d, catches, now) };
-                _body.Controls.Add(content); _body.Controls.Add(head);
+                if (catches.Count == 0 && _section.Selected is 0 or 3)
+                {   // UX-FIX: понятное пустое состояние вместо нулей, похожих на поломку
+                    var empty = new Label
+                    {
+                        Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter, ForeColor = NuTheme.Soft, Font = NuTheme.F(11f), BackColor = NuTheme.Ground,
+                        Text = "Пока нет уловов за выбранный фильтр.\r\nСбросьте фильтры или порыбачьте — данные появятся здесь."
+                    };
+                    _body.Controls.Add(empty); _body.Controls.Add(head);
+                }
+                else
+                {
+                    Control content = _section.Selected switch { 1 => Charts(d, now), 2 => TackleGrid(d, now), 3 => Places(d, catches, now), _ => Summary(d, catches, now) };
+                    _body.Controls.Add(content); _body.Controls.Add(head);
+                }
             }
             _status.Text = d.Errors.Count > 0 ? "Часть данных не прочитана: " + string.Join("; ", d.Errors)
                 : JournalMode ? (catches.Count > JournalMax ? "Показаны последние " + JournalMax + " из " + catches.Count + " — сузьте фильтр. " : "") + "Двойной щелчок по строке — показать место на карте"
@@ -747,7 +799,7 @@ namespace FisherLogger
             tiles.Items.Add((Kg(catches.Sum(c => (long)c.Weight)), "общий вес", NuTheme.Text));
             tiles.Items.Add((catches.Count(c => c.Windex >= 2).ToString(Ru), "крупных и трофеев", Color.FromArgb(0x5D, 0xB3, 0xFF)));
             tiles.Items.Add((casts.Count.ToString(Ru), "забросов записано", NuTheme.Text));
-            tiles.Items.Add(((bites + empty).ToString(Ru), "поклёвок (пустых " + empty + ")", NuTheme.Text));
+            tiles.Items.Add(((bites + empty).ToString(Ru), "всего поклёвок (пустых " + empty + ")", NuTheme.Text));
             // fixr3_review #1: with a class filter the bites are not filtered by class — no honest share, show «—»
             tiles.Items.Add((bites + empty == 0 || Filter.MinClass >= 0 ? "—" : Math.Min(100, Math.Round(100.0 * caughtEv / (bites + empty))) + " %",
                 Filter.MinClass >= 0 ? "поклёвок в рыбу — без фильтра класса" : "поклёвок закончились рыбой", NuTheme.AccentText));
@@ -757,7 +809,7 @@ namespace FisherLogger
             var lbl = new Label { Dock = DockStyle.Top, Height = 34, ForeColor = NuTheme.Soft, Font = NuTheme.F(10f), TextAlign = ContentAlignment.MiddleLeft, BackColor = NuTheme.Ground,
                 Text = bestDay == null ? "" : "Лучший день: " + bestDay.Key.ToString("d MMMM", Ru) + " — " + bestDay.Count() + " рыб, " + Kg(bestDay.Sum(c => (long)c.Weight)) + ".   Рекорды по каждой рыбе:" };
             var grid = NuGrid.Make();
-            grid.Columns.AddRange(NuGrid.Col("Рыба", 120), NuGrid.Col("Поймано", 60, true), NuGrid.Col("Рекорд, г", 70, true), NuGrid.Col("Средний, г", 70, true), NuGrid.Col("Крупных+", 60, true),
+            grid.Columns.AddRange(NuGrid.Col("Рыба", 120), NuGrid.Col("Поймано", 60, true), NuGrid.Col("Рекорд, г", 70, true), NuGrid.Col("Средний, г", 70, true), NuGrid.Col("Крупные и выше", 100, true),
                 NuGrid.Col("Рекорд: когда", 90), NuGrid.Col("на что", 120), NuGrid.Col("где", 140));
             foreach (var g in catches.GroupBy(c => c.Fish).OrderByDescending(g => g.Max(c => c.Weight)))
             {
@@ -791,8 +843,8 @@ namespace FisherLogger
         {
             var rows = NuStatsCalc.Tackle(d, Filter, _group.Selected, now, id => "");
             var grid = NuGrid.Make();
-            grid.Columns.AddRange(NuGrid.Col(_group.Items[_group.Selected], 160), NuGrid.Col("Забросов", 60, true), NuGrid.Col("Поклёвок", 60, true), NuGrid.Col("Пустых", 55, true),
-                NuGrid.Col("Поймано", 60, true), NuGrid.Col("Крупных+", 60, true), NuGrid.Col("Поклёвок на заброс", 80, true), NuGrid.Col("Поклёвок в рыбу", 75, true),
+            grid.Columns.AddRange(NuGrid.Col(_group.Items[_group.Selected], 160), NuGrid.Col("Забросов", 60, true), NuGrid.Col("Поклёвок с рыбой", 105, true), NuGrid.Col("Пустых", 55, true),
+                NuGrid.Col("Поймано", 60, true), NuGrid.Col("Крупные и выше", 100, true), NuGrid.Col("С рыбой на заброс", 100, true), NuGrid.Col("Доля в рыбу", 80, true),
                 NuGrid.Col("Лучшая", 120), NuGrid.Col("Кто брал", 180));
             grid.Columns[6].DefaultCellStyle.Format = "0.00"; grid.Columns[7].DefaultCellStyle.Format = "0\" %\""; grid.Columns[6].DefaultCellStyle.FormatProvider = Ru;
             foreach (var r in rows)

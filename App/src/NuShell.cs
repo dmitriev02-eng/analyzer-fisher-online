@@ -442,7 +442,7 @@ namespace FisherLogger
             bool rec = Recording?.Invoke() ?? false;
             using (var f = NuTheme.F(9f))
             {
-                string t = rec ? "Запись идёт" : "Нет данных от игры";
+                string t = rec ? "Запись идёт" : "Ждём данные игры — запустите игру";
                 int tw = TextRenderer.MeasureText(g, t, f, Size.Empty, TextFormatFlags.NoPadding).Width;
                 int rx = _btnMin.X - 16 - tw;
                 using (var dot = new SolidBrush(rec ? NuTheme.Ok : NuTheme.Muted)) g.FillEllipse(dot, rx - 13, h / 2 - 3, 7, 7);

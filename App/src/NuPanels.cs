@@ -1,4 +1,4 @@
-﻿// UI-01 / FEAT-15: the rest of the new window — rods strip (step 3), side panels: recent catches, tips, bite by hours (steps 3–4),
+// UI-01 / FEAT-15: the rest of the new window — rods strip (step 3), side panels: recent catches, tips, bite by hours (steps 3–4),
 // and a host for the old forms that move inside the new window as they are (settings, phone, advisor).
 using System;
 using System.Collections.Generic;
@@ -87,12 +87,13 @@ namespace FisherLogger
             var today = all.Where(c => OverlayDataSource.SortTime(c).Date == DateTime.Today).ToList();
             TextRenderer.DrawText(g, (d?.LocationName.Length > 0 ? d.LocationName + " · " : "") + "сегодня " + today.Count + " · " + Kg(today.Sum(c => (long)c.Weight)), NuFonts.Get(9f), new Rectangle(16, 44, Width - 24, 18), NuTheme.Muted, TextFormatFlags.EndEllipsis);
             // class chips
-            string[] chips = { "Все", "Хороший+", "Крупный+", "Трофей" };
+            string[] chips = { "Все", "Хорошие и выше", "Крупные и выше", "Трофей" };
             int x = 16, y = 70;
             for (int i = 0; i < chips.Length; i++)
             {
                 var sz = TextRenderer.MeasureText(g, chips[i], NuFonts.Get(9f));
                 var r = new Rectangle(x, y, sz.Width + 14, 26);
+                if (r.Right > Width - 8) { x = 16; y += 30; r = new Rectangle(x, y, sz.Width + 14, 26); }   // UX-FIX: wrap long labels
                 bool on = _minClass == i;
                 using (var path = NuTheme.Round(r, 7)) { using var b = new SolidBrush(on ? NuTheme.AccentDeep : NuTheme.Raised); g.FillPath(b, path); }
                 TextRenderer.DrawText(g, chips[i], NuFonts.Get(9f), r, on ? NuTheme.AccentText : NuTheme.Soft, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
