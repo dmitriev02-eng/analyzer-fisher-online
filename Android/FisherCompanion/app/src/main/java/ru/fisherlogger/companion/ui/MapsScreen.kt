@@ -151,6 +151,18 @@ private fun clusterZones(zones: List<JSONObject>, toScreen: (Double, Double) -> 
 }
 private fun f1(v: Double) = String.format(java.util.Locale.US, "%.1f", v).removeSuffix(".0")
 
+/** «2026-11-01» → «01.11» для компактных кнопок дат. */
+fun shortDay(s: String?): String = if (s.isNullOrEmpty()) "" else s.drop(5).replace('-', '.')
+
+/** PROBABLE/CONFIRMED/UNVERIFIED → человеческое (вместо технического статуса карты). */
+fun mapConfidenceText(v: String?): String = when ((v ?: "").trim().uppercase()) {
+    "CONFIRMED", "CONFIRM" -> "проверенная"
+    "PROBABLE" -> "предположительная"
+    "UNVERIFIED" -> "непроверенная"
+    "" -> "неизвестно"
+    else -> v!!.lowercase()
+}
+
 /** Выбранный объект карты: зона, отдельный улов или точка (глубина). */
 private sealed class Sel {
     data class Zone(val z: JSONObject) : Sel()
@@ -213,7 +225,7 @@ fun MapsScreen(vm: AppViewModel, wide: Boolean) {
                 FilterChip(vm.showBathy && bathyOk, { vm.showBathy = !vm.showBathy }, { Text(if (bathy == null || bathyOk) "Глубины" else "Глубины: нет") },
                     Modifier.heightIn(min = 40.dp), enabled = bathyOk)
                 FilterChip(vm.showPoints, { vm.showPoints = !vm.showPoints }, { Text("Точки") }, Modifier.heightIn(min = 40.dp))
-                FilterChip(vm.mapUnverified, { vm.setMapFilter(unverified = !vm.mapUnverified) }, { Text("Непроверенные") }, Modifier.heightIn(min = 40.dp))
+                FilterChip(vm.mapUnverified, { vm.setMapFilter(unverified = !vm.mapUnverified) }, { Text("Спорные") }, Modifier.heightIn(min = 40.dp))
             }
             // фильтры: вид и даты
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -234,8 +246,8 @@ fun MapsScreen(vm: AppViewModel, wide: Boolean) {
                     DatePickerDialog(ctx, { _, y, m, d -> onPick("%04d-%02d-%02d".format(y, m + 1, d)) },
                         c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show()
                 }
-                OutlinedButton({ pick(vm.mapFrom ?: vm.options?.str("dateMin")) { vm.setMapFilter(from = it) } }, Modifier.heightIn(min = 44.dp)) { Text("с " + (vm.mapFrom ?: "…")) }
-                OutlinedButton({ pick(vm.mapTo ?: vm.options?.str("dateMax")) { vm.setMapFilter(to = it) } }, Modifier.heightIn(min = 44.dp)) { Text("по " + (vm.mapTo ?: "…")) }
+                OutlinedButton({ pick(vm.mapFrom ?: vm.options?.str("dateMin")) { vm.setMapFilter(from = it) } }, Modifier.heightIn(min = 44.dp)) { Text(if (vm.mapFrom != null) "с " + shortDay(vm.mapFrom) else "с даты") }
+                OutlinedButton({ pick(vm.mapTo ?: vm.options?.str("dateMax")) { vm.setMapFilter(to = it) } }, Modifier.heightIn(min = 44.dp)) { Text(if (vm.mapTo != null) "по " + shortDay(vm.mapTo) else "по дату") }
                 if (vm.mapFrom != null || vm.mapTo != null)
                     TextButton({ vm.setMapFilter(from = null, to = null) }, Modifier.heightIn(min = 44.dp)) { Text("Весь период") }
             }
@@ -299,8 +311,8 @@ fun MapsScreen(vm: AppViewModel, wide: Boolean) {
                                                    " (радиус " + f1(zr.optDouble("radiusM", zr.optDouble("cellM") / 2)) + " м)")
                         if (zr != null && vm.showZones && (zr.optJSONArray("zones")?.length() ?: 0) > 0)
                             append("\nЧисло — мои уловы · метка с кольцом — несколько зон, нажмите")
-                            if (vm.showBathy && bathyOk) append((if (isNotEmpty()) "\n" else "") + "Глубины: CONFIRMED (рельеф игры) · совмещение " + bathy!!.optString("alignmentConfidence"))
-                            else if (meta != null) append((if (isNotEmpty()) "\n" else "") + "Карта: " + meta.optString("confidence"))
+                            if (vm.showBathy && bathyOk) append((if (isNotEmpty()) "\n" else "") + "Глубины: " + mapConfidenceText("CONFIRMED") + " (рельеф игры) · совмещение " + mapConfidenceText(bathy!!.optString("alignmentConfidence")))
+                            else if (meta != null) append((if (isNotEmpty()) "\n" else "") + "Карта: " + mapConfidenceText(meta.optString("confidence")))
                         }
                         if (note.isNotEmpty()) Text(note, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.85f), RoundedCornerShape(8.dp)).padding(8.dp))

@@ -74,6 +74,7 @@ fun ConnectionScreen(vm: AppViewModel) {
     var host by rememberSaveable { mutableStateOf(vm.store.host) }
     var port by rememberSaveable { mutableStateOf(vm.store.port.toString()) }
     var code by rememberSaveable { mutableStateOf("") }
+    var manual by rememberSaveable { mutableStateOf(false) }   // ручной ввод адреса скрыт по умолчанию (мастер)
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).widthIn(max = 640.dp)) {
         Text("Подключение к FisherLogger", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(8.dp))
@@ -115,8 +116,14 @@ fun ConnectionScreen(vm: AppViewModel) {
         }
 
         SectionTitle(if (vm.pairings.isEmpty()) "Сопряжение с ПК" else "Сопрячь ещё один ПК / повторить сопряжение")
-        Muted("Нужно один раз для каждого ПК. В FisherLogger: кнопка «Телефон» → включить сервис → «Создать код сопряжения». " +
-              "Телефон и ПК должны быть в одной сети Wi-Fi/LAN.")
+        // Мастер из 3 шагов вместо сплошного абзаца (предложение UX-ANDROID-01)
+        Muted("1. На ПК: FisherLogger → «Телефон» → включить сервис.", 14)
+        Spacer(Modifier.height(3.dp))
+        Muted("2. На ПК: «Создать код сопряжения» — появится код из 6 цифр.", 14)
+        Spacer(Modifier.height(3.dp))
+        Muted("3. Здесь: «Найти ПК в сети» → выбрать ПК → ввести код → «Сопрячь».", 14)
+        Spacer(Modifier.height(2.dp))
+        Muted("Телефон и ПК должны быть в одной сети Wi-Fi/LAN.", 13)
         Spacer(Modifier.height(8.dp))
         OutlinedButton(onClick = { vm.discover() }, enabled = !vm.searching, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
             if (vm.searching) CircularProgressIndicator(Modifier.size(22.dp), strokeWidth = 2.dp) else Text("Найти ПК в сети", fontSize = 16.sp)
@@ -127,15 +134,18 @@ fun ConnectionScreen(vm: AppViewModel) {
                 Text(r.host + ":" + r.port + (if (known) " · уже сопряжён" else if (r.pairing) " · ждёт кода" else "") + "  — выбрать")
             }
         }
-        Spacer(Modifier.height(8.dp))
-        OutlinedTextField(host, { host = it.trim() }, label = { Text("IP-адрес ПК") }, singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri), modifier = Modifier.fillMaxWidth())
-        Spacer(Modifier.height(8.dp))
-        OutlinedTextField(port, { port = it.filter(Char::isDigit).take(5) }, label = { Text("Порт") }, singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        Spacer(Modifier.height(10.dp))
-        OutlinedButton(onClick = { vm.testConnection(host, port.toIntOrNull() ?: 47811) }, enabled = host.isNotBlank() && !vm.busy,
-            modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Проверить связь", fontSize = 16.sp) }
+        Spacer(Modifier.height(6.dp))
+        TextButton({ manual = !manual }, Modifier.heightIn(min = 44.dp)) { Text(if (manual) "Скрыть ручной ввод" else "Ввести адрес вручную") }
+        if (manual) {
+            OutlinedTextField(host, { host = it.trim() }, label = { Text("IP-адрес ПК") }, singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri), modifier = Modifier.fillMaxWidth())
+            Spacer(Modifier.height(8.dp))
+            OutlinedTextField(port, { port = it.filter(Char::isDigit).take(5) }, label = { Text("Порт") }, singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            Spacer(Modifier.height(10.dp))
+            OutlinedButton(onClick = { vm.testConnection(host, port.toIntOrNull() ?: 47811) }, enabled = host.isNotBlank() && !vm.busy,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Проверить связь", fontSize = 16.sp) }
+        }
         Spacer(Modifier.height(8.dp))
         Muted("Код действует 2 минуты, один раз. Секрет устройства по сети не передаётся и хранится в защищённом хранилище ключей Android.")
         Spacer(Modifier.height(8.dp))
@@ -275,10 +285,16 @@ fun CatchCard(c: JSONObject, tech: Boolean = false) {
                 maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(c.optInt("weight").toString() + " г", fontWeight = FontWeight.SemiBold, fontSize = 17.sp)
         }
-        // BRIDGE-FB-01: класс — из игры (windex: обычный/хороший/крупный/трофейный), а не старая метка по весу; нет windex — «класс неизвестен»
+        // BRIDGE-FB-01: класс — из игры (windex); если windex пуст, но известен grade — показываем его, чтобы не терять класс
         val wx = if (c.has("windex") && !c.isNull("windex")) c.optInt("windex", -1) else -1
+        val gradeStr = c.str("grade")?.trim().orEmpty()
+        val cls = when {
+            wx >= 0 -> gradeName(wx)
+            gradeStr.isNotEmpty() -> gradeStr
+            else -> ""
+        }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(if (wx >= 0) gradeName(wx).ifEmpty { "класс неизвестен" } else "класс неизвестен", fontSize = 13.sp,
+            Text(cls.ifEmpty { "класс не указан" }, fontSize = 13.sp,
                 fontWeight = if (wx >= 1) FontWeight.SemiBold else FontWeight.Normal,
                 color = gradeColor(wx) ?: MaterialTheme.colorScheme.onSurfaceVariant)
             if (tech) c.str("status")?.takeIf { it.isNotEmpty() }?.let { Muted(" · $it") }
@@ -316,17 +332,26 @@ fun PublicCard(p: JSONObject, tech: Boolean = false) {
 @Composable
 fun HistoryScreen(vm: AppViewModel, wide: Boolean) {
     Column(Modifier.fillMaxSize()) {
+        val mine = vm.catches.objs()
+        val pub = vm.publicFeed.objs()
+        // UX-ANDROID-01 (1.3.0): единый журнал «как свои» — мои + серверные (с других устройств) в одной ленте; дубли убираем
+        val merged: List<Pair<JSONObject, Boolean>> = if (vm.historyTab == 0) {
+            val seen = HashSet<String>()
+            (mine.map { it to true } + pub.filter { !it.optBoolean("matchedOwn") }.map { it to false })
+                .filter { (o, _) -> seen.add(o.optString("key", o.optString("fish") + "|" + o.optString("weight") + "|" + o.optString("realTime", o.optString("receivedAt")))) }
+        } else pub.map { it to false }
         TabRow(selectedTabIndex = vm.historyTab, containerColor = MaterialTheme.colorScheme.surface) {
             Tab(vm.historyTab == 0, { vm.historyTab = 0 }, modifier = Modifier.heightIn(min = 52.dp),
-                text = { Text("Мои уловы (" + (vm.catches?.length() ?: 0) + ")", fontSize = 15.sp) })
+                text = { Text("Мои уловы (" + merged.size + ")", fontSize = 15.sp) })
             Tab(vm.historyTab == 1, { vm.historyTab = 1 }, modifier = Modifier.heightIn(min = 52.dp),
-                text = { Text("Другие игроки (" + (vm.publicFeed?.length() ?: 0) + ")", fontSize = 15.sp) })
+                text = { Text("Другие игроки (" + pub.size + ")", fontSize = 15.sp) })
         }
-        val list = if (vm.historyTab == 0) vm.catches.objs() else vm.publicFeed.objs()
-        if (list.isEmpty()) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Muted("Нет данных", 16) }
+        if (merged.isEmpty()) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Muted("Нет данных", 16) }
         else LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(12.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            items(list, key = { it.optString("key") }) { if (vm.historyTab == 0) CatchCard(it, vm.tech) else PublicCard(it, vm.tech) }
+            items(merged, key = { (o, _) -> o.optString("key", o.optString("fish") + "|" + o.optString("weight") + "|" + o.optString("realTime", o.optString("receivedAt"))) }) { (o, isMine) ->
+                if (isMine) CatchCard(o, vm.tech) else PublicCard(o, vm.tech)
+            }
         }
     }
 }
