@@ -68,6 +68,8 @@ namespace FisherLogger
 
         // ---------------- the data feed (map, rods, catches, tips, minimap) ----------------
         private OverlayDataSource? _nuSrc;
+        // MAPS-FIX-02: отдельный источник для мини-карты — она всегда показывает ТЕКУЩИЙ водоём.
+        private OverlayDataSource? _nuMiniSrc;
         private readonly System.Windows.Forms.Timer _nuMapTimer = new() { Interval = 3000 };
         private bool _nuMapBusy;
 
@@ -173,6 +175,7 @@ namespace FisherLogger
         private void NuFeedStart()
         {
             _nuSrc ??= new OverlayDataSource(_deepParser, () => AppPaths.CatchDb, () => AppPaths.BaseDirectory);
+            _nuMiniSrc ??= new OverlayDataSource(_deepParser, () => AppPaths.CatchDb, () => AppPaths.BaseDirectory);
             _nuMapTimer.Tick -= NuMapTick; _nuMapTimer.Tick += NuMapTick; _nuMapTimer.Start();
         }
 
@@ -275,27 +278,38 @@ namespace FisherLogger
             uint? loc; DateTime? since;
             if (mapMode && shell!.MapPickLoc is uint pick) { loc = pick; since = null; }
             else { loc = _currentBaseId is int id && id >= 0 ? (uint)id : null; since = _currentBaseSince; }
-            string db = AppPaths.CatchDb; var src = _nuSrc;
+            string db = AppPaths.CatchDb; var src = _nuSrc; var miniSrc = _nuMiniSrc;
+            // MAPS-FIX-02: мини-карта всегда показывает ТЕКУЩИЙ водоём, даже если в главном окне открыт другой.
+            uint? curLoc = _currentBaseId is int cid && cid >= 0 ? (uint)cid : null;
+            DateTime? curSince = _currentBaseSince;
             var pfilter = NuPlaceFilter.FromSettings(_appSettings.Window ??= new WindowSettings());
+            var mini = _nuMini;
             System.Threading.Tasks.Task.Run(() =>
             {
                 var md = NuMapFeed.Build(src, db, loc, since, AdvisorLocName, DateTime.Now);
                 try { NuPlaces.Cached(md, pfilter); } catch { }   // ui02_review5 #8: count the places here, not in OnPaint
                 if (mapMode && loc.HasValue) { try { md.MergedCatches = AfoCatches.Fetch(loc.Value); } catch { } }   // SERVER-02: все уловы всех устройств
-                return md;
+                // MAPS-FIX-02: отдельный снимок для мини-карты — текущий водоём (не выбранный в «карте любого водоёма»).
+                NuMapData? mdMini = null;
+                if (mapMode && miniSrc != null && loc != curLoc)
+                {
+                    try { mdMini = NuMapFeed.Build(miniSrc, db, curLoc, curSince, AdvisorLocName, DateTime.Now); } catch { }
+                }
+                return (md, mdMini);
             }).ContinueWith(t =>
             {
                 _nuMapBusy = false;
                 if (t.Exception != null) { Log("[NEWUI] карта: " + t.Exception.InnerException?.Message); return; }
+                var res = t.Result;
                 if (shell != null && !shell.IsDisposed)
                 {
-                    shell.MapView.Data = t.Result;
+                    shell.MapView.Data = res.md;
                     shell.MapView.ShowPose = !mapMode;   // UI-02-6: на чужой карте не рисуем свою позу/забросы/маркер
                     var ws = _appSettings.Window;
                     if (ws != null && shell.MapView.PlacesOn != ws.NuPlacesOn) shell.MapView.PlacesOn = ws.NuPlacesOn;   // the minimap menu can switch the layer on
                     shell.RodsStrip.Invalidate(); shell.Catches.Invalidate(); shell.TipsPanel.Invalidate();
                 }
-                if (_nuMini != null) { _nuMini.Data = t.Result; _nuMini.Refresh(); }
+                if (mini != null) { mini.Data = res.mdMini ?? res.md; mini.Refresh(); }
             }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
         }
 
