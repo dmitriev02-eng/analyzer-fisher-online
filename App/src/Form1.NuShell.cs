@@ -236,6 +236,25 @@ namespace FisherLogger
             }
             catch { }
             try { foreach (var m in MapRegistry.All) if (m.LocationId > 0 && !set.ContainsKey(m.LocationId)) set[m.LocationId] = m.Name ?? ""; } catch { }
+            // UI-02-6: полный список водоёмов из location_map.json (в т.ч. без карты/без уловов — напр. Болгария: Луда Камчия).
+            try
+            {
+                string lmPath = AppPaths.LocationMapPath;
+                if (System.IO.File.Exists(lmPath))
+                {
+                    using var doc = System.Text.Json.JsonDocument.Parse(System.IO.File.ReadAllText(lmPath));
+                    if (doc.RootElement.TryGetProperty("locations", out var arr) && arr.ValueKind == System.Text.Json.JsonValueKind.Array)
+                        foreach (var loc in arr.EnumerateArray())
+                        {
+                            if (!loc.TryGetProperty("id", out var idEl) || idEl.ValueKind != System.Text.Json.JsonValueKind.Number) continue;
+                            long id = idEl.GetInt64();
+                            if (id <= 0 || id > 1000000) continue;
+                            string nm = loc.TryGetProperty("name", out var nEl) && nEl.ValueKind == System.Text.Json.JsonValueKind.String ? (nEl.GetString() ?? "") : "";
+                            if (!set.ContainsKey((uint)id)) set[(uint)id] = nm;
+                        }
+                }
+            }
+            catch { }
             var list = new System.Collections.Generic.List<(uint id, string name)>();
             foreach (var kv in set) list.Add((kv.Key, kv.Value.Length > 0 ? kv.Value : "loc " + kv.Key));
             return list;

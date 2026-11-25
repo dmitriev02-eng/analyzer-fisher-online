@@ -448,14 +448,23 @@ namespace FisherLogger
                 y += 46;
             }
             // who touched the bait on this cast (s2c 1122: fish and weight that did not hook)
-            var touched = d.Rods.Where(r => r.Active && r.EmptyFish.Count > 0).SelectMany(r => r.EmptyFish.Select(x => (r.Slot, x.fish, x.weight))).LastOrDefault();
-            if (touched.fish != 0)
+            // UI-02-7: показываем до 5 последних пустых поклёвок (а не только последнюю).
+            var touched = d.Rods.Where(r => r.Active)
+                                .SelectMany(r => (r.EmptyRecent.Count > 0 ? r.EmptyRecent : r.EmptyFish).Select(x => (r.Slot, x.fish, x.weight)))
+                                .Take(5).ToList();
+            if (touched.Count > 0)
             {
-                var box = new Rectangle(8, y, Width - 16, 38);
+                int boxH = Math.Max(24, 10 + touched.Count * 15);
+                var box = new Rectangle(8, y, Width - 16, boxH);
                 using (var path = NuTheme.Round(box, 8)) { using var b = new SolidBrush(Color.FromArgb(115, 0x1E, 0x31, 0x3B)); g.FillPath(b, path); }
-                string nm = FishName?.Invoke(touched.fish) ?? ""; if (nm.Length == 0) nm = "рыба";
-                TextRenderer.DrawText(g, "Тронул наживку (удочка " + (touched.Slot + 1) + "): " + nm.ToLowerInvariant() + " " + touched.weight + " г", f,
-                    new Rectangle(box.X + 8, box.Y + 4, box.Width - 16, box.Height - 6), NuTheme.Soft, TextFormatFlags.WordBreak | TextFormatFlags.NoPadding);
+                int ly = box.Y + 4;
+                foreach (var t in touched)
+                {
+                    string nm = FishName?.Invoke(t.fish) ?? ""; if (nm.Length == 0) nm = "рыба";
+                    TextRenderer.DrawText(g, "Тронул наживку (удочка " + (t.Slot + 1) + "): " + nm.ToLowerInvariant() + " " + t.weight + " г", f,
+                        new Rectangle(box.X + 8, ly, box.Width - 16, 14), NuTheme.Soft, TextFormatFlags.NoPadding);
+                    ly += 15;
+                }
             }
             PaintBorder(g);
         }

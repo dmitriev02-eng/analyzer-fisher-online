@@ -43,6 +43,8 @@ namespace FisherLogger
         public double? Chance; public int Bites, Empty;
         /// <summary>Who touched the bait on this cast (fish id, weight) — s2c 1122, as in the coach.</summary>
         public List<(uint fish, int weight)> EmptyFish = new();
+        /// <summary>UI-02-7: последние пустые поклёвки этой удочки (до 5, новые первыми) — «список до 5 рыб».</summary>
+        public List<(uint fish, int weight)> EmptyRecent = new();
     }
 
     /// <summary>Background loader for the map (only while the new window is open).</summary>
@@ -67,6 +69,7 @@ namespace FisherLogger
                         Tackle = ChanceSpots.TackleKey(r.Setup.Bait.Length > 0 ? r.Setup.Bait : r.Bait, r.HookPar),
                         Spinning = r.RodCode is int c && c is not (0 or 1), X = r.Setup.X, Z = r.Setup.Z,
                         RodCode = r.RodCode, SoakMin = r.SoakMin, Level = r.Level, Status = r.Status, TrophyNormal = r.TrophyNormal, EmptyFish = r.EmptyFish.ToList(),
+                        EmptyRecent = r.RecentEmpty.Select(x => (x.Fish, x.Weight)).ToList(),
                         Chance = r.Chance, Bites = r.Bites, Empty = r.Empty
                     }).OrderBy(r => r.Slot).ToList();
                     d.Hints = coach.Hints.ToList(); d.CurveNote = coach.CurveNote;
