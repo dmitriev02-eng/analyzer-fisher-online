@@ -113,6 +113,9 @@ namespace FisherLogger
                     if (_currentBaseId is int b && b >= 0) waters.Add((uint)b);
                     if (shell.Stats.Filter.Water is uint fw) waters.Add(fw);
                     if (shell.Stats.Filter.Area is { } a) waters.Add(a.water);
+                    // PACKS-05: при «Все водоёмы» подмешиваем серверные поимки ВСЕХ водоёмов, где есть свои уловы,
+                    // иначе чужие поимки не видны (раньше добавлялся только текущий/выбранный).
+                    foreach (var row in d.Catches) if (row.Water is uint wv && wv > 0) waters.Add(wv);
                     foreach (var w in waters) NuStatsData.MergeServer(d, w, AdvisorLocName, id => _deepParser.GetFish(id)?.Name ?? "", id => _deepParser.GetItem((uint)id)?.Name ?? "");
                 }
                 catch { }
@@ -120,6 +123,9 @@ namespace FisherLogger
             };
             shell.Stats.FishIdByName = n => { try { return _deepParser.GetFishByName(n)?.Id; } catch { return null; } };   // ui01_review3 #7
             shell.Stats.OpenLegacyJournal = () => _tray?.ShowLegacyMain();
+            // PACKS-01: вкладка «Торговые паки» — лог и демо-уведомление в трей.
+            shell.Packs.Log = m => Log(m);
+            shell.Packs.NotifyTest = text => { try { ShowPackToast(text); } catch { } };
             shell.Stats.ShowOnMap = c =>
             {
                 if (c.X is not double x || c.Z is not double z) return;
@@ -361,6 +367,19 @@ namespace FisherLogger
                 if (Visible) _tray?.HideToTray(returnFocus: false);   // the old window is never the main one now
                 if (!StartInTray) ShowNuShell();
             }));
+        }
+
+        /// <summary>PACKS-03: уведомление о выгодной покупке пака — в стиле поклёвок (BiteToast).</summary>
+        private void ShowPackToast(string text)
+        {
+            try
+            {
+                var m = new BiteToastModel { Slot = 0, Fish = text, Weight = 0, Windex = -1, Icon = null, Gold = false };
+                var bmp = BiteToastRenderer.Render(m, ToastStyle.Capsule, 1.0);
+                var f = new BiteToastForm(m, bmp, new Point(140, 140), 1.0, 7000);
+                f.Show();
+            }
+            catch (Exception ex) { Log("[PACKS] toast: " + ex.Message); }
         }
     }
 }

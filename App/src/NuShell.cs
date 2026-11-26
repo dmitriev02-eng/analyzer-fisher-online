@@ -201,6 +201,18 @@ namespace FisherLogger
             using var p = P(c, r);
             g.DrawEllipse(p, Rc(r, 3, 3, 18, 18)); g.DrawEllipse(p, Rc(r, 7.5f, 7.5f, 9, 9)); g.DrawLine(p, Pt(r, 12, 12), Pt(r, 18, 6));
         }
+        /// <summary>PACKS-01: иконка «торговые паки» — коробка-груз с обвязкой.</summary>
+        public static void Packs(Graphics g, Rectangle r, Color c)
+        {
+            using var p = P(c, r);
+            using (var path = NuTheme.Round(Rectangle.Round(Rc(r, 3.5f, 8.5f, 17, 12)), (int)(2 * r.Width / 24f))) g.DrawPath(p, path);
+            g.DrawLine(p, Pt(r, 3.5f, 12.5f), Pt(r, 20.5f, 12.5f));
+            g.DrawLine(p, Pt(r, 11, 12.5f), Pt(r, 11, 20.5f));
+            g.DrawLine(p, Pt(r, 13, 12.5f), Pt(r, 13, 20.5f));
+            g.DrawLine(p, Pt(r, 7, 5), Pt(r, 17, 5));
+            g.DrawLine(p, Pt(r, 9, 5), Pt(r, 8.5f, 8.5f));
+            g.DrawLine(p, Pt(r, 15, 5), Pt(r, 15.5f, 8.5f));
+        }
     }
 
     /// <summary>The new main window (beta). Owns no logic: Form1 feeds it through callbacks.</summary>
@@ -242,6 +254,8 @@ namespace FisherLogger
         public NuMapView MapView { get; } = new() { Dock = DockStyle.Fill };
         /// <summary>FEAT-13: journal and statistics.</summary>
         public NuStatsView Stats { get; } = new() { Visible = false };
+        /// <summary>PACKS-01: вкладка «Торговые паки» — цены, калькулятор, уведомления.</summary>
+        public NuPacks Packs { get; } = new() { Visible = false };
         /// <summary>FEAT-15: the rest of the window.</summary>
         public NuRodsStrip RodsStrip { get; } = new() { Dock = DockStyle.Fill };
         public NuCatchList Catches { get; } = new() { Dock = DockStyle.Fill };
@@ -287,7 +301,7 @@ namespace FisherLogger
             Padding = new Padding(5);   // the 5-px frame belongs to the form itself: resizing by the edges works (WM_NCHITTEST)
             _ai.MouseClick += (s, e) => { if (new Rectangle(_ai.Width - 36, 8, 28, 28).Contains(e.Location)) { _ai1 = false; Sync(); } };
 
-            _work.Controls.Add(_map); _work.Controls.Add(_rods); _map.Controls.Add(MapView); _map.Controls.Add(Stats); _map.Controls.Add(SettingsHost); _map.Controls.Add(_ai); _ai.BringToFront();
+            _work.Controls.Add(_map); _work.Controls.Add(_rods); _map.Controls.Add(MapView); _map.Controls.Add(Stats); _map.Controls.Add(Packs); _map.Controls.Add(SettingsHost); _map.Controls.Add(_ai); _ai.BringToFront();
             // UI-02-6: полоска выбора водоёма над картой (появляется только в режиме «карта любого водоёма»).
             _waterLabel.ForeColor = NuTheme.Text; _waterPick.BackColor = NuTheme.Raised; _waterPick.ForeColor = NuTheme.Text;
             _waterStrip.Controls.Add(_waterLabel); _waterStrip.Controls.Add(_waterPick);
@@ -307,6 +321,8 @@ namespace FisherLogger
             Btn("settings", "Настройки", NuIcons.Gear);
             // UI-02-6: «Карта любого водоёма» — карта выбранного водоёма со всеми уловами (все сессии).
             Btn("map", "Карта любого водоёма (со всеми уловами)", NuIcons.Map);
+            // PACKS-01: торговые паки — цены с аукциона/продажи, калькулятор, уведомления о моменте продажи.
+            Btn("packs", "Торговые паки: цены, калькулятор, уведомления о продаже", NuIcons.Packs);
             _exit = new NuRailButton("exit", "Закрыть программу полностью (запись остановится)", NuIcons.Power) { Danger = true };
             _exit.Click += (s, e) => ExitApp?.Invoke();
             _rail.Controls.Add(_exit);
@@ -335,7 +351,7 @@ namespace FisherLogger
             else
             {
                 Mode = Mode == id ? "catches" : id;
-                if (Mode is "settings" or "journal" or "stats") _ai1 = false;   // ui01_review3 #17: the assistant must not cover these pages
+                if (Mode is "settings" or "journal" or "stats" or "packs") _ai1 = false;   // ui01_review3 #17: the assistant must not cover these pages
             }
             Sync();
         }
@@ -353,7 +369,7 @@ namespace FisherLogger
             if (_waterPick.Items.Count > 0 && _waterPick.SelectedIndex < 0) _waterPick.SelectedIndex = 0;
         }
 
-        private bool Wide => Mode is "journal" or "stats" or "settings";
+        private bool Wide => Mode is "journal" or "stats" or "settings" or "packs";
 
         private void Sync()
         {
@@ -366,6 +382,9 @@ namespace FisherLogger
             else Stats.Visible = false;
             if (Mode == "settings") { SettingsHost.Visible = true; SettingsHost.Ensure(); SettingsHost.BringToFront(); _ai.BringToFront(); }
             else SettingsHost.Visible = false;
+            // PACKS-01: вкладка торговых паков.
+            if (Mode == "packs") { Packs.Visible = true; Packs.BringToFront(); _ai.BringToFront(); }
+            else Packs.Visible = false;
             // side panel
             _side.Width = Mode == "phone" ? 560 : SideW;
             Catches.Visible = Mode == "catches"; TipsPanel.Visible = Mode == "tips"; Hours.Visible = Mode == "hours";

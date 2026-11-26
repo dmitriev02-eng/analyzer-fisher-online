@@ -55,7 +55,9 @@ namespace FisherLogger
             var d = new NuMapData { BuiltAt = now };
             var snap = src.Refresh(loc, since, false);
             d.LocationId = snap.LocationId; d.LocationName = snap.LocationName; d.LocationSince = snap.LocationSince;
-            d.Map = snap.Map; d.MapImage = snap.MapImage; d.Catches = snap.Catches; d.Casts = snap.Casts;
+            d.Map = snap.Map; d.MapImage = snap.MapImage; d.Casts = snap.Casts;
+            // PACKS-05: на карту водоёма попадают только уловы ЭТОГО водоёма (раньше чужие «путешествовали» по координатам).
+            d.Catches = snap.Catches.Where(c => !c.LocationId.HasValue || !d.LocationId.HasValue || c.LocationId == d.LocationId).ToList();
             try { d.Bathy = Bathymetry.Get(d.LocationId); if (d.Bathy is { Implemented: true }) d.BathyImage = Bathymetry.LoadOverlay(d.Bathy); } catch { }
             try
             {

@@ -1,0 +1,357 @@
+{
+ "generated": "2026-11-26",
+ "source": "items_full_database.json",
+ "notes": [
+  "Торговый груз = wtype 57 «Товар», состав в base_params: ingredient_id/count",
+  "Рецепт (wtype 28) — разовая стоимость изучения; base_params: a/b/c — семантика частично неизвестна",
+  "По скриншоту верстака: 5 Упаковок + 1 Корд + работа 200 OP на пак (нужна сверка)",
+  "Лимит продажи: 10 паков/сутки (скрин 1)",
+  "Цены аукциона — только из трафика (парсер ещё не сделан)"
+ ],
+ "cargos": [
+  {
+   "id": 2383,
+   "name": "Груз потрохов",
+   "cost_cr": 100000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1197,
+   "ingredient_name": "Рыбьи потроха",
+   "ingredient_cost_cr": 40000,
+   "count": 20,
+   "ingredient_total_cr": 800000
+  },
+  {
+   "id": 2387,
+   "name": "Груз кусочков",
+   "cost_cr": 100000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1176,
+   "ingredient_name": "Кусочки рыбы",
+   "ingredient_cost_cr": 50000,
+   "count": 20,
+   "ingredient_total_cr": 1000000
+  },
+  {
+   "id": 2388,
+   "name": "Груз филе",
+   "cost_cr": 350000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1324,
+   "ingredient_name": "Филе рыбы",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2389,
+   "name": "Груз дорогого филе",
+   "cost_cr": 375000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2372,
+   "ingredient_name": "Дорогое филе",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2390,
+   "name": "Груз ценного филе",
+   "cost_cr": 400000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2373,
+   "ingredient_name": "Ценное филе",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2391,
+   "name": "Груз грибов",
+   "cost_cr": 310000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2361,
+   "ingredient_name": "Сушеные грибы",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2392,
+   "name": "Груз овощей",
+   "cost_cr": 310000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2376,
+   "ingredient_name": "Сушеные овощи",
+   "ingredient_cost_cr": 1000,
+   "count": 20,
+   "ingredient_total_cr": 20000
+  },
+  {
+   "id": 2411,
+   "name": "Груз мутомяса",
+   "cost_cr": 300000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1257,
+   "ingredient_name": "Мутомясо",
+   "ingredient_cost_cr": 3000,
+   "count": 20,
+   "ingredient_total_cr": 60000
+  },
+  {
+   "id": 2419,
+   "name": "Груз Арктик",
+   "cost_cr": 100000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1257,
+   "ingredient_name": "Мутомясо",
+   "ingredient_cost_cr": 3000,
+   "count": 20,
+   "ingredient_total_cr": 60000
+  },
+  {
+   "id": 2492,
+   "name": "Груз морского филе",
+   "cost_cr": 320000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2372,
+   "ingredient_name": "Дорогое филе",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2493,
+   "name": "Груз кальмара",
+   "cost_cr": 375000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 2372,
+   "ingredient_name": "Дорогое филе",
+   "ingredient_cost_cr": 10,
+   "count": 20,
+   "ingredient_total_cr": 200
+  },
+  {
+   "id": 2528,
+   "name": "Пиво лагер",
+   "cost_cr": 250000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2529,
+   "name": "Пиво стаут",
+   "cost_cr": 400000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2530,
+   "name": "Пиво эль",
+   "cost_cr": 150000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2600,
+   "name": "Груз деликатесов",
+   "cost_cr": 480000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 1257,
+   "ingredient_name": "Мутомясо",
+   "ingredient_cost_cr": 3000,
+   "count": 20,
+   "ingredient_total_cr": 60000
+  },
+  {
+   "id": 2941,
+   "name": "Пицца Формажи",
+   "cost_cr": 10000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2942,
+   "name": "Пицца Сицилийская",
+   "cost_cr": 50000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2943,
+   "name": "Пицца Фрутти ди Маре",
+   "cost_cr": 80000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2944,
+   "name": "Пицца де Пеше",
+   "cost_cr": 100000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2945,
+   "name": "Пицца Особая от Шефа",
+   "cost_cr": 150000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2975,
+   "name": "Шашлык на блюде",
+   "cost_cr": 20000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2978,
+   "name": "Шашлык на доске",
+   "cost_cr": 40000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  },
+  {
+   "id": 2979,
+   "name": "Шашлык на подносе",
+   "cost_cr": 50000,
+   "shop_count": 1,
+   "sale_to_auck": 0,
+   "ingredient_id": 0,
+   "ingredient_name": "",
+   "ingredient_cost_cr": 0,
+   "count": 0,
+   "ingredient_total_cr": 0
+  }
+ ],
+ "recipes": [
+  {
+   "id": 2495,
+   "name": "Рецепт \"Груз филе\"",
+   "cost_cr": 2500000,
+   "raw_base_params": "203/2035/100",
+   "a": 203,
+   "b": 2035,
+   "c": 100,
+   "b_name": "Тесто сухое"
+  },
+  {
+   "id": 2496,
+   "name": "Рецепт \"Груз дор. филе\"",
+   "cost_cr": 2800000,
+   "raw_base_params": "203/2036/100",
+   "a": 203,
+   "b": 2036,
+   "c": 100,
+   "b_name": "Молотый горох"
+  },
+  {
+   "id": 2497,
+   "name": "Рецепт \"Груз цен. филе\"",
+   "cost_cr": 4200000,
+   "raw_base_params": "203/2037/100",
+   "a": 203,
+   "b": 2037,
+   "c": 100,
+   "b_name": "Рубленый кальмар"
+  },
+  {
+   "id": 2498,
+   "name": "Рецепт \"Груз мор. филе\"",
+   "cost_cr": 3200000,
+   "raw_base_params": "203/2038/100",
+   "a": 203,
+   "b": 2038,
+   "c": 100,
+   "b_name": "Gurza TROUT"
+  },
+  {
+   "id": 2499,
+   "name": "Рецепт \"Груз кальмара\"",
+   "cost_cr": 3800000,
+   "raw_base_params": "203/2039/100",
+   "a": 203,
+   "b": 2039,
+   "c": 100,
+   "b_name": "Gurza TROUT №0"
+  }
+ ],
+ "workshop": {
+  "packaging": [
+   {
+    "id": 2494,
+    "wtype": 24,
+    "cost_cr": 50000
+   }
+  ],
+  "cord": [
+   {
+    "id": 1273,
+    "wtype": 26,
+    "cost_cr": 20000
+   }
+  ]
+ }
+}
